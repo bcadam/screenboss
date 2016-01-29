@@ -33,13 +33,18 @@ var LeftSideBar = React.createClass({
                                         </form>*/}
                     <ul className="sidebar-menu">
                         <li className="active">
-                            <a href="../index.html">
+                            <a href="/#/">
                                 <i className="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
                         <li>
-                            <a href="widgets.html">
-                                <i className="fa fa-th"></i> <span>Widgets</span> <small className="badge pull-right bg-green">new</small>
+                            <a href="/#/screens">
+                                <i className="fa fa-th"></i> <span>Screens</span>{/**<small className="badge pull-right bg-green">new</small>**/}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#/assets">
+                                <i className="fa fa-picture-o"></i> <span>Files</span>{/**<small className="badge pull-right bg-green">new</small>**/}
                             </a>
                         </li>
                         {/*<li className="treeview">
@@ -78,7 +83,7 @@ var LeftSideBar = React.createClass({
                                                         <li><a href="forms/advanced.html"><i className="fa fa-angle-double-right"></i> Advanced Elements</a></li>
                                                         <li><a href="forms/editors.html"><i className="fa fa-angle-double-right"></i> Editors</a></li>                                
                                                     </ul>
-                                                </li>*/}
+                                                </li>
                         <li className="treeview">
                             <a href="#">
                                 <i className="fa fa-table"></i> <span>Tables</span>
@@ -100,7 +105,7 @@ var LeftSideBar = React.createClass({
                                 <i className="fa fa-envelope"></i> <span>Mailbox</span>
                                 <small className="badge pull-right bg-yellow">12</small>
                             </a>
-                        </li>
+                        </li>*/}
                         {/*<li className="treeview">
                                                     <a href="#">
                                                         <i className="fa fa-folder"></i> <span>Examples</span>

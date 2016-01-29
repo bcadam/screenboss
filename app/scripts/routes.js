@@ -19,6 +19,7 @@ var ScreenDisplay = require('./components/ScreenDisplay.js');
 var LoginForm = require('./components/LoginForm.js');
 var AssetList = require('./components/AssetList.js');
 var Screen = require('./components/Screen.js');
+var Dropzone = require('./components/Dropzone.js');
 
 
 const historyOptions = {
