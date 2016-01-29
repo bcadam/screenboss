@@ -2,14 +2,8 @@ var express = require('express');
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
-
 app.use(express.static(__dirname + '/'));
-
-
 app.set('view engine', 'ejs');
-
-
-
 app.use('/css', express.static('dist/css'));
 app.use('/images', express.static('dist/images'));
 app.use('/js', express.static('dist/js'));
@@ -33,18 +27,11 @@ app.get('/', function(req, res) {
     });
 });
 
-// app.get('/app/*', function(req, res) {
-//     res.sendFile('app/index.html', {
-//         root: __dirname
-//     });
-// });
-
 app.get('/app.html', function(req, res) {
     res.sendFile('app/index.html', {
         root: __dirname
     });
 });
-
 
 
 app.listen(app.get('port'), function() {
