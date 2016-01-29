@@ -13,8 +13,7 @@
   ],
   "main": "index.html",
   "scripts": {
-    "build": "gulp clean && gulp",
-    "start": "node index.js",
+    "start": "gulp clean && gulp",
     "test": "jest"
   },
   "author": "@moklick <mo@webkid.io>",

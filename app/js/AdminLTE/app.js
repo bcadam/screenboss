@@ -157,37 +157,37 @@ $(function() {
         border: "3px solid rgba(0, 0, 0, 0.7)",
         "width": "200px",
         "z-index": "999999"
-    }// ).addClass("no-print");
-    // // demo_settings.append(
-    // //         "<h4 style='margin: 0 0 5px 0; border-bottom: 1px dashed #ddd; padding-bottom: 3px;'>Layout Options</h4>"
-    // //         + "<div class='form-group no-margin'>"
-    // //         + "<div class='.checkbox'>"
-    // //         + "<label>"
-    // //         + "<input type='checkbox' onchange='change_layout();'/> "
-    // //         + "Fixed layout"
-    // //         + "</label>"
-    // //         + "</div>"
-    // //         + "</div>"
-    // //         );
-    // demo_settings.append(
-    //         "<h4 style='margin: 0 0 5px 0; border-bottom: 1px dashed #ddd; padding-bottom: 3px;'>Skins</h4>"
-    //         + "<div class='form-group no-margin'>"
-    //         + "<div class='.radio'>"
-    //         + "<label>"
-    //         + "<input name='skins' type='radio' onchange='change_skin(\"skin-black\");' /> "
-    //         + "Black"
-    //         + "</label>"
-    //         + "</div>"
-    //         + "</div>"
+    }).addClass("no-print");
+    demo_settings.append(
+            "<h4 style='margin: 0 0 5px 0; border-bottom: 1px dashed #ddd; padding-bottom: 3px;'>Layout Options</h4>"
+            + "<div class='form-group no-margin'>"
+            + "<div class='.checkbox'>"
+            + "<label>"
+            + "<input type='checkbox' onchange='change_layout();'/> "
+            + "Fixed layout"
+            + "</label>"
+            + "</div>"
+            + "</div>"
+            );
+    demo_settings.append(
+            "<h4 style='margin: 0 0 5px 0; border-bottom: 1px dashed #ddd; padding-bottom: 3px;'>Skins</h4>"
+            + "<div class='form-group no-margin'>"
+            + "<div class='.radio'>"
+            + "<label>"
+            + "<input name='skins' type='radio' onchange='change_skin(\"skin-black\");' /> "
+            + "Black"
+            + "</label>"
+            + "</div>"
+            + "</div>"
 
-    //         + "<div class='form-group no-margin'>"
-    //         + "<div class='.radio'>"
-    //         + "<label>"
-    //         + "<input name='skins' type='radio' onchange='change_skin(\"skin-blue\");' checked='checked'/> "
-    //         + "Blue"
-    //         + "</label>"
-    //         + "</div>"
-    //         + "</div>"
+            + "<div class='form-group no-margin'>"
+            + "<div class='.radio'>"
+            + "<label>"
+            + "<input name='skins' type='radio' onchange='change_skin(\"skin-blue\");' checked='checked'/> "
+            + "Blue"
+            + "</label>"
+            + "</div>"
+            + "</div>"
             );
 
     demo.click(function() {
