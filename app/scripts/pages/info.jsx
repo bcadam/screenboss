@@ -13,7 +13,7 @@ var Info = React.createClass({
 
       if(!currentUser)
       {
-        window.location.assign("#/app/login");
+        window.location.assign("#/login");
       }
       
   },  

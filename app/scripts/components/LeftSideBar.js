@@ -10,6 +10,12 @@ var LeftSideBar = React.createClass({
         // Render the text of each comment as a list item
         var user = Parse.User.current();
 
+        var email = '';
+
+        if(user)
+        {
+            email = user.get('email');
+        }
         return (
             <aside className="left-side sidebar-offcanvas">                
                 <section className="sidebar">
@@ -19,7 +25,7 @@ var LeftSideBar = React.createClass({
                             {/*<img src="../images/avatar3.png" className="img-circle" alt="User Image" />*/}
                         </div>
                         <div className="pull-left info">
-                            <div className='text-center' style={{fontSize:"14px"}}>{user.get('email')}</div>
+                            <div className='text-center' style={{fontSize:"14px"}}>{email}</div>
                             {/**<a href="#"><i className="fa fa-circle text-success"></i> Online</a>**/}
                         </div>
                     </div>

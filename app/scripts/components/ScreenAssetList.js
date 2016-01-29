@@ -15,6 +15,16 @@ var ScreenAssetList = React.createClass({
             comments: (new Parse.Query('ScreenAsset')).descending('createdAt')
         };
     },
+    componentWillMount: function(){
+
+              var currentUser = Parse.User.current();
+
+              if(!currentUser)
+              {
+                window.location.assign("#/login");
+              }
+              
+          }, 
     render: function() {
         // Render the text of each comment as a list item
         var self = this;

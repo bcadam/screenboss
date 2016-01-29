@@ -36,7 +36,7 @@ class Home extends React.Component {
 
       if(!currentUser)
       {
-        window.location.assign("#/app/login");
+        window.location.assign("#/login");
       }
       
   }
