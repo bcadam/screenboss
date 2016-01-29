@@ -1,0 +1,1104 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ScreenBoss</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+    body {
+      background: #e5e5e5;
+      color: #999;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #777;
+      font-weight: 300;
+    }
+    a {
+      color: #52b6ec;
+      -webkit-transition: 300ms;
+      -moz-transition: 300ms;
+      -o-transition: 300ms;
+      transition: 300ms;
+    }
+    .btn {
+      font-weight: 300;
+      border: 0;
+    }
+    .btn.btn-primary {
+      background-color: #52b6ec;
+    }
+    .btn.btn-primary:hover,
+    .btn.btn-primary.active {
+      background-color: #1586c3;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+    a:hover,
+    a:focus {
+      color: #80c9f1;
+      text-decoration: none;
+      outline: none;
+    }
+    #header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      z-index: 99999;
+    }
+    #main-slider {
+      background-image: url(../images/slider-bg.jpg);
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      padding: 200px 0;
+      color: #fff;
+    }
+    #main-slider .item {
+      -moz-transition: opacity ease-in-out 500ms;
+      -o-transition: opacity ease-in-out 500ms;
+      -webkit-transition: opacity ease-in-out 500ms;
+      transition: opacity ease-in-out 500ms;
+      left: 0 !important;
+      opacity: 0;
+      top: 0;
+      position: absolute;
+      width: 100%;
+      display: block !important;
+      z-index: 1;
+      text-align: center;
+    }
+    #main-slider .item:first-child {
+      top: auto;
+      position: relative;
+    }
+    #main-slider .item.active {
+      opacity: 1;
+      -moz-transition: opacity ease-in-out 500ms;
+      -o-transition: opacity ease-in-out 500ms;
+      -webkit-transition: opacity ease-in-out 500ms;
+      transition: opacity ease-in-out 500ms;
+      z-index: 2;
+    }
+    #main-slider .item.active h1 {
+      -webkit-animation: scaleUp 400ms;
+      -moz-animation: scaleUp 400ms;
+      -o-animation: scaleUp 400ms;
+      -ms-animation: scaleUp 400ms;
+      animation: scaleUp 400ms;
+    }
+    #main-slider .prev,
+    #main-slider .next {
+      position: absolute;
+      top: 50%;
+      background-color: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      display: inline-block;
+      margin-top: -50px;
+      font-size: 24px;
+      height: 50px;
+      width: 50px;
+      line-height: 50px;
+      text-align: center;
+      border-radius: 4px;
+      z-index: 5;
+    }
+    #main-slider .prev:hover,
+    #main-slider .next:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    #main-slider .prev {
+      left: 10px;
+    }
+    #main-slider .next {
+      right: 10px;
+    }
+    #main-slider h1 {
+      font-size: 68px;
+      text-shadow: 0 3px rgba(0, 0, 0, 0.1);
+      color: #fff;
+    }
+    #contact .box {
+      background-color: #222;
+      color: #999;
+    }
+    #contact .box h1,
+    #contact .box h2,
+    #contact .box h3 {
+      color: #fff;
+    }
+    #contact .box a {
+      color: #999;
+    }
+    #contact .box a:hover {
+      color: #52b6ec;
+    }
+    #contact .box input[type="text"],
+    #contact .box input[type="email"],
+    #contact .box textarea {
+      background-color: #111;
+      border: 0;
+      -webkit-transition: 300ms;
+      -moz-transition: 300ms;
+      -o-transition: 300ms;
+      transition: 300ms;
+    }
+    #contact .box input[type="text"]:focus,
+    #contact .box input[type="email"]:focus,
+    #contact .box textarea:focus {
+      background-color: #000;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+    .box {
+      padding: 50px 30px;
+      background: #fff;
+      border-bottom: 1px solid #e9e9e9;
+      position: relative;
+    }
+    .box.first {
+      margin-top: -40px;
+      border-radius: 5px 5px 0 0;
+    }
+    .box.last {
+      border-radius: 0 0 5px 5px;
+    }
+    .box h2 {
+      padding: 10px 30px;
+      display: inline-block;
+      border-radius: 4px;
+      position: relative;
+      margin-bottom: 30px;
+      font-size: 48px;
+    }
+    #portfolio .box {
+      background: #f3f3f3;
+    }
+    .portfolio-items,
+    .portfolio-filter {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .portfolio-items {
+      margin-right: -20px;
+    }
+    .portfolio-filter {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    .portfolio-filter > li {
+      display: inline-block;
+    }
+    .portfolio-items > li {
+      float: left;
+      padding: 0;
+      margin: 0;
+    }
+    .portfolio-items.col-2 > li {
+      width: 50%;
+    }
+    .portfolio-items.col-3 > li {
+      width: 33%;
+    }
+    .portfolio-items.col-4 > li {
+      width: 25%;
+    }
+    .portfolio-items.col-5 > li {
+      width: 20%;
+    }
+    .portfolio-items.col-6 > li {
+      width: 16%;
+    }
+    .portfolio-item .item-inner {
+      margin: 0 20px 20px 0;
+      text-align: center;
+      background: #fff;
+      padding: 10px;
+      border-bottom: 1px solid #e1e1e1;
+    }
+    .portfolio-item img {
+      width: 100%;
+    }
+    .portfolio-item .portfolio-image {
+      position: relative;
+    }
+    .portfolio-item h5 {
+      margin: 0;
+      padding: 10px 0 0 0;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .portfolio-item .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      background-color: rgba(255, 255, 255, 0.9);
+      text-align: center;
+      vertical-align: middle;
+      -webkit-transition: opacity 300ms;
+      -moz-transition: opacity 300ms;
+      -o-transition: opacity 300ms;
+      transition: opacity 300ms;
+    }
+    .portfolio-item .overlay .preview {
+      position: relative;
+      top: 50%;
+      display: inline-block;
+      margin-top: -20px;
+    }
+    .portfolio-item:hover .overlay {
+      opacity: 1;
+    }
+    /* Start: Recommended Isotope styles */
+    /**** Isotope Filtering ****/
+    .isotope-item {
+      z-index: 2;
+    }
+    .isotope-hidden.isotope-item {
+      pointer-events: none;
+      z-index: 1;
+    }
+    /**** Isotope CSS3 transitions ****/
+    .isotope,
+    .isotope .isotope-item {
+      -webkit-transition-duration: 0.8s;
+      -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+      -o-transition-duration: 0.8s;
+      transition-duration: 0.8s;
+    }
+    .isotope {
+      -webkit-transition-property: height, width;
+      -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+      -o-transition-property: height, width;
+      transition-property: height, width;
+    }
+    .isotope .isotope-item {
+      -webkit-transition-property: -webkit-transform, opacity;
+      -moz-transition-property: -moz-transform, opacity;
+      -ms-transition-property: -ms-transform, opacity;
+      -o-transition-property: -o-transform, opacity;
+      transition-property: transform, opacity;
+    }
+    /**** disabling Isotope CSS3 transitions ****/
+    .isotope.no-transition,
+    .isotope.no-transition .isotope-item,
+    .isotope .isotope-item.no-transition {
+      -webkit-transition-duration: 0s;
+      -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+      -o-transition-duration: 0s;
+      transition-duration: 0s;
+    }
+    /* End: Recommended Isotope styles */
+    /* disable CSS transitions for containers with infinite scrolling*/
+    .isotope.infinite-scrolling {
+      -webkit-transition: none;
+      -moz-transition: none;
+      -ms-transition: none;
+      -o-transition: none;
+      transition: none;
+    }
+    #pricing .box {
+      background-color: #f9f9f9;
+    }
+    #pricing .plan {
+      background: #fff;
+      list-style: none;
+      margin: 0 0 20px;
+      text-align: center;
+      padding: 0;
+      border-bottom: 1px solid #e1e1e1;
+    }
+    #pricing .plan li {
+      padding: 10px 0;
+      margin: 0 15px;
+      border-bottom: 1px dashed #eee;
+    }
+    #pricing .plan li.plan-name {
+      padding: 15px 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    #pricing .plan li.plan-price {
+      color: #666;
+      padding: 15px 0;
+      font-size: 48px;
+    }
+    #pricing .plan li.plan-action {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border-bottom: 0;
+    }
+    #pricing .plan.featured {
+      -webkit-transform: scale(1.05);
+      -moz-transform: scale(1.05);
+      -ms-transform: scale(1.05);
+      -o-transform: scale(1.05);
+      transform: scale(1.05);
+    }
+    #pricing .plan.featured .plan-price {
+      color: #fff;
+      background-color: #52b6ec;
+      border-bottom-color: #52b6ec;
+      margin: 0;
+    }
+    #services .box {
+      padding-bottom: 0;
+    }
+    #services .row > div {
+      margin-bottom: 50px;
+    }
+    .center {
+      text-align: center;
+    }
+    #team-scroller .designation {
+      margin-top: 10px;
+      display: block;
+    }
+    .member {
+      margin: 0 50px;
+      text-align: center;
+    }
+    .carousel.scale .left-arrow,
+    .carousel.scale .right-arrow {
+      top: 30%;
+      position: absolute;
+    }
+    .carousel.scale .left-arrow {
+      left: -10px;
+    }
+    .carousel.scale .right-arrow {
+      right: -10px;
+    }
+    .carousel.scale .active .row > div:nth-child(1) {
+      -webkit-animation: scaleUp 200ms linear 0 both;
+      -moz-animation: scaleUp 200ms linear 0 both;
+      -ms-animation: scaleUp 200ms linear 0 both;
+      -o-animation: scaleUp 200ms linear 0 both;
+      animation: scaleUp 200ms linear 0 both;
+    }
+    .carousel.scale .active .row > div:nth-child(2) {
+      -webkit-animation: scaleUp 200ms linear 100ms both;
+      -moz-animation: scaleUp 200ms linear 100ms both;
+      -ms-animation: scaleUp 200ms linear 100ms both;
+      -o-animation: scaleUp 200ms linear 100ms both;
+      animation: scaleUp 200ms linear 100ms both;
+    }
+    .carousel.scale .active .row > div:nth-child(3) {
+      -webkit-animation: scaleUp 200ms linear 200ms both;
+      -moz-animation: scaleUp 200ms linear 200ms both;
+      -ms-animation: scaleUp 200ms linear 200ms both;
+      -o-animation: scaleUp 200ms linear 200ms both;
+      animation: scaleUp 200ms linear 200ms both;
+    }
+    .carousel.scale .active .row > div:nth-child(4) {
+      -webkit-animation: scaleUp 200ms linear 400ms both;
+      -moz-animation: scaleUp 200ms linear 400ms both;
+      -ms-animation: scaleUp 200ms linear 400ms both;
+      -o-animation: scaleUp 200ms linear 400ms both;
+      animation: scaleUp 200ms linear 400ms both;
+    }
+    .icon-social {
+      border: 0;
+      color: #fff;
+      border-radius: 100%;
+      display: inline-block !important;
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      padding: 0;
+    }
+    .icon-social.icon-facebook {
+      background: #4f7dd4;
+    }
+    .icon-social.icon-facebook:hover {
+      background: #789bde;
+    }
+    .icon-social.icon-twitter {
+      background: #5bceff;
+    }
+    .icon-social.icon-twitter:hover {
+      background: #8eddff;
+    }
+    .icon-social.icon-linkedin {
+      background: #21a6d8;
+    }
+    .icon-social.icon-linkedin:hover {
+      background: #49b9e3;
+    }
+    .icon-social.icon-google-plus {
+      background: #dc422b;
+    }
+    .icon-social.icon-google-plus:hover {
+      background: #e36957;
+    }
+    .icon-social.icon-pinterest {
+      background: #cb2027;
+    }
+    .icon-social.icon-pinterest:hover {
+      background: #e03e44;
+    }
+    .icon-social.icon-youtube {
+      background: #ce332d;
+    }
+    .icon-social.icon-youtube:hover {
+      background: #da5954;
+    }
+    .icon-social:hover {
+      color: #fff;
+    }
+    .navbar-default {
+      background: #fff;
+      border-radius: 0 0 5px 5px;
+      border: 0;
+      padding: 0;
+      -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
+      -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
+      box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
+      overflow: hidden;
+    }
+    .navbar-default .first a {
+      border-radius: 0 0 0 5px;
+    }
+    .navbar-default .navbar-brand {
+      margin-right: 50px;
+      margin-left: 20px;
+      width: 200px;
+      height: 78px;
+      background: url(../images/logo.png) no-repeat 0 50%;
+    }
+    .navbar-default .navbar-nav > li {
+      margin-left: 1px;
+    }
+    .navbar-default .navbar-nav > li > a {
+      padding: 30px 25px;
+      font-size: 16px;
+      line-height: 18px;
+      color: #999;
+    }
+    .navbar-default .navbar-nav > li > a > i {
+      display: inline-block;
+    }
+    .navbar-default .navbar-nav > li.active > a,
+    .navbar-default .navbar-nav > li.active:focus > a,
+    .navbar-default .navbar-nav > li.active:hover > a,
+    .navbar-default .navbar-nav > li:hover > a,
+    .navbar-default .navbar-nav > li:focus > a,
+    .navbar-default .navbar-nav > li.active > a:focus,
+    .navbar-default .navbar-nav > li.active:focus > a:focus,
+    .navbar-default .navbar-nav > li.active:hover > a:focus,
+    .navbar-default .navbar-nav > li:hover > a:focus,
+    .navbar-default .navbar-nav > li:focus > a:focus {
+      background-color: #52b6ec;
+      color: #fff;
+    }
+    .icon-lg {
+      font-size: 48px;
+      height: 108px;
+      width: 108px;
+      line-height: 108px;
+      color: #fff;
+      margin: 10px;
+      background-color: rgba(0, 0, 0, 0.4);
+      text-align: center;
+      display: inline-block !important;
+      border-radius: 100%;
+    }
+    .icon-md {
+      font-size: 24px;
+      height: 68px;
+      width: 68px;
+      line-height: 68px;
+      color: #fff;
+      margin-right: 10px;
+      background-color: rgba(0, 0, 0, 0.4);
+      text-align: center;
+      display: inline-block;
+      border-radius: 100%;
+      margin-bottom: 10px;
+    }
+    .icon-color1 {
+      background-color: #e74c3c;
+    }
+    .icon-color2 {
+      background-color: #2ecc71;
+    }
+    .icon-color3 {
+      background-color: #3498db;
+    }
+    .icon-color4 {
+      background-color: #8e44ad;
+    }
+    .icon-color5 {
+      background-color: #1abc9c;
+    }
+    .icon-color6 {
+      background-color: #2c3e50;
+    }
+    .gap {
+      margin-bottom: 50px;
+    }
+    .big-gap {
+      margin-bottom: 100px;
+    }
+    #footer {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      color: #999;
+    }
+    #footer a {
+      color: #999;
+    }
+    #footer a:hover {
+      color: #52b6ec;
+    }
+    ul.social {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0;
+    }
+    ul.social > li {
+      margin: 0 0 20px;
+    }
+    ul.social > li > a {
+      display: block;
+      font-size: 18px;
+    }
+    ul.social > li > a i {
+      margin-right: 10px;
+    }
+    textarea#message {
+      padding: 10px 15px;
+      height: 220px;
+    }
+    @keyframes scaleUp {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    @-moz-keyframes scaleUp {
+      0% {
+        opacity: 0;
+        -moz-transform: scale(0.3);
+      }
+      100% {
+        opacity: 1;
+        -moz-transform: scale(1);
+      }
+    }
+    @-webkit-keyframes scaleUp {
+      0% {
+        opacity: 0;
+        -webkit-transform: scale(0.3);
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+      }
+    }
+    @-ms-keyframes scaleUp {
+      0% {
+        opacity: 0;
+        -ms-transform: scale(0.3);
+      }
+      100% {
+        opacity: 1;
+        -ms-transform: scale(1);
+      }
+    }
+    @-o-keyframes scaleUp {
+      0% {
+        opacity: 0;
+        -o-transform: scale(0.3);
+      }
+      100% {
+        opacity: 1;
+        -o-transform: scale(1);
+      }
+}</style>  
+<style>
+    div.pp_default .pp_top,div.pp_default .pp_top .pp_middle,div.pp_default .pp_top .pp_left,div.pp_default .pp_top .pp_right,div.pp_default .pp_bottom,div.pp_default .pp_bottom .pp_left,div.pp_default .pp_bottom .pp_middle,div.pp_default .pp_bottom .pp_right{height:13px}
+    div.pp_default .pp_top .pp_left{background:url(../images/prettyPhoto/default/sprite.png) -78px -93px no-repeat}
+    div.pp_default .pp_top .pp_middle{background:url(../images/prettyPhoto/default/sprite_x.png) top left repeat-x}
+    div.pp_default .pp_top .pp_right{background:url(../images/prettyPhoto/default/sprite.png) -112px -93px no-repeat}
+    div.pp_default .pp_content .ppt{color:#f8f8f8}
+    div.pp_default .pp_content_container .pp_left{background:url(../images/prettyPhoto/default/sprite_y.png) -7px 0 repeat-y;padding-left:13px}
+    div.pp_default .pp_content_container .pp_right{background:url(../images/prettyPhoto/default/sprite_y.png) top right repeat-y;padding-right:13px}
+    div.pp_default .pp_next:hover{background:url(../images/prettyPhoto/default/sprite_next.png) center right no-repeat;cursor:pointer}
+    div.pp_default .pp_previous:hover{background:url(../images/prettyPhoto/default/sprite_prev.png) center left no-repeat;cursor:pointer}
+    div.pp_default .pp_expand{background:url(../images/prettyPhoto/default/sprite.png) 0 -29px no-repeat;cursor:pointer;width:28px;height:28px}
+    div.pp_default .pp_expand:hover{background:url(../images/prettyPhoto/default/sprite.png) 0 -56px no-repeat;cursor:pointer}
+    div.pp_default .pp_contract{background:url(../images/prettyPhoto/default/sprite.png) 0 -84px no-repeat;cursor:pointer;width:28px;height:28px}
+    div.pp_default .pp_contract:hover{background:url(../images/prettyPhoto/default/sprite.png) 0 -113px no-repeat;cursor:pointer}
+    div.pp_default .pp_close{width:30px;height:30px;background:url(../images/prettyPhoto/default/sprite.png) 2px 1px no-repeat;cursor:pointer}
+    div.pp_default .pp_gallery ul li a{background:url(../images/prettyPhoto/default/default_thumb.png) center center #f8f8f8;border:1px solid #aaa}
+    div.pp_default .pp_social{margin-top:7px}
+    div.pp_default .pp_gallery a.pp_arrow_previous,div.pp_default .pp_gallery a.pp_arrow_next{position:static;left:auto}
+    div.pp_default .pp_nav .pp_play,div.pp_default .pp_nav .pp_pause{background:url(../images/prettyPhoto/default/sprite.png) -51px 1px no-repeat;height:30px;width:30px}
+    div.pp_default .pp_nav .pp_pause{background-position:-51px -29px}
+    div.pp_default a.pp_arrow_previous,div.pp_default a.pp_arrow_next{background:url(../images/prettyPhoto/default/sprite.png) -31px -3px no-repeat;height:20px;width:20px;margin:4px 0 0}
+    div.pp_default a.pp_arrow_next{left:52px;background-position:-82px -3px}
+    div.pp_default .pp_content_container .pp_details{margin-top:5px}
+    div.pp_default .pp_nav{clear:none;height:30px;width:110px;position:relative}
+    div.pp_default .pp_nav .currentTextHolder{font-family:Georgia;font-style:italic;color:#999;font-size:11px;left:75px;line-height:25px;position:absolute;top:2px;margin:0;padding:0 0 0 10px}
+    div.pp_default .pp_close:hover,div.pp_default .pp_nav .pp_play:hover,div.pp_default .pp_nav .pp_pause:hover,div.pp_default .pp_arrow_next:hover,div.pp_default .pp_arrow_previous:hover{opacity:0.7}
+    div.pp_default .pp_description{font-size:11px;font-weight:700;line-height:14px;margin:5px 50px 5px 0}
+    div.pp_default .pp_bottom .pp_left{background:url(../images/prettyPhoto/default/sprite.png) -78px -127px no-repeat}
+    div.pp_default .pp_bottom .pp_middle{background:url(../images/prettyPhoto/default/sprite_x.png) bottom left repeat-x}
+    div.pp_default .pp_bottom .pp_right{background:url(../images/prettyPhoto/default/sprite.png) -112px -127px no-repeat}
+    div.pp_default .pp_loaderIcon{background:url(../images/prettyPhoto/default/loader.gif) center center no-repeat}
+    div.light_rounded .pp_top .pp_left{background:url(../images/prettyPhoto/light_rounded/sprite.png) -88px -53px no-repeat}
+    div.light_rounded .pp_top .pp_right{background:url(../images/prettyPhoto/light_rounded/sprite.png) -110px -53px no-repeat}
+    div.light_rounded .pp_next:hover{background:url(../images/prettyPhoto/light_rounded/btnNext.png) center right no-repeat;cursor:pointer}
+    div.light_rounded .pp_previous:hover{background:url(../images/prettyPhoto/light_rounded/btnPrevious.png) center left no-repeat;cursor:pointer}
+    div.light_rounded .pp_expand{background:url(../images/prettyPhoto/light_rounded/sprite.png) -31px -26px no-repeat;cursor:pointer}
+    div.light_rounded .pp_expand:hover{background:url(../images/prettyPhoto/light_rounded/sprite.png) -31px -47px no-repeat;cursor:pointer}
+    div.light_rounded .pp_contract{background:url(../images/prettyPhoto/light_rounded/sprite.png) 0 -26px no-repeat;cursor:pointer}
+    div.light_rounded .pp_contract:hover{background:url(../images/prettyPhoto/light_rounded/sprite.png) 0 -47px no-repeat;cursor:pointer}
+    div.light_rounded .pp_close{width:75px;height:22px;background:url(../images/prettyPhoto/light_rounded/sprite.png) -1px -1px no-repeat;cursor:pointer}
+    div.light_rounded .pp_nav .pp_play{background:url(../images/prettyPhoto/light_rounded/sprite.png) -1px -100px no-repeat;height:15px;width:14px}
+    div.light_rounded .pp_nav .pp_pause{background:url(../images/prettyPhoto/light_rounded/sprite.png) -24px -100px no-repeat;height:15px;width:14px}
+    div.light_rounded .pp_arrow_previous{background:url(../images/prettyPhoto/light_rounded/sprite.png) 0 -71px no-repeat}
+    div.light_rounded .pp_arrow_next{background:url(../images/prettyPhoto/light_rounded/sprite.png) -22px -71px no-repeat}
+    div.light_rounded .pp_bottom .pp_left{background:url(../images/prettyPhoto/light_rounded/sprite.png) -88px -80px no-repeat}
+    div.light_rounded .pp_bottom .pp_right{background:url(../images/prettyPhoto/light_rounded/sprite.png) -110px -80px no-repeat}
+    div.dark_rounded .pp_top .pp_left{background:url(../images/prettyPhoto/dark_rounded/sprite.png) -88px -53px no-repeat}
+    div.dark_rounded .pp_top .pp_right{background:url(../images/prettyPhoto/dark_rounded/sprite.png) -110px -53px no-repeat}
+    div.dark_rounded .pp_content_container .pp_left{background:url(../images/prettyPhoto/dark_rounded/contentPattern.png) top left repeat-y}
+    div.dark_rounded .pp_content_container .pp_right{background:url(../images/prettyPhoto/dark_rounded/contentPattern.png) top right repeat-y}
+    div.dark_rounded .pp_next:hover{background:url(../images/prettyPhoto/dark_rounded/btnNext.png) center right no-repeat;cursor:pointer}
+    div.dark_rounded .pp_previous:hover{background:url(../images/prettyPhoto/dark_rounded/btnPrevious.png) center left no-repeat;cursor:pointer}
+    div.dark_rounded .pp_expand{background:url(../images/prettyPhoto/dark_rounded/sprite.png) -31px -26px no-repeat;cursor:pointer}
+    div.dark_rounded .pp_expand:hover{background:url(../images/prettyPhoto/dark_rounded/sprite.png) -31px -47px no-repeat;cursor:pointer}
+    div.dark_rounded .pp_contract{background:url(../images/prettyPhoto/dark_rounded/sprite.png) 0 -26px no-repeat;cursor:pointer}
+    div.dark_rounded .pp_contract:hover{background:url(../images/prettyPhoto/dark_rounded/sprite.png) 0 -47px no-repeat;cursor:pointer}
+    div.dark_rounded .pp_close{width:75px;height:22px;background:url(../images/prettyPhoto/dark_rounded/sprite.png) -1px -1px no-repeat;cursor:pointer}
+    div.dark_rounded .pp_description{margin-right:85px;color:#fff}
+    div.dark_rounded .pp_nav .pp_play{background:url(../images/prettyPhoto/dark_rounded/sprite.png) -1px -100px no-repeat;height:15px;width:14px}
+    div.dark_rounded .pp_nav .pp_pause{background:url(../images/prettyPhoto/dark_rounded/sprite.png) -24px -100px no-repeat;height:15px;width:14px}
+    div.dark_rounded .pp_arrow_previous{background:url(../images/prettyPhoto/dark_rounded/sprite.png) 0 -71px no-repeat}
+    div.dark_rounded .pp_arrow_next{background:url(../images/prettyPhoto/dark_rounded/sprite.png) -22px -71px no-repeat}
+    div.dark_rounded .pp_bottom .pp_left{background:url(../images/prettyPhoto/dark_rounded/sprite.png) -88px -80px no-repeat}
+    div.dark_rounded .pp_bottom .pp_right{background:url(../images/prettyPhoto/dark_rounded/sprite.png) -110px -80px no-repeat}
+    div.dark_rounded .pp_loaderIcon{background:url(../images/prettyPhoto/dark_rounded/loader.gif) center center no-repeat}
+    div.dark_square .pp_left,div.dark_square .pp_middle,div.dark_square .pp_right,div.dark_square .pp_content{background:#000}
+    div.dark_square .pp_description{color:#fff;margin:0 85px 0 0}
+    div.dark_square .pp_loaderIcon{background:url(../images/prettyPhoto/dark_square/loader.gif) center center no-repeat}
+    div.dark_square .pp_expand{background:url(../images/prettyPhoto/dark_square/sprite.png) -31px -26px no-repeat;cursor:pointer}
+    div.dark_square .pp_expand:hover{background:url(../images/prettyPhoto/dark_square/sprite.png) -31px -47px no-repeat;cursor:pointer}
+    div.dark_square .pp_contract{background:url(../images/prettyPhoto/dark_square/sprite.png) 0 -26px no-repeat;cursor:pointer}
+    div.dark_square .pp_contract:hover{background:url(../images/prettyPhoto/dark_square/sprite.png) 0 -47px no-repeat;cursor:pointer}
+    div.dark_square .pp_close{width:75px;height:22px;background:url(../images/prettyPhoto/dark_square/sprite.png) -1px -1px no-repeat;cursor:pointer}
+    div.dark_square .pp_nav{clear:none}
+    div.dark_square .pp_nav .pp_play{background:url(../images/prettyPhoto/dark_square/sprite.png) -1px -100px no-repeat;height:15px;width:14px}
+    div.dark_square .pp_nav .pp_pause{background:url(../images/prettyPhoto/dark_square/sprite.png) -24px -100px no-repeat;height:15px;width:14px}
+    div.dark_square .pp_arrow_previous{background:url(../images/prettyPhoto/dark_square/sprite.png) 0 -71px no-repeat}
+    div.dark_square .pp_arrow_next{background:url(../images/prettyPhoto/dark_square/sprite.png) -22px -71px no-repeat}
+    div.dark_square .pp_next:hover{background:url(../images/prettyPhoto/dark_square/btnNext.png) center right no-repeat;cursor:pointer}
+    div.dark_square .pp_previous:hover{background:url(../images/prettyPhoto/dark_square/btnPrevious.png) center left no-repeat;cursor:pointer}
+    div.light_square .pp_expand{background:url(../images/prettyPhoto/light_square/sprite.png) -31px -26px no-repeat;cursor:pointer}
+    div.light_square .pp_expand:hover{background:url(../images/prettyPhoto/light_square/sprite.png) -31px -47px no-repeat;cursor:pointer}
+    div.light_square .pp_contract{background:url(../images/prettyPhoto/light_square/sprite.png) 0 -26px no-repeat;cursor:pointer}
+    div.light_square .pp_contract:hover{background:url(../images/prettyPhoto/light_square/sprite.png) 0 -47px no-repeat;cursor:pointer}
+    div.light_square .pp_close{width:75px;height:22px;background:url(../images/prettyPhoto/light_square/sprite.png) -1px -1px no-repeat;cursor:pointer}
+    div.light_square .pp_nav .pp_play{background:url(../images/prettyPhoto/light_square/sprite.png) -1px -100px no-repeat;height:15px;width:14px}
+    div.light_square .pp_nav .pp_pause{background:url(../images/prettyPhoto/light_square/sprite.png) -24px -100px no-repeat;height:15px;width:14px}
+    div.light_square .pp_arrow_previous{background:url(../images/prettyPhoto/light_square/sprite.png) 0 -71px no-repeat}
+    div.light_square .pp_arrow_next{background:url(../images/prettyPhoto/light_square/sprite.png) -22px -71px no-repeat}
+    div.light_square .pp_next:hover{background:url(../images/prettyPhoto/light_square/btnNext.png) center right no-repeat;cursor:pointer}
+    div.light_square .pp_previous:hover{background:url(../images/prettyPhoto/light_square/btnPrevious.png) center left no-repeat;cursor:pointer}
+    div.facebook .pp_top .pp_left{background:url(../images/prettyPhoto/facebook/sprite.png) -88px -53px no-repeat}
+    div.facebook .pp_top .pp_middle{background:url(../images/prettyPhoto/facebook/contentPatternTop.png) top left repeat-x}
+    div.facebook .pp_top .pp_right{background:url(../images/prettyPhoto/facebook/sprite.png) -110px -53px no-repeat}
+    div.facebook .pp_content_container .pp_left{background:url(../images/prettyPhoto/facebook/contentPatternLeft.png) top left repeat-y}
+    div.facebook .pp_content_container .pp_right{background:url(../images/prettyPhoto/facebook/contentPatternRight.png) top right repeat-y}
+    div.facebook .pp_expand{background:url(../images/prettyPhoto/facebook/sprite.png) -31px -26px no-repeat;cursor:pointer}
+    div.facebook .pp_expand:hover{background:url(../images/prettyPhoto/facebook/sprite.png) -31px -47px no-repeat;cursor:pointer}
+    div.facebook .pp_contract{background:url(../images/prettyPhoto/facebook/sprite.png) 0 -26px no-repeat;cursor:pointer}
+    div.facebook .pp_contract:hover{background:url(../images/prettyPhoto/facebook/sprite.png) 0 -47px no-repeat;cursor:pointer}
+    div.facebook .pp_close{width:22px;height:22px;background:url(../images/prettyPhoto/facebook/sprite.png) -1px -1px no-repeat;cursor:pointer}
+    div.facebook .pp_description{margin:0 37px 0 0}
+    div.facebook .pp_loaderIcon{background:url(../images/prettyPhoto/facebook/loader.gif) center center no-repeat}
+    div.facebook .pp_arrow_previous{background:url(../images/prettyPhoto/facebook/sprite.png) 0 -71px no-repeat;height:22px;margin-top:0;width:22px}
+    div.facebook .pp_arrow_previous.disabled{background-position:0 -96px;cursor:default}
+    div.facebook .pp_arrow_next{background:url(../images/prettyPhoto/facebook/sprite.png) -32px -71px no-repeat;height:22px;margin-top:0;width:22px}
+    div.facebook .pp_arrow_next.disabled{background-position:-32px -96px;cursor:default}
+    div.facebook .pp_nav{margin-top:0}
+    div.facebook .pp_nav p{font-size:15px;padding:0 3px 0 4px}
+    div.facebook .pp_nav .pp_play{background:url(../images/prettyPhoto/facebook/sprite.png) -1px -123px no-repeat;height:22px;width:22px}
+    div.facebook .pp_nav .pp_pause{background:url(../images/prettyPhoto/facebook/sprite.png) -32px -123px no-repeat;height:22px;width:22px}
+    div.facebook .pp_next:hover{background:url(../images/prettyPhoto/facebook/btnNext.png) center right no-repeat;cursor:pointer}
+    div.facebook .pp_previous:hover{background:url(../images/prettyPhoto/facebook/btnPrevious.png) center left no-repeat;cursor:pointer}
+    div.facebook .pp_bottom .pp_left{background:url(../images/prettyPhoto/facebook/sprite.png) -88px -80px no-repeat}
+    div.facebook .pp_bottom .pp_middle{background:url(../images/prettyPhoto/facebook/contentPatternBottom.png) top left repeat-x}
+    div.facebook .pp_bottom .pp_right{background:url(../images/prettyPhoto/facebook/sprite.png) -110px -80px no-repeat}
+    div.pp_pic_holder a:focus{outline:none}
+    div.pp_overlay{background:#000;display:none;left:0;position:absolute;top:0;width:100%;z-index:9500}
+    div.pp_pic_holder{display:none;position:absolute;width:100px;z-index:10000}
+    .pp_content{height:40px;min-width:40px}
+    * html .pp_content{width:40px}
+    .pp_content_container{position:relative;text-align:left;width:100%}
+    .pp_content_container .pp_left{padding-left:20px}
+    .pp_content_container .pp_right{padding-right:20px}
+    .pp_content_container .pp_details{float:left;margin:10px 0 2px}
+    .pp_description{display:none;margin:0}
+    .pp_social{float:left;margin:0}
+    .pp_social .facebook{float:left;margin-left:5px;width:55px;overflow:hidden}
+    .pp_social .twitter{float:left}
+    .pp_nav{clear:right;float:left;margin:3px 10px 0 0}
+    .pp_nav p{float:left;white-space:nowrap;margin:2px 4px}
+    .pp_nav .pp_play,.pp_nav .pp_pause{float:left;margin-right:4px;text-indent:-10000px}
+    a.pp_arrow_previous,a.pp_arrow_next{display:block;float:left;height:15px;margin-top:3px;overflow:hidden;text-indent:-10000px;width:14px}
+    .pp_hoverContainer{position:absolute;top:0;width:100%;z-index:2000}
+    .pp_gallery{display:none;left:50%;margin-top:-50px;position:absolute;z-index:10000}
+    .pp_gallery div{float:left;overflow:hidden;position:relative}
+    .pp_gallery ul{float:left;height:35px;position:relative;white-space:nowrap;margin:0 0 0 5px;padding:0}
+    .pp_gallery ul a{border:1px rgba(0,0,0,0.5) solid;display:block;float:left;height:33px;overflow:hidden}
+    .pp_gallery ul a img{border:0}
+    .pp_gallery li{display:block;float:left;margin:0 5px 0 0;padding:0}
+    .pp_gallery li.default a{background:url(../images/prettyPhoto/facebook/default_thumbnail.gif) 0 0 no-repeat;display:block;height:33px;width:50px}
+    .pp_gallery .pp_arrow_previous,.pp_gallery .pp_arrow_next{margin-top:7px!important}
+    a.pp_next{background:url(../images/prettyPhoto/light_rounded/btnNext.png) 10000px 10000px no-repeat;display:block;float:right;height:100%;text-indent:-10000px;width:49%}
+    a.pp_previous{background:url(../images/prettyPhoto/light_rounded/btnNext.png) 10000px 10000px no-repeat;display:block;float:left;height:100%;text-indent:-10000px;width:49%}
+    a.pp_expand,a.pp_contract{cursor:pointer;display:none;height:20px;position:absolute;right:30px;text-indent:-10000px;top:10px;width:20px;z-index:20000}
+    a.pp_close{position:absolute;right:0;top:0;display:block;line-height:22px;text-indent:-10000px}
+    .pp_loaderIcon{display:block;height:24px;left:50%;position:absolute;top:50%;width:24px;margin:-12px 0 0 -12px}
+    #pp_full_res{line-height:1!important}
+    #pp_full_res .pp_inline{text-align:left}
+    #pp_full_res .pp_inline p{margin:0 0 15px}
+    div.ppt{color:#fff;display:none;font-size:17px;z-index:9999;margin:0 0 5px 15px}
+    div.pp_default .pp_content,div.light_rounded .pp_content{background-color:#fff}
+    div.pp_default #pp_full_res .pp_inline,div.light_rounded .pp_content .ppt,div.light_rounded #pp_full_res .pp_inline,div.light_square .pp_content .ppt,div.light_square #pp_full_res .pp_inline,div.facebook .pp_content .ppt,div.facebook #pp_full_res .pp_inline{color:#000}
+    div.pp_default .pp_gallery ul li a:hover,div.pp_default .pp_gallery ul li.selected a,.pp_gallery ul a:hover,.pp_gallery li.selected a{border-color:#fff}
+    div.pp_default .pp_details,div.light_rounded .pp_details,div.dark_rounded .pp_details,div.dark_square .pp_details,div.light_square .pp_details,div.facebook .pp_details{position:relative}
+    div.light_rounded .pp_top .pp_middle,div.light_rounded .pp_content_container .pp_left,div.light_rounded .pp_content_container .pp_right,div.light_rounded .pp_bottom .pp_middle,div.light_square .pp_left,div.light_square .pp_middle,div.light_square .pp_right,div.light_square .pp_content,div.facebook .pp_content{background:#fff}
+    div.light_rounded .pp_description,div.light_square .pp_description{margin-right:85px}
+    div.light_rounded .pp_gallery a.pp_arrow_previous,div.light_rounded .pp_gallery a.pp_arrow_next,div.dark_rounded .pp_gallery a.pp_arrow_previous,div.dark_rounded .pp_gallery a.pp_arrow_next,div.dark_square .pp_gallery a.pp_arrow_previous,div.dark_square .pp_gallery a.pp_arrow_next,div.light_square .pp_gallery a.pp_arrow_previous,div.light_square .pp_gallery a.pp_arrow_next{margin-top:12px!important}
+    div.light_rounded .pp_arrow_previous.disabled,div.dark_rounded .pp_arrow_previous.disabled,div.dark_square .pp_arrow_previous.disabled,div.light_square .pp_arrow_previous.disabled{background-position:0 -87px;cursor:default}
+    div.light_rounded .pp_arrow_next.disabled,div.dark_rounded .pp_arrow_next.disabled,div.dark_square .pp_arrow_next.disabled,div.light_square .pp_arrow_next.disabled{background-position:-22px -87px;cursor:default}
+    div.light_rounded .pp_loaderIcon,div.light_square .pp_loaderIcon{background:url(../images/prettyPhoto/light_rounded/loader.gif) center center no-repeat}
+    div.dark_rounded .pp_top .pp_middle,div.dark_rounded .pp_content,div.dark_rounded .pp_bottom .pp_middle{background:url(../images/prettyPhoto/dark_rounded/contentPattern.png) top left repeat}
+    div.dark_rounded .currentTextHolder,div.dark_square .currentTextHolder{color:#c4c4c4}
+    div.dark_rounded #pp_full_res .pp_inline,div.dark_square #pp_full_res .pp_inline{color:#fff}
+    .pp_top,.pp_bottom{height:20px;position:relative}
+    * html .pp_top,* html .pp_bottom{padding:0 20px}
+    .pp_top .pp_left,.pp_bottom .pp_left{height:20px;left:0;position:absolute;width:20px}
+    .pp_top .pp_middle,.pp_bottom .pp_middle{height:20px;left:20px;position:absolute;right:20px}
+    * html .pp_top .pp_middle,* html .pp_bottom .pp_middle{left:0;position:static}
+    .pp_top .pp_right,.pp_bottom .pp_right{height:20px;left:auto;position:absolute;right:0;top:0;width:20px}
+    .pp_fade,.pp_gallery li.default a img{display:none}
+
+</style>  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <meta name="description" content="ScreenBoss makes it easy to manage all of your digital displays in one place. Upload files to the cloud and show them anywhere. Easily request files from colleagues and clients.">
+</head>
+<!--/head-->
+
+<body data-spy="scroll" data-target="#navbar" data-offset="0">
+    <div class="hidden">
+        <p>ScreenBoss makes it easy to manage all of your digital displays in one place. Upload files to the cloud and show them anywhere. Easily request files from colleagues and clients.</p>
+        <p>Set your electronic signage on schedules so you can set it and forget it. No contracts signage solution that is purely cloud-based. ScreenBoss is an intuitive CMS to manage your displays. Ease-of-use, scalability, with dynamic data. A great tool even for those with no technical skills.</p>
+    </div>
+    <header id="header" role="banner">
+        <div class="container">
+            <div id="navbar" class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#main-slider"><i class="icon-home"></i></a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#contact" class="hidden-xs">Contact</a></li>
+                        <li><a href="/app.html" onclick="location.href = 'app.html';">App</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="main-slider" class="carousel">
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="container">
+                    <div class="carousel-content">
+                        <h1>Digital Signage Management</h1>
+                        <p class="lead">Easily control and schedule content for displays.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="item">
+                <div class="container">
+                    <div class="carousel-content">
+                        <h1>ShapeBootstrap.net</h1>
+                        <p class="lead">Download free but 100% premium quaility twitter Bootstrap based WordPress and HTML themes <br>from shapebootstrap.net</p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <!--/.carousel-inner-->
+        <!-- <a class="prev" href="#main-slider" data-slide="prev"><i class="icon-angle-left"></i></a>
+        <a class="next" href="#main-slider" data-slide="next"><i class="icon-angle-right"></i></a> -->
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <div class="box first">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-md icon-color1 fa-3x fa-calendar"></i>
+                            <h4>Set a schedule</h4>
+                            <p>Set the date that files are added to the the screens. Never have to remember to add something again.</p>
+                        </div>
+                    </div>
+                    <!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-md icon-color2 fa-3x fa-retweet"></i>
+                            <h4>Share and reuse content</h4>
+                            <p>Re-use your best content and share it across mutliple screens.</p>
+                        </div>
+                    </div>
+                    <!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-md icon-color3 fa-3x fa-cloud-upload"></i>
+                            <h4>Request files</h4>
+                            <p>Easily get new files to display from colleagues and clients.</p>
+                        </div>
+                    </div>
+                    <!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-md icon-color4 fa-3x fa-mobile"></i>
+                            <h4>Manage from your phone</h4>
+                            <p>Easily upload files and change patterns from your phone. Manage all your screens while on the go.</p>
+                        </div>
+                    </div>
+                    <!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-md icon-color5 fa-3x fa-wrench"></i>
+                            <h4>Easy to setup</h4>
+                            <p>Get started quickly. No complicated code, no system logs. Just click and go.</p>
+                        </div>
+                    </div>
+                    <!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-md icon-color6 fa-3x fa-chrome"></i>
+                            <h4>No software only a browser</h4>
+                            <p>No need to download and manage new software on your sceens. Everything runs in the broswer.</p>
+                        </div>
+                    </div>
+                    <!--/.col-md-4-->
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.box-->
+        </div>
+        <!--/.container-->
+    </section>
+
+    <style>
+        .blurry-text {
+            color: transparent !important;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.5) !important;
+        }
+        
+        .notPickable {
+            -webkit-user-select: none;
+            /* Chrome/Safari */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* IE10+ */
+            /* Rules below not implemented in browsers yet */
+            -o-user-select: none;
+            user-select: none;
+        }
+    </style>
+    <section id="pricing">
+        <div class="container">
+            <div class="box">
+                <!-- <div class="center">
+                    <h2>See our Pricings</h2>
+                    <p class="lead">Pellentesque habitant morbi tristique senectus et netus et <br>malesuada fames ac turpis egestas.</p>
+                </div>-->
+                <div id="pricing-table" class="row">
+                    <div class="col-sm-4">
+                        <ul class="plan featured">
+                            <li class="plan-name">Beta Test</li>
+                            <li class="plan-price">Free</li>
+                            <li>Unlimited Screens</li>
+                            <li>Unlimited Paterns</li>
+                            <li>Unlimited Files</li>
+                            <li>Unlimited Team Uploads</li>
+                            <li>Email Support</li>
+                            <li class="plan-action"><a href="/app.html" class="btn btn-primary btn-lg">Signup</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 blurry-text notPickable">
+                        <ul class="plan">
+                            <li class="plan-name">Standard</li>
+                            <li class="plan-price blurry-text">$49</li>
+                            <li style="color:#999 blurry-text">10GB Storage</li>
+                            <li>2GB RAM</li>
+                            <li>1TB Bandwidth</li>
+                            <li>100 Email Address</li>
+                            <li>Forum Support</li>
+                            <li class="plan-action"><a href="#" class="btn btn-primary btn-lg blurry-text">Signup</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 blurry-text notPickable">
+                        <ul class="plan">
+                            <li class="plan-name">Advanced</li>
+                            <li class="plan-price blurry-text">$199</li>
+                            <li>30GB Storage</li>
+                            <li>5GB RAM</li>
+                            <li>5TB Bandwidth</li>
+                            <li>1000 Email Address</li>
+                            <li>Forum Support</li>
+                            <li class="plan-action"><a href="#" class="btn btn-primary btn-lg blurry-text">Signup</a></li>
+                        </ul>
+                    </div>
+                    <!--/.col-sm-4-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="box last">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1>Contact Form</h1>
+                        <p>We'd love to hear from you. Please drop us a line if you have any questions.</p>
+                        <div class="status alert alert-success" style="display: none"></div>
+                        <form id="main-contact-form" class="contact-form" name="contact-form" action="http://formspree.io/you@email.com" role="form">
+                            <input type="hidden" name="_subject" value="New ScreenBoss Email" />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" required="required" placeholder="Name" name="name">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" required="required" placeholder="Email address" name="_replyto">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Message"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-danger btn-lg" value="Send">Send Message</button>
+                                        <input type="hidden" name="_next" value="http://screenboss.co/index.html#main-slider" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--/.col-sm-6-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72709353-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <!-- begin olark code -->
+<script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
+f[z]=function(){
+(a.s=a.s||[]).push(arguments)};var a=f[z]._={
+},q=c.methods.length;while(q--){(function(n){f[z][n]=function(){
+f[z]("call",n,arguments)}})(c.methods[q])}a.l=c.loader;a.i=nt;a.p={
+0:+new Date};a.P=function(u){
+a.p[u]=new Date-a.p[0]};function s(){
+a.P(r);f[z](r)}f.addEventListener?f.addEventListener(r,s,false):f.attachEvent("on"+r,s);var ld=function(){function p(hd){
+hd="head";return["<",hd,"></",hd,"><",i,' onl' + 'oad="var d=',g,";d.getElementsByTagName('head')[0].",j,"(d.",h,"('script')).",k,"='",l,"//",a.l,"'",'"',"></",i,">"].join("")}var i="body",m=d[i];if(!m){
+return setTimeout(ld,100)}a.P(1);var j="appendChild",h="createElement",k="src",n=d[h]("div"),v=n[j](d[h](z)),b=d[h]("iframe"),g="document",e="domain",o;n.style.display="none";m.insertBefore(n,m.firstChild).id=z;b.frameBorder="0";b.id=z+"-loader";if(/MSIE[ ]+6/.test(navigator.userAgent)){
+b.src="javascript:false"}b.allowTransparency="true";v[j](b);try{
+b.contentWindow[g].open()}catch(w){
+c[e]=d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{
+var t=b.contentWindow[g];t.write(p());t.close()}catch(x){
+b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({
+loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
+/* custom configuration goes here (www.olark.com/documentation) */
+olark.identify('3932-129-10-4975');/*]]>*/</script><noscript><a href="https://www.olark.com/site/3932-129-10-4975/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript>
+<!-- end olark code -->
+</body>
+
+</html>
