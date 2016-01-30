@@ -10,10 +10,9 @@ var Header = React.createClass({
         
         return (
             <header className="header">
-            <a href="../" className="logo">
+            <a href="/#/" className="logo">
                 ScreenBoss
             </a>
-
             <nav className="navbar navbar-static-top" role="navigation">
                 <a href="#" className="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span className="sr-only">Toggle navigation</span>
@@ -35,7 +34,7 @@ var Header = React.createClass({
                                         <li>
                                             <a href="#">
                                                 <div className="pull-left">
-                                                    <img src="../images/avatar3.png" className="img-circle" alt="User Image"/>
+                                                    <img src="images/avatar3.png" className="img-circle" alt="User Image"/>
                                                 </div>
                                                 <h4>
                                                     Support Team
@@ -47,10 +46,10 @@ var Header = React.createClass({
                                         <li>
                                             <a href="#">
                                                 <div className="pull-left">
-                                                    <img src="../images/avatar2.png" className="img-circle" alt="user image"/>
+                                                    <img src="images/avatar2.png" className="img-circle" alt="user image"/>
                                                 </div>
                                                 <h4>
-                                                    ScreenBoss
+                                                    AdminLTE Design Team
                                                     <small><i className="fa fa-clock-o"></i> 2 hours</small>
                                                 </h4>
                                                 <p>Why not buy a new awesome theme?</p>
@@ -59,7 +58,7 @@ var Header = React.createClass({
                                         <li>
                                             <a href="#">
                                                 <div className="pull-left">
-                                                    <img src="../images/avatar.png" className="img-circle" alt="user image"/>
+                                                    <img src="images/avatar.png" className="img-circle" alt="user image"/>
                                                 </div>
                                                 <h4>
                                                     Developers
@@ -71,7 +70,7 @@ var Header = React.createClass({
                                         <li>
                                             <a href="#">
                                                 <div className="pull-left">
-                                                    <img src="../images/avatar2.png" className="img-circle" alt="user image"/>
+                                                    <img src="images/avatar2.png" className="img-circle" alt="user image"/>
                                                 </div>
                                                 <h4>
                                                     Sales Department
@@ -83,7 +82,7 @@ var Header = React.createClass({
                                         <li>
                                             <a href="#">
                                                 <div className="pull-left">
-                                                    <img src="../images/avatar.png" className="img-circle" alt="user image"/>
+                                                    <img src="images/avatar.png" className="img-circle" alt="user image"/>
                                                 </div>
                                                 <h4>
                                                     Reviewers
@@ -212,7 +211,7 @@ var Header = React.createClass({
                             </a>
                             <ul className="dropdown-menu">
                                 <li className="user-header bg-light-blue">
-                                    <img src="../images/avatar3.png" className="img-circle" alt="User Image" />
+                                    <img src="images/avatar3.png" className="img-circle" alt="User Image" />
                                     <p>
                                         Jane Doe - Web Developer
                                         <small>Member since Nov. 2012</small>
@@ -220,13 +219,13 @@ var Header = React.createClass({
                                 </li>
                                 <li className="user-body">
                                     <div className="col-xs-4 text-center">
-                                        <a href="#" style={{color:'grey'}}>Followers</a>
+                                        <a href="#">Followers</a>
                                     </div>
                                     <div className="col-xs-4 text-center">
-                                        <a href="#" style={{color:'grey'}}>Sales</a>
+                                        <a href="#">Sales</a>
                                     </div>
                                     <div className="col-xs-4 text-center">
-                                        <a href="#" style={{color:'grey'}}>Friends</a>
+                                        <a href="#">Friends</a>
                                     </div>
                                 </li>
                                 <li className="user-footer">
@@ -234,7 +233,7 @@ var Header = React.createClass({
                                         <a href="#" className="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div className="pull-right">
-                                        {/*<a href="#" className="btn btn-default btn-flat">*/}<LogOutButton />{/*</a>*/}
+                                        <a href="#" className="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>

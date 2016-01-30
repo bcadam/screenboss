@@ -9,6 +9,19 @@ app.use('/images', express.static('dist/images'));
 app.use('/js', express.static('dist/js'));
 app.use('/fonts', express.static('dist/fonts'));
 
+
+
+
+
+app.get('/*', function(req, res) {
+    res.sendFile('app/index.html', {
+        root: __dirname
+    });
+});
+
+
+
+
 app.get('/index.html', function(req, res) {
     res.sendFile('app/home.html', {
         root: __dirname

@@ -63,7 +63,7 @@ var MainApp = React.createClass({
 
               if(!currentUser)
               {
-                window.location.assign("#/login");
+        window.location.assign("#/app/login");
               }
               
           }, 

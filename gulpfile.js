@@ -106,11 +106,11 @@ gulp.task('clean', function(cb) {
 
 
 // by default build project and then watch files in order to trigger livereload
-gulp.task('default', ['scripts','html','styles','serve','images','watch','javascripts','javascriptsdown','plugins','fonts','javascriptsdowntarget','bootstrap','home']);
+gulp.task('default', ['scripts','html','styles','serve','images','watch','javascripts','javascriptsdown','plugins','fonts','javascriptsdowntarget','bootstrap','home','css']);
 
 // waits until clean is finished then builds the project
 gulp.task('build', ['clean'], function(){
-  gulp.start(['scripts','html','styles','serve','images','watch','javascripts','javascriptsdown','plugins','fonts','javascriptsdowntarget','bootstrap','home']);
+  gulp.start(['scripts','html','styles','serve','images','watch','javascripts','javascriptsdown','plugins','fonts','javascriptsdowntarget','bootstrap','home','css']);
 });
 
 
@@ -170,11 +170,9 @@ gulp.task('images2', ['clean'], function() {
 });
 
 
-gulp.task('styles5', function () {
-    return gulp.src(app + 'css/*.css')
-        .pipe($.autoprefixer('last 1 version'))
-        .pipe(gulp.dest(dist + 'css/'))
-        .pipe($.size());
+gulp.task('css', ['clean'], function() {
+  return gulp.src(app + 'css/*')
+    .pipe(gulp.dest(dist + 'css/'));
 });
 
 

@@ -39,17 +39,17 @@ var LeftSideBar = React.createClass({
                                         </form>*/}
                     <ul className="sidebar-menu">
                         <li className="active">
-                            <a href="/#/">
+                            <a href="/#/app/">
                                 <i className="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/#/screens">
+                            <a href="/#/app/screens">
                                 <i className="fa fa-th"></i> <span>Screens</span>{/**<small className="badge pull-right bg-green">new</small>**/}
                             </a>
                         </li>
                         <li>
-                            <a href="/#/assets">
+                            <a href="/#/app/assets">
                                 <i className="fa fa-picture-o"></i> <span>Files</span>{/**<small className="badge pull-right bg-green">new</small>**/}
                             </a>
                         </li>

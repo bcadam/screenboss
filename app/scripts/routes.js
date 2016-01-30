@@ -33,7 +33,7 @@ const routes = (
     <Route path='/screen/' component={ BlankApp }>
       <Route path=':id' component={ Screen } />
     </Route>
-    <Route path='/' component={ App }>
+    <Route path='/app' component={ App }>
       <IndexRoute component={ Main } />
       <Route path='info' component={ Info } />
       <Route path='screens' component={ ScreenList } />
