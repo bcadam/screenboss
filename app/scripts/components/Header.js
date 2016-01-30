@@ -10,7 +10,7 @@ var Header = React.createClass({
         
         return (
             <header className="header">
-            <a href="/#/" className="logo">
+            <a href="/#/app/" className="logo">
                 ScreenBoss
             </a>
             <nav className="navbar navbar-static-top" role="navigation">

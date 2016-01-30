@@ -31,24 +31,96 @@ class Home extends React.Component {
     var featureTitle = {color:' #777',fontWeight: '300',fontSize: '18px',marginTop: '0px',marginBottom: '10px',fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif'};
     
     var mainSlider = {backgroundImage: 'url(../images/slider-bg.jpg)',
-    backgroundAttachment: 'fixed',
-    backgroundSize: 'cover',
-    backgroundPosition: '50% 50%',
-    backgroundRepeat: 'no-repeat',
-    padding: '50px 0',
-    color:' #fff',
-    position: 'relative',
-    display: 'block',
-    boxSizing: 'border-box',
-    height: '300px',
-    fontWeight: '300',
-    fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif'};
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
+        backgroundPosition: '50% 20%',
+        backgroundRepeat: 'no-repeat',
+        padding: '50px 0',
+        color:' #fff',
+        position: 'relative',
+        display: 'block',
+        boxSizing: 'border-box',
+        height: '300px',
+        fontWeight: '300',
+        fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif'};
 
-    var mainSliderH1 = {fontSize: '68px',
-    textShadow: '0 3px rgba(0, 0, 0, 0.1)',
-    color: '#fff',
-    marginTop: '20px',
-    marginBottom: '10px'};
+    var carouselInner = {
+        position: 'relative',
+        width: '100%',
+        overflow: 'hidden',
+        boxSizing: 'border-box',
+        display: 'block',
+        color: '#fff',
+        fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif',
+        fontSize: '14px',
+        lineHeight: '1.428571429'
+    };
+
+    
+    var itemActive = {
+        opacity: '1',
+        transition: 'opacity ease-in-out 500ms',
+        zIndex: '2',
+        top: 'auto',
+        position: 'relative',
+        left: '0 !important',
+        width: '100%',
+        display: 'block !important',
+        textAlign: 'center',
+        boxSizing: 'border-box',
+        color: '#fff',
+        fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif',
+        fontSize: '14px',
+        lineHeight: '1.428571429'
+    };
+
+    var itemContainer = {
+        maxWidth:' 1170px',
+        paddingRight: '15px',
+        paddingLeft: '15px',
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        boxSizing: 'border-box',
+        textSlign: 'center',
+        color: '#fff'
+    };
+
+
+    var mainSliderH1 = {
+        animation: 'scaleUp 400ms',
+        fontSize: '68px',
+        textShadow: '0 3px rgba(0, 0, 0, 0.1)',
+        color: '#fff',
+        fontWeight: '300',
+        marginTop: '20px',
+        marginBottom: '10px',
+        fontFamily:' "Helvetica Neue",Helvetica,Arial,sans-serif',
+        lineHeight: '1.1',
+        margin: '.67em 0',
+        WebkitMarginBefore: '0.83em',
+        WebkitMarginAfter: '0.83em',
+        display:'block'
+    };
+
+
+    var pLead = {
+        fontSize: '21px',
+        fontWeight: '200',
+        lineHeight: '1.4',
+        marginBottom:' 20px',
+        margin: '0 0 10px',
+        boxSizing: 'border-box',
+        display: 'block',
+        WebkitMarginBefore: "1em",
+        WebkitMarginAfter: "1em",
+        WebkitMarginStart: '0px',
+        WebkitMarginEnd: '0px'
+    };
+
+
+
+
+
 
     var subHeaders = {color: '#777',
         fontWeight: '300',
@@ -258,7 +330,7 @@ class Home extends React.Component {
                                                                                 </ul>
                                                 </li>*/}
                         <li className="dropdown notifications-menu">
-                            <a href="/#/app" className="dropdown-toggle" data-toggle="dropdown">
+                            <a href="http://www.screenboss.co/#/app/" className="dropdown-toggle" data-toggle="dropdown">
                                 {/*
                                                                 <span className="label label-warning">10</span>*/}
                                 App  <i className="fa fa-fort-awesome"></i> 
@@ -405,26 +477,26 @@ class Home extends React.Component {
             </nav>
         </header>
     <section id="main-slider" className="carousel" style={mainSlider}>
-        <div className="carousel-inner">
-            <div className="item active">
-                <div className="container">
+        <div className="carousel-inner" style={carouselInner}>
+            <div className="item active" style={itemActive}>
+                <div className="container" style={itemContainer}>
                     <div className="carousel-content">
                         <h1 style={mainSliderH1}>Digital Signage Management</h1>
-                        <p className="lead">Easily control and schedule content for displays.</p>
+                        <p className="lead" style={pLead}>Easily control and schedule content for displays.</p>
                     </div>
                 </div>
             </div>
-                <div className="item">
-                <div className="container">
-                    <div className="carousel-content">
-                        <h1>ShapeBootstrap.net</h1>
-                        <p className="lead">Download free but 100% premium quaility twitter Bootstrap based WordPress and HTML themes <br />from shapebootstrap.net</p>
-                    </div>
-                </div>
-            </div>
+            {/*<div className="item">
+                            <div className="container">
+                                <div className="carousel-content">
+                                    <h1>ShapeBootstrap.net</h1>
+                                    <p className="lead">Download free but 100% premium quaility twitter Bootstrap based WordPress and HTML themes <br />from shapebootstrap.net</p>
+                                </div>
+                            </div>
+                        </div>*/}
         </div>
-        <a className="prev" href="#main-slider" data-slide="prev"><i className="icon-angle-left"></i></a>
-        <a className="next" href="#main-slider" data-slide="next"><i className="icon-angle-right"></i></a>
+        {/*<a className="prev" href="#main-slider" data-slide="prev"><i className="icon-angle-left"></i></a>
+                <a className="next" href="#main-slider" data-slide="next"><i className="icon-angle-right"></i></a>*/}
     </section>
         <section className="content col-xs-12">
             <div className='row'>
