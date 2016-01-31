@@ -68,7 +68,7 @@ var AddAssetDropDown = React.createClass({
         
         //console.log(self.data.comments[self.state.index]);
         return (
-            <div className='col-xs-12'>
+            <div className='col-xs-12 row'>
                 
                 <div className='col-xs-12 col-md-6 product'>
                     {img}

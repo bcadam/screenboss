@@ -11,6 +11,16 @@ import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
 import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
+import Card from 'material-ui/lib/card/card';
+import CardActions from 'material-ui/lib/card/card-actions';
+import CardHeader from 'material-ui/lib/card/card-header';
+import CardText from 'material-ui/lib/card/card-text';
+import Table from 'material-ui/lib/table/table';
+import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
+import TableRow from 'material-ui/lib/table/table-row';
+import TableHeader from 'material-ui/lib/table/table-header';
+import TableRowColumn from 'material-ui/lib/table/table-row-column';
+import TableBody from 'material-ui/lib/table/table-body';
 
 
 var ScreenDisplay = React.createClass({
@@ -60,73 +70,88 @@ var ScreenDisplay = React.createClass({
 
         if (!self.props.asset.published){
             stringOfPublished = "Not published";
-             publishedButton = (<RaisedButton className='col-xs-12 col-md-4' primary={true} fullWidth={true} name="checkboxName2" value="checkboxValue2" label={stringOfPublished} defaultChecked={self.props.asset.published} onClick={self.handleChangePublished} />)
+             publishedButton = (<RaisedButton primary={true} name="checkboxName2" value="checkboxValue2" label={stringOfPublished} defaultChecked={self.props.asset.published} onClick={self.handleChangePublished} />)
         }
         else {
             stringOfPublished = "Published";
-            publishedButton = (<RaisedButton className='col-xs-12 col-md-4' secondary={true} fullWidth={true} name="checkboxName2" value="checkboxValue2" label={stringOfPublished} defaultChecked={self.props.asset.published} onClick={self.handleChangePublished} />)
+            publishedButton = (<RaisedButton secondary={true} name="checkboxName2" value="checkboxValue2" label={stringOfPublished} defaultChecked={self.props.asset.published} onClick={self.handleChangePublished} />)
         }
 
 
         return (
-            <div className="panel panel-default">
-            <div className="panel panel-default">
-                
+                <Card>
+                    <CardHeader
+                      title={self.props.asset.name}
+                      subtitle={self.props.asset.description}
+                      actAsExpander={true}
+                      showExpandableButton={true}
 
-                <Toolbar className="panel-heading" role="tab" id={"heading" + self.props.asset.name} data-toggle="collapse" data-parent="#accordion" href={"#" + self.props.asset.objectId} aria-expanded="false" aria-controls={self.props.asset.objectId}>
-                    <ToolbarGroup firstChild={false} float="left">
-                        <ToolbarTitle text={self.props.asset.name} />
-                    </ToolbarGroup>
-                    <ToolbarGroup float="right">
-                        <ToolbarTitle text="Toggle" className="hidden-xs" />
-                    </ToolbarGroup>
-                </Toolbar>
+                    />
+                    <CardText expandable={true}>
+                        <AddAssetDropDown asset={self.props.asset} />
 
-
-                <div id={self.props.asset.objectId} className="panel-collapse collapse in" role="tabpanel" aria-labelledby={"heading" + self.props.asset.objectId}>
-                  <div className="panel-body">
-                  <AddAssetDropDown asset={self.props.asset} />
-                
-                <div className="table-responsive">
-                <table className="table table-condensed">
-
-                    <thead>
-                        <tr>
-                            <th>File</th>
-                            <th>Image</th>
-                            <th>Date</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {this.data.comments.map(function(c) {
-                        return (
-                        <AssignmentWithToggle key={c.id} asset={c} />
-                        );
-                        })}
-                    </tbody>
-
-                </table>
-                </div>
-
-                {publishedButton}
-                <FlatButton className='col-xs-12' label="Delete Schedule" primary={true} onClick={self.handleChange} fullWidth={true} />
-
-                <Dialog
-                  title='Delete Asset?'
-                  actions={actions}
-                  modal={false}
-                  open={self.state.deleteOpen}
-                  onRequestClose={this.handleClose}>
-                  Are you sure you would like to delete your schedule? This means that you will have to change the url of each of your screens. This cannot be undone.
-                </Dialog>
+                        {/*<Table>
+                                                    <TableHeader>
+                                                      <TableRow>
+                                                        <TableHeaderColumn>File Name</TableHeaderColumn>
+                                                        <TableHeaderColumn>Image</TableHeaderColumn>
+                                                        <TableHeaderColumn>Date</TableHeaderColumn>
+                                                        <TableHeaderColumn>Delete</TableHeaderColumn>
+                                                      </TableRow>
+                                                    </TableHeader>
+                                                    <TableBody>
+                                                      {self.data.comments.map(function(c) {
+                                                            return (
+                                                            <TableRow>
+                                                                <TableRowColumn>{c.screenAsset.name}</TableRowColumn>
+                                                                <TableRowColumn><img src={c.screenAsset.file.url()} className='img img-responsive'/></TableRowColumn>
+                                                                <TableRowColumn>Employed</TableRowColumn>
+                                                                <TableRowColumn>Delete</TableRowColumn>
+                                                            </TableRow>
+                                                            );
+                                                            })}
+                                                    </TableBody>
+                                                  </Table>*/}
 
 
-                  </div>
-                </div>
-              </div>
-            </div>
+
+
+
+                          <div className="table-responsive">
+                            <table className="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>File</th>
+                                        <th>Image</th>
+                                        <th>Date</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {self.data.comments.map(function(c) {
+                                    return (
+                                    <AssignmentWithToggle key={c.id} asset={c} />
+                                    );
+                                    })}
+                                </tbody>
+                            </table>
+                            </div>
+                        </CardText>
+
+                        <CardActions expandable={true}>
+                          {publishedButton}
+                          <FlatButton label="Delete Schedule" primary={true} onClick={self.handleChange} />
+                        </CardActions>
+                        <Dialog
+                          title='Delete Asset?'
+                          actions={actions}
+                          modal={false}
+                          open={self.state.deleteOpen}
+                          onRequestClose={this.handleClose}>
+                          Are you sure you would like to delete your schedule? This means that you will have to change the url of each of your screens. This cannot be undone.
+                        </Dialog>
+                    </Card>
         );
     }
 });

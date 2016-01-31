@@ -59,12 +59,12 @@ var AssignmentWithToggle = React.createClass({
           <FlatButton
             label="Cancel"
             secondary={true}
-            onTouchTap={this.handleChange} />,
+            onTouchTap={self.handleChange} />,
           <FlatButton
             label="Submit"
             primary={true}
             keyboardFocused={true}
-            onTouchTap={this.delete} />,
+            onTouchTap={self.delete} />,
         ];
 
         var startDate = self.props.asset.startDate;
@@ -79,7 +79,7 @@ var AssignmentWithToggle = React.createClass({
         }
         else {
             startDate = startDate.toString();
-            startDate = <div onClick={this.resetStartDate}>{startDate}</div>;
+            startDate = <div onClick={self.resetStartDate}>{startDate}</div>;
         }
         if (!endDate){
             endDate = (    <DatePicker
@@ -90,7 +90,7 @@ var AssignmentWithToggle = React.createClass({
         }
         else {
             endDate = endDate.toString();
-            endDate = <div onClick={this.resetEndDate}>{endDate}</div>;
+            endDate = <div onClick={self.resetEndDate}>{endDate}</div>;
         }
 
         return (
@@ -104,7 +104,7 @@ var AssignmentWithToggle = React.createClass({
                   actions={actions}
                   modal={false}
                   open={self.state.deleteOpen}
-                  onRequestClose={this.handleClose}>
+                  onRequestClose={self.handleClose}>
                   Are you sure you would like to delete your assignment? This cannot be undone.
                 </Dialog>
             </tr>
