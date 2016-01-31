@@ -14,7 +14,7 @@ var ScreenList = require('./components/ScreenList.js');
 var ScreenDisplay = require('./components/ScreenDisplay.js');
 var LoginForm = require('./components/LoginForm.js');
 var LogOut = require('./components/LogOut.js');
-var AssetList = require('./components/AssetList.js');
+var AssetListPage = require('./components/AssetListPage.js');
 var Screen = require('./components/Screen.js');
 var Dropzone = require('./components/Dropzone.js');
 
@@ -31,7 +31,7 @@ const routes = (
       <IndexRoute component={ Main } />
       <Route path='info' component={ Info } />
       <Route path='screens' component={ ScreenList } />
-      <Route path='assets' component={ AssetList } />
+      <Route path='assets' component={ AssetListPage } />
       <Route path='login' component={ LoginForm } />
       <Route path='logout' component={ LogOut } />
       <Route path='home' component={ Home } />
