@@ -17,15 +17,24 @@ import Screen from 'material-ui/lib/svg-icons/hardware/cast';
 import File from 'material-ui/lib/svg-icons/file/attachment';
 import Dashboard from 'material-ui/lib/svg-icons/action/dashboard';
 import RemoveRedEye from 'material-ui/lib/svg-icons/image/remove-red-eye';
+
 var NewScreenForm = require('./NewScreenForm.js');
+var LoginForm = require('./LoginForm.js');
 
 
 var LeftSideBar = React.createClass({
+    mixins: [LinkedStateMixin],
+
     handleToggle: function() {
         this.setState({open: !this.state.open});
     },
     handleClose: function() {
         this.setState({open: false});
+    },
+    getInitialState:function() {
+        return {
+              user : Parse.User.current()
+        };
     },
     render: function() {
         // Render the text of each comment as a list item
@@ -33,26 +42,27 @@ var LeftSideBar = React.createClass({
         var self = this;
         var email = '';
 
+        var display;
+
         if(user)
         {
             email = user.get('email');
+
+            display = (<div><MenuItem primaryText="Dashboard" leftIcon={<Dashboard />} onTouchTap={function(){window.location.assign("/#/app/");}} />
+                <MenuItem primaryText="Screens" leftIcon={<Screen />} onTouchTap={function(){window.location.assign("/#/app/screens");}} />
+                <MenuItem primaryText="Files" leftIcon={<File />} onTouchTap={function(){window.location.assign("/#/app/assets");}} />
+                <Divider />
+                <NewScreenForm /></div>);
+        }
+        else{
+            display = (<div><p><h3>Create an account to get started.</h3></p><LoginForm user={this.linkState('user')} /></div>);
         }
 
-        const style = {
-          menu: {
-            marginRight: 32,
-            marginBottom: 32,
-            float: 'left',
-            position: 'relative',
-            zIndex: 0,
-          },
-          rightIcon: {
-            textAlign: 'center',
-            lineHeight: '24px',
-          },
-        };
+        
 
         //console.log(self.props.open);
+
+
 
         return (
             <LeftNav
@@ -67,16 +77,8 @@ var LeftSideBar = React.createClass({
 
               }}
             >
-              <MenuItem primaryText="Dashboard" leftIcon={<Dashboard />} onTouchTap={function(){window.location.assign("/#/app/");}} />
-              <MenuItem primaryText="Screens" leftIcon={<Screen />} onTouchTap={function(){window.location.assign("/#/app/screens");}} />
-              <MenuItem primaryText="Files" leftIcon={<File />} onTouchTap={function(){window.location.assign("/#/app/assets");}} />
-              <Divider />
-              {/*<MenuItem primaryText="Make a copy" leftIcon={<ContentCopy />} />
-                            <MenuItem primaryText="Download" leftIcon={<Download />} />
-                            <Divider />
-                            <MenuItem primaryText="Remove" leftIcon={<Delete />} />*/}
-                <NewScreenForm />
-        </LeftNav>
+                {display}
+            </LeftNav>
         );
     }
 });

@@ -13,6 +13,7 @@ import LandingPage from './pages/landingpage.jsx';
 var ScreenList = require('./components/ScreenList.js');
 var ScreenDisplay = require('./components/ScreenDisplay.js');
 var LoginForm = require('./components/LoginForm.js');
+var LogOut = require('./components/LogOut.js');
 var AssetList = require('./components/AssetList.js');
 var Screen = require('./components/Screen.js');
 var Dropzone = require('./components/Dropzone.js');
@@ -32,6 +33,7 @@ const routes = (
       <Route path='screens' component={ ScreenList } />
       <Route path='assets' component={ AssetList } />
       <Route path='login' component={ LoginForm } />
+      <Route path='logout' component={ LogOut } />
       <Route path='app' component={ Main } />
       <Route path='home' component={ Home } />
       <Route path='*' component={NotFound}/>

@@ -64,6 +64,7 @@ var LoginForm = React.createClass({
           success: function(user) {
             //Hooray! Let them use the app now.
             self.props.user.requestChange(user);
+            window.location.assign("/#/app/");
           },
           error: function(user, error) {
             // Show the error message somewhere and let the user try again.
@@ -88,7 +89,7 @@ var LoginForm = React.createClass({
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12">
-                                <div className="well login-box">
+                                <div className="login-box">
                                         <div className="form-group col-xs-12">
                                             <TextField fullWidth={true} id='assetName' hintText="" floatingLabelText="Email" onChange={this.handleChange.bind(this, 'name')} />
                                         </div>

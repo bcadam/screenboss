@@ -14,14 +14,13 @@ var Header = React.createClass({
         // Render the text of each comment as a list item
         var self = this;
         return (
-            <div>
             <AppBar
                 title="ScreenBoss"
                 iconClassNameRight="muidocs-icon-navigation-expand-more"
                 onLeftIconButtonTouchTap={self.handleClick}
                 onTitleTouchTap={function(){window.location.assign("/#/");}}
+                style={{backgroundColor:"#367FA9"}}
               />
-            </div>
         );
     }
 });
