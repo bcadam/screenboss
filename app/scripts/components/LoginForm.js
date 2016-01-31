@@ -27,6 +27,7 @@ var LoginForm = React.createClass({
           success: function(user) {
             // Do stuff after successful login.
             self.props.user.requestChange(user);
+            window.location.assign("/#/app/");
           },
           error: function(user, error) {
             // The login failed. Check error to see why.

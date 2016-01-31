@@ -4,6 +4,10 @@ import ParseReact from 'parse-react';
 Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6', '8UXFi3hzHgbKWoMZIIX3ZgUg0tHKPzSK6w8Ul0M6');var LogOutButton = require('../components/LogOutButton.js');
 
 import AppBar from 'material-ui/lib/app-bar';
+import Popover from 'material-ui/lib/popover/popover';
+import PopoverAnimationFromTop from 'material-ui/lib/popover/popover-animation-from-top';
+
+var ProfileNavItem = require('./ProfileNavItem.js');
 
 var Header = React.createClass({
     handleClick: function(){
@@ -16,10 +20,10 @@ var Header = React.createClass({
         return (
             <AppBar
                 title="ScreenBoss"
-                iconClassNameRight="muidocs-icon-navigation-expand-more"
                 onLeftIconButtonTouchTap={self.handleClick}
                 onTitleTouchTap={function(){window.location.assign("/#/");}}
                 style={{backgroundColor:"#367FA9"}}
+                iconElementRight={<ProfileNavItem />}
               />
         );
     }

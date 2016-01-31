@@ -62,7 +62,7 @@ var LeftSideBar = React.createClass({
                         </div>);
         }
         else{
-            display = (<div><p><h3>Create an account to get started.</h3></p><LoginForm user={this.linkState('user')} /></div>);
+            display = (<div><LoginForm user={this.linkState('user')} /></div>);
         }
 
         
