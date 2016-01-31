@@ -34,7 +34,6 @@ const routes = (
       <Route path='assets' component={ AssetList } />
       <Route path='login' component={ LoginForm } />
       <Route path='logout' component={ LogOut } />
-      <Route path='app' component={ Main } />
       <Route path='home' component={ Home } />
       <Route path='*' component={NotFound}/>
     </Route>

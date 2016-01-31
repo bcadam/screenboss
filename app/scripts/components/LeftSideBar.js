@@ -4,6 +4,7 @@ import ParseReact from 'parse-react';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import { Router } from 'react-router';
 
+import FlatButton from 'material-ui/lib/flat-button';
 import LeftNav from 'material-ui/lib/left-nav';
 import Menu from 'material-ui/lib/menus/menu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
@@ -17,6 +18,10 @@ import Screen from 'material-ui/lib/svg-icons/hardware/cast';
 import File from 'material-ui/lib/svg-icons/file/attachment';
 import Dashboard from 'material-ui/lib/svg-icons/action/dashboard';
 import RemoveRedEye from 'material-ui/lib/svg-icons/image/remove-red-eye';
+import IconButton from 'material-ui/lib/icon-button';
+import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
+
+import AppBar from 'material-ui/lib/app-bar';
 
 var NewScreenForm = require('./NewScreenForm.js');
 var LoginForm = require('./LoginForm.js');
@@ -48,11 +53,13 @@ var LeftSideBar = React.createClass({
         {
             email = user.get('email');
 
-            display = (<div><MenuItem primaryText="Dashboard" leftIcon={<Dashboard />} onTouchTap={function(){window.location.assign("/#/app/");}} />
+            display = (<div>
+                <MenuItem primaryText="Dashboard" leftIcon={<Dashboard />} onTouchTap={function(){window.location.assign("/#/app/");}} />
                 <MenuItem primaryText="Screens" leftIcon={<Screen />} onTouchTap={function(){window.location.assign("/#/app/screens");}} />
                 <MenuItem primaryText="Files" leftIcon={<File />} onTouchTap={function(){window.location.assign("/#/app/assets");}} />
                 <Divider />
-                <NewScreenForm /></div>);
+                <NewScreenForm />
+                        </div>);
         }
         else{
             display = (<div><p><h3>Create an account to get started.</h3></p><LoginForm user={this.linkState('user')} /></div>);
@@ -77,7 +84,16 @@ var LeftSideBar = React.createClass({
 
               }}
             >
-                {display}
+            <AppBar
+                title={<span>ScreenBoss</span>}
+                showMenuIconButton={false}
+                onTitleTouchTap={function(){self.props.open.requestChange(false);}}
+                iconElementRight={<IconButton><NavigationClose /></IconButton>}
+                style={{backgroundColor:"#367FA9"}}
+                onClick={function(){self.props.open.requestChange(false);}}
+              />
+              {display}
+               
             </LeftNav>
         );
     }

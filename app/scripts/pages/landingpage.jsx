@@ -260,7 +260,7 @@ mixins: [LinkedStateMixin],
                 <div className="container" style={itemContainer}>
                     <div className="carousel-content">
                         <h1 style={mainSliderH1}>Digital Signage Management</h1>
-                        <p className="lead" style={pLead}>Easily control and schedule content for displays.</p>
+                        <p className="lead hidden-xs" style={pLead}>Easily control and schedule content for displays.</p>
                     </div>
                 </div>
             </div>
