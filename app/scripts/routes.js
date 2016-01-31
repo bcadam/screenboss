@@ -2,9 +2,6 @@ import React from 'react';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import createHistory from 'history/lib/createHashHistory'
 
-
-
-
 import App from './pages/app.jsx';
 import BlankApp from './pages/blankapp.jsx';
 import Home from './pages/home.jsx';
@@ -13,7 +10,6 @@ import NotFound from './pages/notFound.jsx';
 import Main from './pages/main.jsx';
 import LandingPage from './pages/landingpage.jsx';
 
-
 var ScreenList = require('./components/ScreenList.js');
 var ScreenDisplay = require('./components/ScreenDisplay.js');
 var LoginForm = require('./components/LoginForm.js');
@@ -21,12 +17,9 @@ var AssetList = require('./components/AssetList.js');
 var Screen = require('./components/Screen.js');
 var Dropzone = require('./components/Dropzone.js');
 
-
 const historyOptions = {
   queryKey : false
 };
-
-
 
 const routes = (
   <Router history={createHistory(historyOptions)}>

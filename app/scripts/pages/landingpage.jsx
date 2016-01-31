@@ -35,12 +35,12 @@ class Home extends React.Component {
         backgroundSize: 'cover',
         backgroundPosition: '50% 20%',
         backgroundRepeat: 'no-repeat',
-        padding: '50px 0',
+        padding: '20px 0',
         color:' #fff',
         position: 'relative',
         display: 'block',
         boxSizing: 'border-box',
-        height: '300px',
+        height: '350px',
         fontWeight: '300',
         fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif'};
 
@@ -144,6 +144,10 @@ class Home extends React.Component {
         fontSize: '14px',
         lineHeight: '1.428571429'
     };
+
+
+
+    
 
     var pricingTableItem = {
         position: 'relative',
@@ -330,7 +334,7 @@ class Home extends React.Component {
                                                                                 </ul>
                                                 </li>*/}
                         <li className="dropdown notifications-menu">
-                            <a href="http://www.screenboss.co/#/app/" className="dropdown-toggle" data-toggle="dropdown">
+                            <a href="/#/app/" className="dropdown-toggle" data-toggle="dropdown">
                                 {/*
                                                                 <span className="label label-warning">10</span>*/}
                                 App  <i className="fa fa-fort-awesome"></i> 

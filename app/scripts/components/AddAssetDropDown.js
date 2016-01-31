@@ -90,7 +90,7 @@ var AddAssetDropDown = React.createClass({
                     </div>
 
                     <div className='col-xs-12' style={{marginTop:"20px"}}>
-                        <a href={'/screen/' + self.props.asset.objectId} target="_blank"><h3>Screen URL</h3></a>
+                        <a href={'/#/screen/' + self.props.asset.objectId} target="_blank"><h3>Screen URL</h3></a>
                     </div>
                 </div>
 

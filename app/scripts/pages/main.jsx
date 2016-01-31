@@ -83,16 +83,16 @@ var MainApp = React.createClass({
                     <SiteDemoSimple />
                 </div>
 
-                <div className="hidden">
-                    <AssetMenu style={{zIndex:"10"}} / >
-                </div>
+                {/*<div className="hidden">
+                                    <AssetMenu style={{zIndex:"10"}} / >
+                                </div>
 
                 <div className="hidden">
                     <NewScreenSidebar style={{zIndex:"10"}} / >
                 </div>
 
                 <div className="col-xs-12">
-                </div>
+                </div>*/}
 
                 <section>
                     <div className="container">
@@ -100,9 +100,9 @@ var MainApp = React.createClass({
                         <div className="box">
                             <div className="center">
 
-                                <div className='col-xs-12'>
-                                    <ScreenList />    
-                                </div>
+                                {/*<div className='col-xs-12'>
+                                                                    <ScreenList />    
+                                                                </div>*/}
                                 
 
                                 <div style={{marginTop:"30px"}} className='col-xs-12 col-xs-6'>
@@ -112,9 +112,9 @@ var MainApp = React.createClass({
                                     
                                 </div>
 
-                                <div className='col-xs-12 col-sm-6'>
-                                    <NewScreenForm className='' />
-                                </div> 
+                                {/*<div className='col-xs-12 col-sm-6'>
+                                                                    <NewScreenForm className='' />
+                                                                </div> */}
                                 <div className='col-xs-12 col-sm-6' >
                                     <Dropzone style={{width:'100% !important',maxHeight:'100px !important'}} />
                                 </div>
@@ -151,7 +151,7 @@ var MainApp = React.createClass({
 
             var simpleLogIn = (<div>
                                     <SiteDemoSimple />
-                                    <NewScreenForm />
+                                    {/*<NewScreenForm />*/}
                                     <ScreenList />
                                     <br />
                                     <AssetList />

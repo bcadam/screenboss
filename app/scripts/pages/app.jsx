@@ -14,7 +14,8 @@ var App = React.createClass({
 
         getInitialState() {
             return {
-                user: Parse.User.current()
+                user: Parse.User.current(),
+                open: false,
             };
         },
         
@@ -24,12 +25,12 @@ var App = React.createClass({
             //console.log(this.state.user);
             return (
 				<div>
-			        <Header />
-			        <div className="wrapper row-offcanvas row-offcanvas-left">
-			        	<LeftSideBar />
+			        <Header open={this.linkState('open')} /><LeftSideBar open={this.linkState('open')} />
+			        {/*<div className="wrapper row-offcanvas row-offcanvas-left">
+			        			        	<LeftSideBar />
 
 
-			        	<aside className="right-side">                
+			        	<aside className="right-side">    */}            
 			                {/**<section className="content-header">
 			                    <h1>
 			                        Home Page
@@ -46,8 +47,9 @@ var App = React.createClass({
 			                    {this.props.children}
 
 			                </section>
-			            </aside>
-			        </div>
+			           {/* </aside>
+
+			        </div>*/}
 		        </div>    
             )
         }
