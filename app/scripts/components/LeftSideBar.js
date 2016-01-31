@@ -54,9 +54,9 @@ var LeftSideBar = React.createClass({
             email = user.get('email');
 
             display = (<div>
-                <MenuItem primaryText="Dashboard" leftIcon={<Dashboard />} onTouchTap={function(){window.location.assign("/#/app/");}} />
-                <MenuItem primaryText="Screens" leftIcon={<Screen />} onTouchTap={function(){window.location.assign("/#/app/screens");}} />
-                <MenuItem primaryText="Files" leftIcon={<File />} onTouchTap={function(){window.location.assign("/#/app/assets");}} />
+                <MenuItem primaryText="Dashboard" leftIcon={<Dashboard />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/");}} />
+                <MenuItem primaryText="Screens" leftIcon={<Screen />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/screens");}} />
+                <MenuItem primaryText="Files" leftIcon={<File />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/assets");}} />
                 <Divider />
                 <NewScreenForm />
                         </div>);
