@@ -5,16 +5,20 @@ var AddAssetDropDown = require('./AddAssetDropDown');
 var AssignmentWithToggle = require('./AssignmentWithToggle');
 
 import Dialog from 'material-ui/lib/dialog';
+
 import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
+
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
 import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
+
 import Card from 'material-ui/lib/card/card';
 import CardActions from 'material-ui/lib/card/card-actions';
 import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
+
 import Table from 'material-ui/lib/table/table';
 import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
 import TableRow from 'material-ui/lib/table/table-row';
@@ -90,58 +94,54 @@ var ScreenDisplay = React.createClass({
                     <CardText expandable={true}>
                         <AddAssetDropDown asset={self.props.asset} />
 
-                        {/*<Table>
-                                                    <TableHeader>
-                                                      <TableRow>
-                                                        <TableHeaderColumn>File Name</TableHeaderColumn>
-                                                        <TableHeaderColumn>Image</TableHeaderColumn>
-                                                        <TableHeaderColumn>Date</TableHeaderColumn>
-                                                        <TableHeaderColumn>Delete</TableHeaderColumn>
-                                                      </TableRow>
-                                                    </TableHeader>
-                                                    <TableBody>
-                                                      {self.data.comments.map(function(c) {
-                                                            return (
-                                                            <TableRow>
-                                                                <TableRowColumn>{c.screenAsset.name}</TableRowColumn>
-                                                                <TableRowColumn><img src={c.screenAsset.file.url()} className='img img-responsive'/></TableRowColumn>
-                                                                <TableRowColumn>Employed</TableRowColumn>
-                                                                <TableRowColumn>Delete</TableRowColumn>
-                                                            </TableRow>
-                                                            );
-                                                            })}
-                                                    </TableBody>
-                                                  </Table>*/}
-
-
-
-
-
-                          <div className="table-responsive">
-                            <table className="table table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th>File</th>
-                                        <th>Image</th>
-                                        <th>Date</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    {self.data.comments.map(function(c) {
+                        <Table selectable={false}>
+                            <TableHeader adjustForCheckbox={false} >
+                              <TableRow>
+                                <TableHeaderColumn>File Name</TableHeaderColumn>
+                                <TableHeaderColumn>Image</TableHeaderColumn>
+                                <TableHeaderColumn>Date</TableHeaderColumn>
+                                <TableHeaderColumn>Delete</TableHeaderColumn>
+                              </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                              {self.data.comments.map(function(c) {
                                     return (
                                     <AssignmentWithToggle key={c.id} asset={c} />
                                     );
                                     })}
-                                </tbody>
-                            </table>
-                            </div>
+                            </TableBody>
+                        </Table>
+
+
+
+
+
+                          {/*<div className="table-responsive">
+                                                      <table className="table table-condensed">
+                                                          <thead>
+                                                              <tr>
+                                                                  <th>File</th>
+                                                                  <th>Image</th>
+                                                                  <th>Date</th>
+                                                                  <th>Delete</th>
+                                                              </tr>
+                                                          </thead>
+                          
+                                                          <tbody>
+                                                              {self.data.comments.map(function(c) {
+                                                              return (
+                                                              <AssignmentWithToggle key={c.id} asset={c} />
+                                                              );
+                                                              })}
+                                                          </tbody>
+                                                      </table>
+                                                      </div>*/}
+
                         </CardText>
 
                         <CardActions expandable={true}>
-                          {publishedButton}
-                          <FlatButton label="Delete Schedule" primary={true} onClick={self.handleChange} />
+                            {publishedButton}
+                            <FlatButton label="Delete Schedule" primary={true} onClick={self.handleChange} />
                         </CardActions>
                         <Dialog
                           title='Delete Asset?'

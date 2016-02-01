@@ -5,6 +5,8 @@ var ParseReact = require('parse-react');
 import FlatButton from 'material-ui/lib/flat-button';
 import Dialog from 'material-ui/lib/dialog';
 import DatePicker from 'material-ui/lib/date-picker/date-picker';
+import TableRow from 'material-ui/lib/table/table-row';
+import TableRowColumn from 'material-ui/lib/table/table-row-column';
 
 
 var AssignmentWithToggle = React.createClass({
@@ -94,20 +96,36 @@ var AssignmentWithToggle = React.createClass({
         }
 
         return (
-            <tr className="text-left col-xs-12">
-                <td style={{textTransform:'capitalize'}}>{self.props.asset.screenAsset.name}</td>
-                <td><img style={{maxHeight:'100px',maxWidth:'100px'}} className='img-responsive' src={self.props.asset.screenAsset.file.url()} /></td>
-                <td>{startDate}<br />{endDate}</td>
-                <td><FlatButton label="Delete" secondary={true} onClick={self.handleChange} /></td>
+
+            <TableRow>
+                <TableRowColumn>{self.props.asset.screenAsset.name}</TableRowColumn>
+                <TableRowColumn><img src={self.props.asset.screenAsset.file.url()} className='img img-responsive'/></TableRowColumn>
+                <TableRowColumn>{startDate}<br />{endDate}</TableRowColumn>
+                <TableRowColumn><FlatButton label="Delete" secondary={true} onClick={self.handleChange} /></TableRowColumn>
                 <Dialog
                   title='Delete Asset?'
                   actions={actions}
                   modal={false}
                   open={self.state.deleteOpen}
                   onRequestClose={self.handleClose}>
-                  Are you sure you would like to delete your assignment? This cannot be undone.
+                  Are you sure you would like to delete your assignment? This will not delete the file from your database. This cannot be undone.
                 </Dialog>
-            </tr>
+                {/*<tr className="text-left col-xs-12">
+                            <td style={{textTransform:'capitalize'}}>{self.props.asset.screenAsset.name}</td>
+                            <td><img style={{maxHeight:'100px',maxWidth:'100px'}} className='img-responsive' src={self.props.asset.screenAsset.file.url()} /></td>
+                            <td>{startDate}<br />{endDate}</td>
+                            <td><FlatButton label="Delete" secondary={true} onClick={self.handleChange} /></td>
+                            <Dialog
+                              title='Delete Asset?'
+                              actions={actions}
+                              modal={false}
+                              open={self.state.deleteOpen}
+                              onRequestClose={self.handleClose}>
+                              Are you sure you would like to delete your assignment? This will not delete the file from your database. This cannot be undone.
+                            </Dialog>
+                        </tr>*/}
+            </TableRow>
+
         );
     }
 });
