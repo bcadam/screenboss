@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var favicon = require('serve-favicon');
 
-app.use(favicon(__dirname + 'dist/images/favicon.ico'));
+app.use(favicon('app/images/favicon.ico'));
 
 
 app.set('port', (process.env.PORT || 5000));
