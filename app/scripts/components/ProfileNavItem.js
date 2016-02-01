@@ -30,7 +30,7 @@ var ProfileNavItem = React.createClass({
 			      anchorOrigin={{horizontal: 'left', vertical: 'top'}}
 			      targetOrigin={{horizontal: 'left', vertical: 'top'}}
 	    		>
-	    		<MenuItem primaryText="Sign out" onClick={self.logOut} />
+	    		<MenuItem primaryText="Sign out" onTouchTap={self.logOut} />
 	    		</IconMenu>);
         }
          
