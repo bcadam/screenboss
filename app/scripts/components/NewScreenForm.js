@@ -52,13 +52,9 @@ var NewScreenForm = React.createClass({
     render: function() {
         return (
             <div id="newScreenForm" className='col-xs-12'>
-                <div className='form-group'>
-                    <TextField id='screenName' hintText="Main Lobby" floatingLabelText="Schedule Name" onChange={this.handleChange.bind(this, 'name')} />
-                </div>
-                <div className='form-group'>
-                    <TextField id='screenDescription' hintText="Next two weeks" floatingLabelText="Description or use" onChange={this.handleChange.bind(this, 'description')} />
-                </div>
-                <RaisedButton label="Create Schedule" secondary={true} onClick={this.createScreen} />
+                    <TextField fullWidth={true} id='screenName' hintText="Main Lobby" floatingLabelText="Schedule Name" onChange={this.handleChange.bind(this, 'name')} />
+                    <TextField fullWidth={true} id='screenDescription' hintText="Next two weeks" floatingLabelText="Description or use" onChange={this.handleChange.bind(this, 'description')} />
+                <RaisedButton fullWidth={true} label="Create Schedule" secondary={true} onClick={this.createScreen} />
                 <div style={{marginBottom:"20px;"}} />
             </div>
         );

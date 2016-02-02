@@ -320,7 +320,7 @@ mixins: [LinkedStateMixin],
                     <li style={planLine} className="plan-action"><a href="/#/app/" className="btn btn-primary btn-lg">Sign Up</a></li>
                 </ul>
             </div>
-            <div className="col-sm-4 blurry-text notPickable" style={pricingTableItem}>
+            <div className="col-sm-4 blurry-text notPickable hidden-xs" style={pricingTableItem}>
                 <ul className="plan" style={pricingPlan}>
                     <li className="plan-name" style={planName}>Standard</li>
                     <li className="plan-price blurry-text" style={planPriceFree}>$49</li>
@@ -332,7 +332,7 @@ mixins: [LinkedStateMixin],
                     <li style={planLineBlur} className="plan-action"><a href="/#/app/" className="btn btn-primary btn-lg blurry-text" style={{WebkitUserSelect: 'none'}}>Signup</a></li>
                 </ul>
             </div>
-            <div className="col-sm-4 blurry-text notPickable" style={pricingTableItem}>
+            <div className="col-sm-4 blurry-text notPickable hidden-xs" style={pricingTableItem}>
                 <ul className="plan" style={pricingPlan}>
                     <li className="plan-name" style={planName}>Advanced</li>
                     <li style={planPriceFree} className="plan-price blurry-text">$199</li>

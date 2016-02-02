@@ -31,11 +31,11 @@ var ScreenListPage = React.createClass({
         return (
             <div className="col-xs-12">
 
-                <div className="col-xs-3">
+                <div className="col-xs-12 col-sm-3">
                     <NewScreenForm />
                 </div>
 
-                <div className="col-xs-12">
+                <div className="col-xs-12 col-sm-9">
                     {this.data.comments.map(function(c) {
                     return (
                         <div key={c.objectId}>
