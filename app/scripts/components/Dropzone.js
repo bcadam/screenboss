@@ -30,10 +30,13 @@ var Dropzone = React.createClass({
                         'published': true,
                         'ACL' : custom_acl
                     };
-                    var newScreen = ParseReact.Mutation.Create('ScreenAsset', variables).dispatch(function(){
+                    var newScreen = ParseReact.Mutation.Create('ScreenAsset', variables).dispatch().then(function(){
                         self.setState({loading:false});
+                    },function(){
+                        self.setState({loading:false})
                     });
 
+                    self.setState({loading:false});
                     
                 });
             }

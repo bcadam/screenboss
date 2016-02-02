@@ -16,11 +16,16 @@ var ProfileNavItem = React.createClass({
     	});
 
     },
+    goToRequest: function(){
+        var fileRequestPage = Parse.User.current().id;
+        window.location.assign('/#/app/filerequest/' + fileRequestPage);
+    },
     render: function() {
         // Render the text of each comment as a list item
         var self = this;
         var user = Parse.User.current();
         var loggedInMenuItems;
+        
 
         if (user)
         {
@@ -30,7 +35,8 @@ var ProfileNavItem = React.createClass({
 			      anchorOrigin={{horizontal: 'left', vertical: 'top'}}
 			      targetOrigin={{horizontal: 'left', vertical: 'top'}}
 	    		>
-	    		<MenuItem primaryText="Sign out" onTouchTap={self.logOut} />
+	            <MenuItem primaryText="File Request" onTouchTap={self.goToRequest} />
+        		<MenuItem primaryText="Sign out" onTouchTap={self.logOut} />
 	    		</IconMenu>);
         }
          

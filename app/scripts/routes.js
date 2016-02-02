@@ -17,6 +17,8 @@ import GettingStartedScreens from './pages/GettingStartedScreens.jsx';
 var LoginForm = require('./components/LoginForm.js');
 var LogOut = require('./components/LogOut.js');
 var Screen = require('./components/Screen.js');
+var FileRequest = require('./components/FileRequest.js');
+
 
 const historyOptions = {
   queryKey : false
@@ -31,6 +33,7 @@ const routes = (
       <IndexRoute component={ Main } />
       <Route path='screens' component={ ScreenListPage } />
       <Route path='assets' component={ AssetListPage } />
+      <Route path='filerequest/:id' component={ FileRequest } />
 
       <Route path='login' component={ LoginForm } />
       <Route path='logout' component={ LogOut } />

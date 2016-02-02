@@ -3,49 +3,29 @@
 // browserify().transform(babelify, {presets: ["es2015", "react"]});
 
 var React = require('react');
-var FileInput = require('react-file-input');
-var LinkedStateMixin = require('react-addons-linked-state-mixin');
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-
-var Button = require('react-bootstrap').Button;
 var Parse = require('parse');
 var ParseReact = require('parse-react');
 Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6', '8UXFi3hzHgbKWoMZIIX3ZgUg0tHKPzSK6w8Ul0M6');
 
-import CircularProgress from 'material-ui/lib/circular-progress';
-import Checkbox from 'material-ui/lib/checkbox';
-import RaisedButton from 'material-ui/lib/raised-button';
-import FlatButton from 'material-ui/lib/flat-button';
-import TextField from 'material-ui/lib/text-field';
-import Dialog from 'material-ui/lib/dialog';
-import DatePicker from 'material-ui/lib/date-picker/date-picker';
 import DropzoneStarter from 'react-dropzone';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import DropDownMenu from 'material-ui/lib/DropDownMenu';
-
-injectTapEventPlugin();
-import {
-    Link
-}
-from 'react-router';
-
-var key = window.location.href;
-var count = key.indexOf('filerequest/');
-key = key.substring(count + 12, key.length);
-console.log(key);
+import CircularProgress from 'material-ui/lib/circular-progress';
+import Snackbar from 'material-ui/lib/snackbar';
 
 
 
-var Dropzone = React.createClass({
+
+var FileRequest = React.createClass({
     onDrop: function(files) {
+        
         var self = this;
         self.setState({loading:true});
 
         var custom_acl = new Parse.ACL();
-        custom_acl.setWriteAccess(Parse.User.current(), true);
-        custom_acl.setReadAccess(Parse.User.current(), true);
+        custom_acl.setWriteAccess(self.state.userTarget, true);
+        custom_acl.setReadAccess(self.state.userTarget, true);
 
         for (var i = 0; i < files.length; i++) {
+
             var myTargetFile = files[i];
 
             if (myTargetFile) {
@@ -55,29 +35,53 @@ var Dropzone = React.createClass({
                     var variables = {
                         'file': parseFile,
                         'name': fileName,
-                        'owner': Parse.User.current(),
+                        'owner': self.state.userTarget,
                         'published': true,
                         'ACL' : custom_acl
                     };
-                    var newScreen = ParseReact.Mutation.Create('ScreenAsset', variables);
-                    newScreen.dispatch().then(function(){
+                    var newScreen = ParseReact.Mutation.Create('ScreenAsset', variables).dispatch().then(function(){
                         self.setState({loading:false});
                     },function(){
                         self.setState({loading:false})
                     });
-                    //console.log('Uploaded image: ' + fileName);
+
+                    self.setState({loading:false,open:true});
+                    
                 });
             }
         };
+
+    },
+    componentDidMount: function() {
+        var self = this;
+
+        var User = Parse.Object.extend("_User");
+        var query = new Parse.Query(User);
+        query.get(self.props.routeParams.id, {
+              success: function(user) {
+                // The object was retrieved successfully.
+                self.setState({userTarget:user});
+                console.log('found user: ' + user.id);
+              },
+              error: function(object, error) {
+                // The object was not retrieved successfully.
+                // error is a Parse.Error with an error code and message.
+              }
+        });
+
+    },
+    closeSnack: function(){
+        this.setState({open: !this.state.open});
     },
     getInitialState:function(){
         return{
-            loading:false
+            userTarget:null,
+            loading: false,
+            open:false
         };
     },
     render: function() {
-
-        var display;
+       var display;
         if (this.state.loading)
         {
             display = <CircularProgress mode="indeterminate" size={2}/>
@@ -88,47 +92,18 @@ var Dropzone = React.createClass({
             </DropzoneStarter>);
         }
         return (
-            <div>
+            <div className='col-xs-12' style={{marginBottom:"20px"}}>
             {display}
+            <Snackbar
+          open={this.state.open}
+          message="The file has been sent..."
+          autoHideDuration={4000}
+          onRequestClose={this.closeSnack}
+        />
             </div>
         );
     }
 });
 
 
-
-
-
-
-
-export default React.createClass({
-    mixins: [LinkedStateMixin],
-
-    returnSomething(something) {
-        //this is only for testing purposes. Check /test/components/App-test.js
-        return something;
-    },
-    getInitialState() {
-        return {
-            user: Parse.User.current(),
-            imageClass: {
-                width: "100%",
-                height: "auto",
-                overflow: "hidden"
-            }
-        };
-    },
-    render() {
-        // var user = Parse.User.current();
-        // console.log(user);
-        // var self = this;
-        // var loggedIn = (<ScreenDisplayAnimator user={self.linkState('user')} imageClass={self.linkState('imageClass')} />);
-
-        // var notLoggedIn = <LoginForm user={this.linkState('user')} />;
-        // var display = ((this.state.user != null) ? loggedIn : notLoggedIn);
-
-        return (
-            <Dropzone />
-        );
-    }
-});
+module.exports = FileRequest

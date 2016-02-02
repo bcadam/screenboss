@@ -11,7 +11,7 @@ var AssetList = React.createClass({
         // The results will be available at this.data.comments
         var user = Parse.User.current();
         return {
-            comments: (new Parse.Query('ScreenAsset')).descending('createdAt')
+            comments: new Parse.Query('ScreenAsset').descending('createdAt')
         };
     },
     componentWillMount: function(){
@@ -34,18 +34,11 @@ var AssetList = React.createClass({
             <div className="col-xs-12">
                     {this.data.comments.map(function(c) {
 
-                    if(c.objectId)
-                    {
+
                         return (
-                        <IndividualAsset key={c.objectId} asset={c} secondColumn={c.name}/>
+                        <IndividualAsset key={c.objectId + c.createdAt} asset={c} secondColumn={c.name}/>
                         );
-                    }
-                    else{
-                        return (
-                        <div key={c.createdAt} />
-                        );
-                    }
-                        
+                    
 
                     })}
                     

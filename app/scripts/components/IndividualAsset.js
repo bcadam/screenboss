@@ -34,9 +34,13 @@ var IndividualAsset = React.createClass({
             onTouchTap={this.delete} />,
         ];
 
+        
+        var image = <img src={self.props.asset.file.url()} className="col-xs-12 img img-responsive" />;
+       
+
         return (
                 <div className="image-container col-xs-6 col-md-3" style={{marginBottom:'10px'}}>
-                    <img src={self.props.asset.fileThumbnail.url()} className="col-xs-12 img img-responsive"/>
+                    {image}
                     <div onClick={self.handleChange} className="after"><i className="fa fa-trash fa-5x" style={{marginTop:'5%'}}></i></div>
                     <Dialog
                       title='Delete Asset?'
