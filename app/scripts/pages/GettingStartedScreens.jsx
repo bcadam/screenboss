@@ -1,12 +1,15 @@
 import React from 'react';
 import Parse from 'parse';
 import ParseReact from 'parse-react';
-Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6', '8UXFi3hzHgbKWoMZIIX3ZgUg0tHKPzSK6w8Ul0M6');
-
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 
-var NewScreenForm = React.createClass({
+var Dropzone = require('../components/Dropzone.js');
+var AssetList = require('../components/AssetList.js');
+var SiteDemoSimple = require('../components/SiteDemoSimple.js');
+var ScreenList = require('../components/ScreenList.js');
+
+var NewScreenFormGettingStarted = React.createClass({
     getInitialState: function() {
         return {
             name: '',
@@ -45,11 +48,43 @@ var NewScreenForm = React.createClass({
             <div id="newScreenForm" className='col-xs-12'>
                     <TextField fullWidth={true} id='screenName' hintText="Main Lobby" floatingLabelText="Schedule Name" onChange={self.handleChange.bind(self, 'name')} value={self.state.name} />
                     <TextField fullWidth={true} id='screenDescription' hintText="Next two weeks" floatingLabelText="Description or use" onChange={self.handleChange.bind(self, 'description')} value={self.state.description} />
-                <RaisedButton fullWidth={true} label="Create Schedule" secondary={true} onClick={self.createScreen} />
+                <RaisedButton fullWidth={true} id="newScreenButton" label="Create Schedule" secondary={true} onClick={self.createScreen} />
                 <div style={{marginBottom:"20px;"}} />
             </div>
         );
     }
 });
 
-module.exports = NewScreenForm
+
+
+var GettingStartedScreens = React.createClass({
+    componentDidMount: function(){
+        introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
+          window.location.href = '/#/app/gettingstartedassets';
+        });
+
+        $('#newScreenButton').click(function(){
+            console.log('clicked');
+            introJs().start().nextStep();
+        });
+    },
+    render: function() {
+        // Render the text of each comment as a list item
+        var self = this;
+
+        //<th>Published</th>
+        return (
+            
+            <div>
+                <div data-step="3" data-intro="Create a new screen.">
+                    <NewScreenFormGettingStarted />
+                </div>
+                <div data-step="4" data-position="bottom" data-intro="Your screens will show up here.">
+                    <ScreenList />
+                </div>
+            </div>
+        );
+    }
+});
+
+module.exports = GettingStartedScreens

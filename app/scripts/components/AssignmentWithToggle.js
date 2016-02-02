@@ -110,20 +110,6 @@ var AssignmentWithToggle = React.createClass({
                   onRequestClose={self.handleClose}>
                   Are you sure you would like to delete your assignment? This will not delete the file from your database. This cannot be undone.
                 </Dialog>
-                {/*<tr className="text-left col-xs-12">
-                            <td style={{textTransform:'capitalize'}}>{self.props.asset.screenAsset.name}</td>
-                            <td><img style={{maxHeight:'100px',maxWidth:'100px'}} className='img-responsive' src={self.props.asset.screenAsset.file.url()} /></td>
-                            <td>{startDate}<br />{endDate}</td>
-                            <td><FlatButton label="Delete" secondary={true} onClick={self.handleChange} /></td>
-                            <Dialog
-                              title='Delete Asset?'
-                              actions={actions}
-                              modal={false}
-                              open={self.state.deleteOpen}
-                              onRequestClose={self.handleClose}>
-                              Are you sure you would like to delete your assignment? This will not delete the file from your database. This cannot be undone.
-                            </Dialog>
-                        </tr>*/}
             </TableRow>
 
         );

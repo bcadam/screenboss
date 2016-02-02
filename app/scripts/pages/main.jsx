@@ -38,18 +38,16 @@ var MainApp = React.createClass({
         render() {
 
             var loggedIn = (
-                <div>
-                <ReactCSSTransitionGroup transitionName="loading" transitionAppear={true} transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppearTimeout={500}>
-                
-                <div>
-                    <SiteDemoSimple />
-                    <ScreenList />
-                    <br />
-                    <AssetList />
-                </div>
+                    <ReactCSSTransitionGroup transitionName="loading" transitionAppear={true} transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppearTimeout={500}>
+                    
+                        <div>
+                            <SiteDemoSimple />
+                            <ScreenList />
+                            <br />
+                            <AssetList />
+                        </div>
 
-                </ReactCSSTransitionGroup>
-                </div>);
+                    </ReactCSSTransitionGroup>);
 
             return (
 

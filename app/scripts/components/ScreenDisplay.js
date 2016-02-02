@@ -63,7 +63,7 @@ var ScreenDisplay = React.createClass({
             secondary={true}
             onTouchTap={this.handleChange} />,
           <FlatButton
-            label="Submit"
+            label="Confirm"
             primary={true}
             keyboardFocused={true}
             onTouchTap={this.delete} />,
@@ -83,6 +83,7 @@ var ScreenDisplay = React.createClass({
 
 
         return (
+            <div>
                 <Card>
                     <CardHeader
                       title={self.props.asset.name}
@@ -152,6 +153,8 @@ var ScreenDisplay = React.createClass({
                           Are you sure you would like to delete your schedule? This means that you will have to change the url of each of your screens. This cannot be undone.
                         </Dialog>
                     </Card>
+                    <br />
+                    </div>
         );
     }
 });

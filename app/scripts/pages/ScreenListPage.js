@@ -1,20 +1,13 @@
 var React = require('react');
 var Parse = require('parse');
-var ParseReact = require('parse-react');
 
 var ScreenDisplay = require('../components/ScreenDisplay.js');
+var ScreenList = require('../components/ScreenList.js');
 var NewScreenForm = require('../components/NewScreenForm.js');
 
 
 
 var ScreenListPage = React.createClass({
-    mixins: [ParseReact.Mixin],
-    observe: function() {
-
-        return {
-            comments: (new Parse.Query('Screen')).descending('createdAt')
-        };
-    },
     componentWillMount: function(){
 
             var currentUser = Parse.User.current();
@@ -24,7 +17,7 @@ var ScreenListPage = React.createClass({
                 window.location.assign("#/app/login");
             }
               
-          }, 
+        }, 
     render: function() {
         // Render the text of each comment as a list item
         var self = this;
@@ -36,14 +29,7 @@ var ScreenListPage = React.createClass({
                 </div>
 
                 <div className="col-xs-12 col-sm-9">
-                    {this.data.comments.map(function(c) {
-                    return (
-                        <div key={c.objectId}>
-                    <ScreenDisplay asset={c} />
-                    <br />
-                    </div>
-                    );
-                    })}
+                    <ScreenList />
                 </div>
 
             </div>

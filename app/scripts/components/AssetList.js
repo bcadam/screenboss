@@ -31,12 +31,24 @@ var AssetList = React.createClass({
         //<th>Published</th>
         return (
             
-            <div className="row">
+            <div className="col-xs-12">
                     {this.data.comments.map(function(c) {
-                    return (
-                    <IndividualAsset key={c.id} asset={c} secondColumn={c.name}/>
-                    );
+
+                    if(c.objectId)
+                    {
+                        return (
+                        <IndividualAsset key={c.createdAt} asset={c} secondColumn={c.name}/>
+                        );
+                    }
+                    else{
+                        return (
+                        <div key={c.createdAt} />
+                        );
+                    }
+                        
+
                     })}
+                    }
                 
             </div>
         );

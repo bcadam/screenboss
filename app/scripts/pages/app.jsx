@@ -20,8 +20,8 @@ var App = React.createClass({
         },
         
         render() {
-        	
-            //console.log(this.state.user);
+        
+
             return (
 				<div>
 			        <Header open={this.linkState('open')} /><LeftSideBar open={this.linkState('open')} />

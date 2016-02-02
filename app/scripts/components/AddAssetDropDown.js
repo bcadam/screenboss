@@ -39,8 +39,6 @@ var AddAssetDropDown = React.createClass({
         var owner = Parse.User.current();
         var screenAsset = this.data.comments[self.state.index];
 
-
-
         var custom_acl = new Parse.ACL();
         custom_acl.setWriteAccess(Parse.User.current(), true);
         custom_acl.setReadAccess(Parse.User.current(), true);
@@ -52,8 +50,6 @@ var AddAssetDropDown = React.createClass({
             ACL : custom_acl
         };
         ParseReact.Mutation.Create('AssignmentPattern',configs).dispatch();
-
-
 
     },
     render: function() {

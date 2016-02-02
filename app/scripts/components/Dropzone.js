@@ -1,7 +1,9 @@
 var React = require('react');
+var Parse = require('parse');
 var ParseReact = require('parse-react');
 
 import DropzoneStarter from 'react-dropzone';
+import CircularProgress from 'material-ui/lib/circular-progress';
 
 
 var Dropzone = React.createClass({
@@ -12,8 +14,6 @@ var Dropzone = React.createClass({
         var custom_acl = new Parse.ACL();
         custom_acl.setWriteAccess(Parse.User.current(), true);
         custom_acl.setReadAccess(Parse.User.current(), true);
-
-
 
         for (var i = 0; i < files.length; i++) {
 
@@ -30,19 +30,14 @@ var Dropzone = React.createClass({
                         'published': true,
                         'ACL' : custom_acl
                     };
-                    var newScreen = ParseReact.Mutation.Create('ScreenAsset', variables);
-                    newScreen.dispatch().then(function(){
+                    var newScreen = ParseReact.Mutation.Create('ScreenAsset', variables).dispatch(function(){
                         self.setState({loading:false});
-                    },function(){
-                        self.setState({loading:false})
                     });
 
+                    
                 });
             }
         };
-
-
-
 
     },
     getInitialState:function(){
@@ -63,7 +58,7 @@ var Dropzone = React.createClass({
             </DropzoneStarter>);
         }
         return (
-            <div style={{marginBottom:"20px"}}>
+            <div className='col-xs-12' style={{marginBottom:"20px"}}>
             {display}
             </div>
         );
