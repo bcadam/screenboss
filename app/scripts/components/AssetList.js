@@ -37,7 +37,7 @@ var AssetList = React.createClass({
                     if(c.objectId)
                     {
                         return (
-                        <IndividualAsset key={c.createdAt} asset={c} secondColumn={c.name}/>
+                        <IndividualAsset key={c.objectId} asset={c} secondColumn={c.name}/>
                         );
                     }
                     else{
@@ -48,7 +48,7 @@ var AssetList = React.createClass({
                         
 
                     })}
-                    }
+                    
                 
             </div>
         );
