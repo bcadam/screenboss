@@ -23,14 +23,17 @@ var NewScreenForm = React.createClass({
     },
     createScreen: function() {
 
+
+
         var self = this;
         var owner = Parse.User.current();
-
-
-
         var custom_acl = new Parse.ACL();
         custom_acl.setWriteAccess(Parse.User.current(), true);
         custom_acl.setReadAccess(Parse.User.current(), true);
+
+        
+
+
 
         var configs ={
             name: self.state.name,
@@ -41,16 +44,9 @@ var NewScreenForm = React.createClass({
         };
 
 
+        var newScreen = ParseReact.Mutation.Create('Screen',configs).dispatch();
+
         
-
-
-        var newScreen = ParseReact.Mutation.Create('Screen',configs);
-
-        newScreen.dispatch().then(function(){
-                        self.setState({name:null, description:null});
-                    },function(){
-                        self.setState({name:null, description:null});
-                    });
         
     },
     render: function() {

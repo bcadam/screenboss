@@ -2,28 +2,21 @@ import React from 'react';
 import Parse from 'parse';
 import ParseReact from 'parse-react';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
-import { Router } from 'react-router';
 
-import FlatButton from 'material-ui/lib/flat-button';
 import LeftNav from 'material-ui/lib/left-nav';
-import Menu from 'material-ui/lib/menus/menu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import Divider from 'material-ui/lib/divider';
-import FontIcon from 'material-ui/lib/font-icon';
-import ContentCopy from 'material-ui/lib/svg-icons/content/content-copy';
-import ContentLink from 'material-ui/lib/svg-icons/content/link';
-import Delete from 'material-ui/lib/svg-icons/action/delete';
-import Download from 'material-ui/lib/svg-icons/file/file-download';
+
+
 import Screen from 'material-ui/lib/svg-icons/hardware/cast';
 import File from 'material-ui/lib/svg-icons/file/attachment';
 import Dashboard from 'material-ui/lib/svg-icons/action/dashboard';
-import RemoveRedEye from 'material-ui/lib/svg-icons/image/remove-red-eye';
+
 import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 
 import AppBar from 'material-ui/lib/app-bar';
 
-var NewScreenForm = require('./NewScreenForm.js');
 var LoginForm = require('./LoginForm.js');
 
 
@@ -58,7 +51,7 @@ var LeftSideBar = React.createClass({
                 <MenuItem primaryText="Screens" leftIcon={<Screen />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/screens");}} />
                 <MenuItem primaryText="Files" leftIcon={<File />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/assets");}} />
                 <Divider />
-                <NewScreenForm />
+                {/*<NewScreenForm />*/}
                         </div>);
         }
         else{

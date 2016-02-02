@@ -99,7 +99,7 @@ var AssignmentWithToggle = React.createClass({
 
             <TableRow>
                 <TableRowColumn>{self.props.asset.screenAsset.name}</TableRowColumn>
-                <TableRowColumn><img src={self.props.asset.screenAsset.file.url()} className='img img-responsive'/></TableRowColumn>
+                <TableRowColumn><img src={self.props.asset.screenAsset.fileThumbnail.url()} className='img img-responsive'/></TableRowColumn>
                 <TableRowColumn>{startDate}<br />{endDate}</TableRowColumn>
                 <TableRowColumn><FlatButton label="Delete" secondary={true} onClick={self.handleChange} /></TableRowColumn>
                 <Dialog

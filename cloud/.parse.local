@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "ScreenBoss": {
+      "applicationId": "pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6"
+    },
+    "_default": {
+      "link": "ScreenBoss"
+    }
+  }
+}

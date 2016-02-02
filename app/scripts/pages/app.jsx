@@ -20,8 +20,7 @@ var App = React.createClass({
         },
         
         render() {
-          
-            
+        	
             //console.log(this.state.user);
             return (
 				<div>

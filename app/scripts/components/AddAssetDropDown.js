@@ -63,7 +63,7 @@ var AddAssetDropDown = React.createClass({
 
         if (self.data.comments[self.state.index])
         {
-            img = <img className='img-responsive' style={{maxHeight:"200px"}} src={self.data.comments[self.state.index].file.url()} />;
+            img = <img className='img-responsive' style={{maxHeight:"200px"}} src={self.data.comments[self.state.index].fileThumbnail.url()} />;
         }
         
         //console.log(self.data.comments[self.state.index]);

@@ -2,12 +2,12 @@ var React = require('react');
 var Parse = require('parse');
 var ParseReact = require('parse-react');
 
-var ScreenDisplay = require('./ScreenDisplay.js');
-var NewScreenForm = require('./NewScreenForm.js');
+var ScreenDisplay = require('../components/ScreenDisplay.js');
+var NewScreenForm = require('../components/NewScreenForm.js');
 
 
 
-var ScreenList = React.createClass({
+var ScreenListPage = React.createClass({
     mixins: [ParseReact.Mixin],
     observe: function() {
 
@@ -29,21 +29,26 @@ var ScreenList = React.createClass({
         // Render the text of each comment as a list item
         var self = this;
         return (
-            
+            <div className="col-xs-12">
+
+                <div className="col-xs-3">
+                    <NewScreenForm />
+                </div>
 
                 <div className="col-xs-12">
                     {this.data.comments.map(function(c) {
                     return (
-                        <div key={'div'+c.objectId}>
-                        <ScreenDisplay key={c.objectId} asset={c} />
-                        <br />
-                        </div>
+                        <div key={c.objectId}>
+                    <ScreenDisplay asset={c} />
+                    <br />
+                    </div>
                     );
                     })}
                 </div>
 
+            </div>
         );
     }
 });
 
-module.exports = ScreenList
+module.exports = ScreenListPage

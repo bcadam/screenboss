@@ -34,7 +34,7 @@ var ScreenDisplay = React.createClass({
         // The results will be available at this.data.comments
         var id = this.props.asset.objectId;
         return {
-            comments: new Parse.Query('AssignmentPattern').equalTo('screen', new Parse.Object('Screen', { id: id })).descending('createdAt')
+            comments: new Parse.Query('AssignmentPattern').equalTo('screen', new Parse.Object('Screen', { id: id })).include('screenAsset').descending('createdAt')
         };
     },
     handleChangePublished: function() {

@@ -4,19 +4,16 @@ import createHistory from 'history/lib/createHashHistory'
 
 import App from './pages/app.jsx';
 import BlankApp from './pages/blankapp.jsx';
-import Home from './pages/home.jsx';
 import Info from './pages/info.jsx';
 import NotFound from './pages/notFound.jsx';
 import Main from './pages/main.jsx';
 import LandingPage from './pages/landingpage.jsx';
 
-var ScreenList = require('./components/ScreenList.js');
-var ScreenDisplay = require('./components/ScreenDisplay.js');
+var ScreenListPage = require('./pages/ScreenListPage.js');
 var LoginForm = require('./components/LoginForm.js');
 var LogOut = require('./components/LogOut.js');
-var AssetListPage = require('./components/AssetListPage.js');
+var AssetListPage = require('./pages/AssetListPage.js');
 var Screen = require('./components/Screen.js');
-var Dropzone = require('./components/Dropzone.js');
 
 const historyOptions = {
   queryKey : false
@@ -30,11 +27,12 @@ const routes = (
     <Route path='/app' component={ App }>
       <IndexRoute component={ Main } />
       <Route path='info' component={ Info } />
-      <Route path='screens' component={ ScreenList } />
+      <Route path='screens' component={ ScreenListPage } />
       <Route path='assets' component={ AssetListPage } />
+
       <Route path='login' component={ LoginForm } />
       <Route path='logout' component={ LogOut } />
-      <Route path='home' component={ Home } />
+
       <Route path='*' component={NotFound}/>
     </Route>
     <Route path='/' component={ BlankApp }>

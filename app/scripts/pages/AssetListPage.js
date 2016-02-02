@@ -2,8 +2,8 @@ import React from 'react';
 import Parse from 'parse';
 var ParseReact = require('parse-react');
 
-var AssetList = require('./AssetList.js');
-var Dropzone = require('./Dropzone.js');
+var AssetList = require('../components/AssetList.js');
+var Dropzone = require('../components/Dropzone.js');
 
 
 var AssetListPage = React.createClass({

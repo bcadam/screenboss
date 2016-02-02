@@ -44,7 +44,7 @@ var AssetWithToggle = React.createClass({
         return (
             <tr className="text-left col-xs-12">
             <td>{self.props.secondColumn}</td>
-            <td><img className='img-responsive' src={self.props.asset.file.url()}  style={{padding:'10px',maxHeight:'100px'}} /></td>
+            <td><img className='img-responsive' src={self.props.asset.fileThumbnail.url()}  style={{padding:'10px',maxHeight:'100px'}} /></td>
             <td><FlatButton label="Delete" primary={true} onClick={self.handleChange} /></td>
             <Dialog
               title='Delete Asset?'

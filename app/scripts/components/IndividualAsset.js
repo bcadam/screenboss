@@ -21,7 +21,7 @@ var IndividualAsset = React.createClass({
     },
     render: function() {
         var self = this;
-        var tabPosition = {height:'200px !important',widht:'200px !important',borderTop:"solid",borderBottom:"solid",borderRight:"solid",borderColor:"grey",borderRadius:"10px",borderRadius:"10px",borderTopLeftRadius:"0px",borderBottomLeftRadius:"0px", padding:'10px !important',position:'absolute',top:"100px !important",left: '400px !important', backgroundColor:'white'};
+        var tabPosition = {height:'200px !important',width:'200px !important',borderTop:"solid",borderBottom:"solid",borderRight:"solid",borderColor:"grey",borderRadius:"10px",borderRadius:"10px",borderTopLeftRadius:"0px",borderBottomLeftRadius:"0px", padding:'10px !important',position:'absolute',top:"100px !important",left: '400px !important', backgroundColor:'white'};
         const actions = [
           <FlatButton
             label="Cancel"
@@ -36,7 +36,7 @@ var IndividualAsset = React.createClass({
 
         return (
                 <div className="image-container col-xs-6 col-md-3" style={{marginBottom:'10px'}}>
-                    <img src={self.props.asset.file.url()} className="col-xs-12 img img-responsive"/>
+                    <img src={self.props.asset.fileThumbnail.url()} className="col-xs-12 img img-responsive"/>
                     <div onClick={self.handleChange} className="after"><i className="fa fa-trash fa-5x" style={{marginTop:'5%'}}></i></div>
                     <Dialog
                       title='Delete Asset?'
