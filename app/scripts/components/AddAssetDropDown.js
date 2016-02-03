@@ -47,7 +47,8 @@ var AddAssetDropDown = React.createClass({
             screen : screen,
             owner : owner,
             screenAsset : screenAsset,
-            ACL : custom_acl
+            ACL : custom_acl,
+            published:true
         };
         ParseReact.Mutation.Create('AssignmentPattern',configs).dispatch();
 

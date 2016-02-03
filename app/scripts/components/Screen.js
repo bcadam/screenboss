@@ -10,61 +10,7 @@ var count = key.indexOf('screen/');
 key = key.substring(count + 7, key.length);
 //console.log(key);
 
-var LoginForm = React.createClass({
-    getInitialState: function() {
-        return {
-            name: '',
-            password: ''
-        };
-    },
-    handleChange: function(name, e) {
-        var change = {};
-        change[name] = e.target.value;
-        this.setState(change);
-    },
-    login: function() {
-        //console.log(this.props.user);
-
-        var self = this;
-
-        Parse.User.logIn(this.state.name, this.state.password, {
-            success: function(user) {
-                // Do stuff after successful login.
-                self.props.user.requestChange(user);
-            },
-            error: function(user, error) {
-                // The login failed. Check error to see why.
-            }
-        });
-
-    },
-    render: function() {
-        return (
-            <div>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="well login-box">
-                                        <legend>Login</legend>
-                                        <div className="form-group col-xs-12">
-                                            <label for="username-email">E-mail</label>
-                                            <input type="text" className='form-control' id="screenName" placeholder="E-mail" onChange={this.handleChange.bind(this, 'name')} />
-                                        </div>
-                                        <div className="form-group col-xs-12">
-                                            <label for="password">Password</label>
-                                            <input id="password" placeholder="Password" type="text" className="form-control" onChange={this.handleChange.bind(this, 'password')} />
-                                        </div>
-                                        <div className="row form-group text-center">
-                                            <input type="submit" className="btn btn-success btn-login-submit col-xs-12" value="Login" onClick={this.login} />
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-        );
-    }
-});
+var LoginForm = require('./LoginForm.js');
 
 var ScreenDisplayAnimator = React.createClass({
     mixins: [ParseReact.Mixin],
@@ -73,10 +19,10 @@ var ScreenDisplayAnimator = React.createClass({
         // The results will be available at this.data.comments
         //var user = Parse.User.current();
         return {
-            screens: (new Parse.Query('AssignmentPattern')).include('screenAsset').include('screen').equalTo('screen', new Parse.Object('Screen', {
+            screens: (new Parse.Query('AssignmentPattern').equalTo('published',true)).include('screenAsset').include('screen').equalTo('screen', new Parse.Object('Screen', {
                 id: key
             })).descending('createdAt').skip(1),
-            firstScreen: (new Parse.Query('AssignmentPattern')).include('screenAsset').include('screen').equalTo('screen', new Parse.Object('Screen', {
+            firstScreen: (new Parse.Query('AssignmentPattern').equalTo('published',true)).include('screenAsset').include('screen').equalTo('screen', new Parse.Object('Screen', {
                 id: key
             })).descending('createdAt').limit(1)
         };

@@ -41,7 +41,7 @@ var IndividualAsset = React.createClass({
         return (
                 <div className="image-container col-xs-6 col-md-3" style={{marginBottom:'10px'}}>
                     {image}
-                    <div onClick={self.handleChange} className="after"><i className="fa fa-trash fa-5x" style={{marginTop:'5%'}}></i></div>
+                    <div onClick={self.handleChange} className="after"><i className="fa fa-trash fa-5x" style={{paddingLeft:'35%',paddingTop:'10%'}}></i></div>
                     <Dialog
                       title='Delete Asset?'
                       actions={actions}

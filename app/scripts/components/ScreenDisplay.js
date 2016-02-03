@@ -101,6 +101,7 @@ var ScreenDisplay = React.createClass({
                                 <TableHeaderColumn>File Name</TableHeaderColumn>
                                 <TableHeaderColumn>Image</TableHeaderColumn>
                                 <TableHeaderColumn>Date</TableHeaderColumn>
+                                <TableHeaderColumn>Published</TableHeaderColumn>
                                 <TableHeaderColumn>Delete</TableHeaderColumn>
                               </TableRow>
                             </TableHeader>

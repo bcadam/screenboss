@@ -7,6 +7,7 @@ import Dialog from 'material-ui/lib/dialog';
 import DatePicker from 'material-ui/lib/date-picker/date-picker';
 import TableRow from 'material-ui/lib/table/table-row';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
+import Toggle from 'material-ui/lib/toggle';
 
 
 var AssignmentWithToggle = React.createClass({
@@ -29,6 +30,10 @@ var AssignmentWithToggle = React.createClass({
     handleChange: function(){
         var self = this;
         this.setState({deleteOpen: !self.state.deleteOpen});
+    },
+    handleToggle: function(){
+        var self = this;
+        ParseReact.Mutation.Set(self.props.asset.id,{published: !self.props.asset.published}).dispatch();
     },
     handleStart:function(e,start){
         var self = this;
@@ -63,7 +68,7 @@ var AssignmentWithToggle = React.createClass({
             secondary={true}
             onTouchTap={self.handleChange} />,
           <FlatButton
-            label="Submit"
+            label="Confirm"
             primary={true}
             keyboardFocused={true}
             onTouchTap={self.delete} />,
@@ -101,7 +106,8 @@ var AssignmentWithToggle = React.createClass({
                 <TableRowColumn>{self.props.asset.screenAsset.name}</TableRowColumn>
                 <TableRowColumn><img src={self.props.asset.screenAsset.fileThumbnail.url()} className='img img-responsive'/></TableRowColumn>
                 <TableRowColumn>{startDate}<br />{endDate}</TableRowColumn>
-                <TableRowColumn><FlatButton label="Delete" secondary={true} onClick={self.handleChange} /></TableRowColumn>
+                <TableRowColumn><Toggle style={{margin:'40%'}} toggled={self.props.asset.published} onToggle={self.handleToggle} /></TableRowColumn>
+                <TableRowColumn><FlatButton label="Delete" primary={true} onClick={self.handleChange} /></TableRowColumn>
                 <Dialog
                   title='Delete Asset?'
                   actions={actions}
