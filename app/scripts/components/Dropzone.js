@@ -22,22 +22,24 @@ var Dropzone = React.createClass({
             if (myTargetFile) {
                 var fileName = myTargetFile.name;
                 var parseFile = new Parse.File(fileName, myTargetFile);
+                
                 parseFile.save().then(function() {
-                    var variables = {
+                  // The file has been saved to Parse.
+                  var variables = {
                         'file': parseFile,
                         'name': fileName,
                         'owner': Parse.User.current(),
                         'published': true,
                         'ACL' : custom_acl
                     };
-                    var newScreen = ParseReact.Mutation.Create('ScreenAsset', variables).dispatch().then(function(){
-                        self.setState({loading:false});
-                    },function(){
-                        self.setState({loading:false})
-                    });
-
-                    self.setState({loading:false});
                     
+                    var newScreen = ParseReact.Mutation.Create('ScreenAsset', variables).dispatch();
+                    self.setState({loading:false,open:true});
+
+                }, function(error) {
+                  // The file either could not be read, or could not be saved to Parse.
+                  console.log(error);
+                  self.setState({loading:false,open:true});
                 });
             }
         };
@@ -57,7 +59,7 @@ var Dropzone = React.createClass({
         }
         else {
             display = (<DropzoneStarter className='col-xs-12' style={{borderStyle:'dashed',minHeight:120}} onDrop={this.onDrop}>
-              <h2>Add a new file by dropping it here, or click here to select one to upload.</h2>
+              <h2>Add a new file by dropping it here, or click here to select one to upload. Please keep it less than 2mb and an image.</h2>
             </DropzoneStarter>);
         }
         return (
