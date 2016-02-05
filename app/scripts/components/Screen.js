@@ -8,8 +8,6 @@ Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6', '8UXFi3hzHgbKWoMZII
 var key = window.location.href;
 var count = key.indexOf('screen/');
 key = key.substring(count + 7, key.length);
-//console.log(key);
-
 var LoginForm = require('./LoginForm.js');
 
 var ScreenDisplayAnimator = React.createClass({
@@ -78,6 +76,11 @@ var ScreenDisplayPage = React.createClass({
                 overflow: "hidden"
             }
         };
+    },
+    componentDidMount() {
+          setInterval(function() {
+                  window.location.reload();
+                }, 30 * 60 * 1000);
     },
     render() {
         // var user = Parse.User.current();

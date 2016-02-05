@@ -89,7 +89,7 @@ var FileRequest = React.createClass({
         }
         else {
             display = (<DropzoneStarter className='col-xs-12' style={{borderStyle:'dashed',minHeight:120}} onDrop={this.onDrop}>
-              <h2>Add a new file by dropping it here, or click here to select one to upload. Please keep it less than 2mb and an image.</h2>
+              <h2>Add a new file by dropping it here, or click here to select one to upload.<br/ ><br/ >Please keep it less than 2mb and an image.</h2>
             </DropzoneStarter>);
         }
         return (

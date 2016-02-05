@@ -60,12 +60,7 @@ var NewScreenFormGettingStarted = React.createClass({
 var GettingStartedScreens = React.createClass({
     componentDidMount: function(){
         introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
-          window.location.href = '/#/app/gettingstartedassets';
-        });
-
-        $('#newScreenButton').click(function(){
-            console.log('clicked');
-            introJs().start().nextStep();
+          window.location.href = '/#/app/gettingstartedassignments';
         });
     },
     render: function() {
@@ -76,10 +71,10 @@ var GettingStartedScreens = React.createClass({
         return (
             
             <div>
-                <div data-step="3" data-intro="Create a new screen.">
+                <div data-step="3" data-intro="Create a new screen and click next page.">
                     <NewScreenFormGettingStarted />
                 </div>
-                <div data-step="4" data-position="bottom" data-intro="Your screens will show up here.">
+                <div>
                     <ScreenList />
                 </div>
             </div>

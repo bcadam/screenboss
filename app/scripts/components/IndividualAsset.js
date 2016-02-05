@@ -8,7 +8,10 @@ var ParseReact = require('parse-react');
 
 var IndividualAsset = React.createClass({
     delete: function() {
-        ParseReact.Mutation.Destroy(this.props.asset.id).dispatch();
+        ParseReact.Mutation.Destroy(this.props.asset.id).dispatch().then(function(){},function(error){
+            console.log(error);
+        });
+
     },
     getInitialState: function(){
         return{

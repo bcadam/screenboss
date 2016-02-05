@@ -59,3 +59,45 @@ Parse.Cloud.beforeSave("ScreenAsset", function(request, response) {
         response.error(error);
     });
 });
+
+
+// Parse.Cloud.beforeDelete("ScreenAsset", function(request, response) {
+
+// // response.error(request.object.id);
+// query = new Parse.Query("ScreenAsset");
+// query.equalTo("screenAsset", request.object.id);
+// query.count({
+//     success: function(count) {
+//       if (count > 0) {
+//         response.error("Can't delete album if it still has photos.");
+//       } else {
+//         response.error(count);
+//       }
+//     },
+//     error: function(error) {
+//       response.error("Error " + error.code + " : " + error.message + " when getting photo count.");
+//     }
+//   });
+
+
+
+// query = new Parse.Query("AssignmentPattern");
+// query.equalTo("screenAsset", request.object.id);
+
+
+// // query.count({
+// //     success: function(count) {
+// //       if (count > 0) {
+// //         response.error("Can't delete album if it still has photos.");
+// //       } else {
+// //         response.success();
+// //       }
+// //     },
+// //     error: function(error) {
+// //       response.error("Error " + error.code + " : " + error.message + " when getting photo count.");
+// //     }
+// //   });
+
+
+
+// });
