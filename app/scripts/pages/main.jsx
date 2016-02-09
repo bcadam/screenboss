@@ -14,7 +14,8 @@ var SiteDemoSimple = require('../components/SiteDemoSimple.js');
 var ScreenList = require('../components/ScreenList.js');
 var AssetList = require('../components/AssetList.js');
 var IndividualAsset = require('../components/IndividualAsset.js');
-
+var Dropzone = require('../components/Dropzone.js');
+var NewScreenForm = require('../components/NewScreenForm.js');
 
 
 var MainApp = React.createClass({
@@ -42,8 +43,9 @@ var MainApp = React.createClass({
                     
                         <div>
                             <SiteDemoSimple />
+                            <Dropzone/>
+                            <NewScreenForm />
                             <ScreenList />
-                            <br />
                             <AssetList />
                         </div>
 

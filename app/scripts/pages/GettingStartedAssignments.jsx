@@ -35,6 +35,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import DatePicker from 'material-ui/lib/date-picker/date-picker';
 
 import Toggle from 'material-ui/lib/toggle';
+
 var ScreenList = React.createClass({
     mixins: [ParseReact.Mixin],
     observe: function() {
@@ -44,13 +45,6 @@ var ScreenList = React.createClass({
             comments: new Parse.Query('Screen').descending('createdAt')
         };
 
-    },
-    componentDidMount: function(){
-        
-        // introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
-        //   window.location.href = '/#/app/gettingstartedassignments';
-        // });
-        console.log('Mounted ScreenList');
     },
     componentWillMount: function(){
         var currentUser = Parse.User.current();
@@ -87,19 +81,22 @@ var ScreenList = React.createClass({
         );
     }
 });
+
 var GettingStartedAssignment = React.createClass({
     componentDidMount: function(){
         
         // introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
         //   window.location.href = '/#/app/gettingstartedassignments';
         // });
+
+        console.log('MountedGettingStartedAssignment');
         setTimeout(function() {
-                  console.log('MountedGettingStartedAssignment');
+                  
 
                   introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
                       window.location.href = '/#/app/gettingstartedassignments';
                     });
-                }, 1 * 1000);
+                }, 2 * 1000);
         
     },
     render: function() {
@@ -191,7 +188,7 @@ var AddAssetDropDown = React.createClass({
                                 })}
                         </DropDownMenu>
                     </div>
-                    <div className='col-xs-12' style={{marginTop:"20px"}}>
+                    <div className='col-xs-12' style={{marginTop:"20px"}} data-step="4" data-intro="Click to add a file to the schedule.">
                         <RaisedButton label="Add file" secondary={true} onClick={self.addAsset} />
                     </div>
 
@@ -274,11 +271,11 @@ var AssignmentWithToggle = React.createClass({
         var endDate = self.props.asset.endDate;
         
         if (!startDate){
-            startDate = (    <DatePicker data-step="4" data-intro="Click to set a start date."
+            startDate = (    <DatePicker
                             autoOk={true}
                             hintText="Start"
                             mode="landscape"
-                            onChange={self.handleStart} />);
+                            onChange={self.handleStart} data-step="5" data-intro="Click to add a file to the schedule." />);
         }
         else {
             startDate = startDate.toString();
@@ -431,9 +428,6 @@ var ScreenDisplay = React.createClass({
         );
     }
 });
-
-
-
 
 
 module.exports = GettingStartedAssignment
