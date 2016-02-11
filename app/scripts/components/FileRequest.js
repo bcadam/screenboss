@@ -56,21 +56,21 @@ var FileRequest = React.createClass({
 
     },
     componentDidMount: function() {
-        var self = this;
+        // var self = this;
 
-        var User = Parse.Object.extend("_User");
-        var query = new Parse.Query(User);
-        query.get(self.props.routeParams.id, {
-              success: function(user) {
-                // The object was retrieved successfully.
-                self.setState({userTarget:user});
-                //console.log('found user: ' + user.id);
-              },
-              error: function(object, error) {
-                // The object was not retrieved successfully.
-                // error is a Parse.Error with an error code and message.
-              }
-        });
+        // var User = Parse.Object.extend("_User");
+        // var query = new Parse.Query(User);
+        // query.get(self.props.routeParams.id, {
+        //       success: function(user) {
+        //         // The object was retrieved successfully.
+        //         self.setState({userTarget:user});
+        //         //console.log('found user: ' + user.id);
+        //       },
+        //       error: function(object, error) {
+        //         // The object was not retrieved successfully.
+        //         // error is a Parse.Error with an error code and message.
+        //       }
+        // });
 
     },
     closeSnack: function(){
@@ -94,6 +94,9 @@ var FileRequest = React.createClass({
               <h2>Add a new file by dropping it here, or click here to select one to upload.<br/ ><br/ >Please keep it less than 2mb and an image.</h2>
             </DropzoneStarter>);
         }
+
+        //console.log(this.props.routeParams.id);
+        var self = this;
         return (
             <div className='col-xs-12' style={{marginBottom:"20px"}}>
             {/**display**/}
@@ -104,7 +107,7 @@ var FileRequest = React.createClass({
           onRequestClose={this.closeSnack}
         />
         <br />
-        <PickFile />
+        <PickFile userId={self.props.routeParams.id} />
             </div>
         );
     }
