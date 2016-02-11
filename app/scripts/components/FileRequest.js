@@ -6,6 +6,8 @@ var React = require('react');
 var Parse = require('parse');
 var ParseReact = require('parse-react');
 Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6', '8UXFi3hzHgbKWoMZIIX3ZgUg0tHKPzSK6w8Ul0M6');
+var PickFile = require('../components/PickFile.js')
+
 
 import DropzoneStarter from 'react-dropzone';
 import CircularProgress from 'material-ui/lib/circular-progress';
@@ -94,13 +96,15 @@ var FileRequest = React.createClass({
         }
         return (
             <div className='col-xs-12' style={{marginBottom:"20px"}}>
-            {display}
+            {/**display**/}
             <Snackbar
           open={this.state.open}
           message="The file has been sent..."
           autoHideDuration={4000}
           onRequestClose={this.closeSnack}
         />
+        <br />
+        <PickFile />
             </div>
         );
     }
