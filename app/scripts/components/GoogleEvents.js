@@ -2,6 +2,105 @@ window.React    = require("react");
 var request  = require("superagent");
 var moment = require('moment');
 
+var calendar = {
+    backgroundColor: '#fff',
+    WebkitBorderRadius: '50px',
+    MozBorderRadius: '50px',
+    borderRadius: '50px',
+    //color: '#18bdca',
+    width: '90%',
+    //height: '800px',
+    left: '0',
+    margin: 'auto',
+    padding: '20px 60px',
+    position: 'relative',
+    textAlign: 'center',
+    top: '50px',
+    WebkitTransition: 'all .5s ease-in-out',
+    MozTransition: 'all .5s ease-in-out',
+    OTransition: 'all .5s ease-in-out',
+    transition: 'all .5s ease-in-out'
+};
+
+var calendarLogo = {
+    marginTop: '-10px'
+};
+
+var calendarH1 = {
+    paddingBottom: '30px'
+};
+
+var calendarCard = {
+    backgroundColor: '#fff',
+    border: '1px solid #18bdca',
+    //color: '#18bdca',
+    height: '180px',
+    overflow: 'hidden',
+    marginBottom: '30px',
+    textAlign: 'left'
+};
+
+var calendarCardToday = {
+    border: '1px solid orange'
+};
+
+var calendarCardTodayDatetime = {
+    backgroundColor: 'orange'
+};
+
+var calendarCardDatetime = {
+    backgroundColor: '#18bdca',
+    color: '#fff',
+    fontFamily: 'Arial',
+    height: '180px',
+    paddingTop: '0',
+    paddingLeft: '20px'
+};
+
+var calendarCardDate = {
+    fontSize: '34pt'
+};
+
+var calendarCardDateMonth = {
+    verticalAlign: 'super'
+};
+
+var calendarCardDateSlash = {
+    fontSize: '48pt'
+};
+
+var calendarCardDateDay = {
+    verticalAlign: 'sub'
+};
+
+var calendarCardWeekday = {
+    fontSize: '24pt',
+    marginTop: '-10pt'
+};
+
+var calendarCardTime = {
+    //fontSize: '14pt',
+    fontSize: '25pt',
+    fontStyle: 'italic',
+    marginTop: '0'
+};
+
+var calendarCardTitle = {
+    color: '#18bdca',
+    fontSize: '16pt',
+    fontWeight: '700',
+    lineHeight: '1.2em',
+    padding: '10px 10px 10px 0'
+};
+
+var calendarCardLocation = {
+    color: '#a6a6a6',
+    fontStyle: 'italic',
+    fontSize: '12pt'
+};
+
+
+
 
 var CalEvent = React.createClass({
 
@@ -62,13 +161,13 @@ var CalEvent = React.createClass({
     //console.log(event);
 
     return(
-            <tr>
-                <td className="agenda-date">
+            <tr style={calendarCard}>
+                <td className="agenda-date" style={calendarCardDate}>
                     <div className="dayofmonth">{startDate.format('DD')}</div>
                     <div className="dayofweek">{startDate.format('dddd')}</div>
                     <div className="shortdate text-muted">{startDate.format('MMMM')}</div>
                 </td>
-                <td className="agenda-time">
+                <td className="agenda-time" style={calendarCardTime}>
                     {startDate.format('h:mm a')} - {endTimeShowing}
                 </td>
                 <td className="agenda-events">
@@ -146,7 +245,7 @@ var GoogleEvents = React.createClass({displayName: 'CalEvents',
 
 
     return(
-        <div className="agenda">
+        <div className="agenda"  style={calendar}>
         <h2 style={{padding:'10px',marginBottom:'10px'}}>{self.props.title}</h2>
         <div className="table-responsive">
             <table className="table table-condensed table-bordered">
