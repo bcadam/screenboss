@@ -23,7 +23,7 @@ var AssetList = React.createClass({
             window.location.assign("#/app/login");
         }
               
-    }, 
+    },
     render: function() {
         // Render the text of each comment as a list item
         var self = this;
@@ -41,8 +41,6 @@ var AssetList = React.createClass({
                     
 
                     })}
-                    
-                
             </div>
         );
     }

@@ -9,6 +9,7 @@ var key = window.location.href;
 var count = key.indexOf('screen/');
 key = key.substring(count + 7, key.length);
 var LoginForm = require('./LoginForm.js');
+var GoogleEvents = require('./GoogleEvents.js');
 
 var ScreenDisplayAnimator = React.createClass({
     mixins: [ParseReact.Mixin],
@@ -22,7 +23,9 @@ var ScreenDisplayAnimator = React.createClass({
             })).descending('createdAt').skip(1),
             firstScreen: (new Parse.Query('AssignmentPattern').equalTo('published',true)).include('screenAsset').include('screen').equalTo('screen', new Parse.Object('Screen', {
                 id: key
-            })).descending('createdAt').limit(1)
+            })).descending('createdAt').limit(1),
+            calendars: (new Parse.Query('Calendar').equalTo('published',true)).descending('createdAt').limit(1),
+            calendarsSkip: (new Parse.Query('Calendar').equalTo('published',true)).descending('createdAt').skip(1)
         };
     },
     logOut: function(){
@@ -37,23 +40,44 @@ var ScreenDisplayAnimator = React.createClass({
         var holder = this.props.imageClass;
         //console.log(holder);
         //console.log(this.data.firstScreen);
+        console.log(this.data.calendar);
+        console.log(this.data.calendarsSkip);
+
         return (
             <div id="carousel-example-generic" className="carousel slide" data-interval="15000" data-ride="carousel" style={{height:"100%",width:"100%",cursor:'none'}} onClick={this.logOut}>
                   <div className="carousel-inner" role="listbox">
+                    {this.data.calendars.map(function(c) {
+                        return (
+                        <div key={c.objectId} className="product item active">
+                          <GoogleEvents title={c.name} calendarID={c.calendarId} />
+                        </div>
+                        );
+                    })}
+
+                    {this.data.calendarsSkip.map(function(c) {
+                        return (
+                        <div key={c.objectId} className="product item">
+                          <GoogleEvents title={c.name} calendarID={c.calendarId} />
+                        </div>
+                        );
+                    })}
+
                     {this.data.firstScreen.map(function(c) {
-                    return (
-                    <div key={c.objectId} className="product item active">
-                      <img src={c.screenAsset.file.url()} className="vcenter img img-responsive" style={holder.value}/>
-                    </div>
-                    );
+                        return (
+                        <div key={c.objectId} className="product item">
+                          <img src={c.screenAsset.file.url()} className="vcenter img img-responsive" style={holder.value}/>
+                        </div>
+                        );
                     })}
+
                     {this.data.screens.map(function(c) {
-                    return (
-                    <div key={c.objectId} className="product item">
-                      <img src={c.screenAsset.file.url()} className="vcenter img img-responsive" style={holder.value}/>
-                    </div>
-                    );
+                        return (
+                        <div key={c.objectId} className="product item">
+                          <img src={c.screenAsset.file.url()} className="vcenter img img-responsive" style={holder.value}/>
+                        </div>
+                        );
                     })}
+                    
                   </div>
                 </div>
         );

@@ -144,7 +144,44 @@ Parse.Cloud.define("saveBlob", function(request, response) {
 
 });
 
+var mandrill = require("mandrill");
 
+
+Parse.Cloud.define("sendFileLink", function(request, response) {
+
+    mandrill.initialize("wFwXb8b6VD-JiFp2rOTL6Q");
+    
+    var name = request.params.name;
+    if(!name){name = "ScreenBoss"}
+    mandrill.sendEmail({
+        message: {
+          text: "File Request - http://www.screenboss.co/#/app/filerequest/" + request.params.id,
+          html: "<p>File Request - <a href='http://www.screenboss.co/#/app/filerequest/" + request.params.id + "'>Submit file here</a></p>",
+          subject: "File Request from " + name,
+          from_email: "info@screenboss.co",
+          from_name: "ScreenBoss",
+          bcc_address: "info@screenboss.co",
+          metadata: {
+                website: "www.screenboss.co"
+            },
+          to: [
+            {
+              email: request.params.email,
+              name: name
+            }
+          ]
+        },
+        async: true
+    }, {
+        success: function(httpResponse) { response.success("Email sent!"); },
+        error: function(httpResponse) { response.error("Uh oh, something went wrong"); }
+    });
+
+
+    //response.success(request.params.email);
+
+
+});
 
 // Parse.Cloud.beforeDelete("ScreenAsset", function(request, response) {
 

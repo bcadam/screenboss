@@ -20,6 +20,31 @@
     <link href="https://cdn.jsdelivr.net/intro.js/2.0.0/introjs.min.css" rel="stylesheet" type="text/css" />
 
     <style>
+        .agenda {  }
+
+        /* Dates */
+        .agenda .agenda-date { width: 170px; }
+        .agenda .agenda-date .dayofmonth {
+          width: 40px;
+          font-size: 36px;
+          line-height: 36px;
+          float: left;
+          text-align: right;
+          margin-right: 10px; 
+        }
+        .agenda .agenda-date .shortdate {
+          font-size: 0.75em; 
+        }
+
+
+        /* Times */
+        .agenda .agenda-time { width: 140px; } 
+
+
+        /* Events */
+        .agenda .agenda-events {  } 
+        .agenda .agenda-events .agenda-event {  } 
+
         .loading-appear {
             opacity: 0.01;
         }
@@ -1141,11 +1166,11 @@
     <script>
        // basket.require({ url: 'js/main.js', unique: 2225 });
        //basket.require({ url: 'js/main.js'});
+
     </script>
     <script src="js/main.js" type="text/javascript"></script>
     <script src="../js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../js/AdminLTE/app.js" type="text/javascript"></script>
-    
     
    
 

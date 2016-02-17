@@ -16,13 +16,14 @@ var Header = React.createClass({
     render: function() {
         // Render the text of each comment as a list item
         var self = this;
+        //iconElementRight={<ProfileNavItem />}
         return (
             <AppBar
                 title="ScreenBoss"
                 onLeftIconButtonTouchTap={self.handleClick}
                 onTitleTouchTap={function(){window.location.assign("/#/");}}
                 style={{backgroundColor:"#367FA9"}}
-                iconElementRight={<ProfileNavItem />}
+                
               />
         );
     }

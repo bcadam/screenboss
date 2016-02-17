@@ -12,7 +12,7 @@ var PickFile = React.createClass({
 
         var userId = null;
 
-        console.log(!self.props.userId);
+        //console.log(!self.props.userId);
 
         if (! self.props.userId)
         {
@@ -21,8 +21,8 @@ var PickFile = React.createClass({
         else{
           userId = self.props.userId;
         }
-        console.log(userId);
-        
+        //console.log(userId);
+
         filepicker.setKey("AYddgLB7cRj2z4JI1xXGzz");
 
         filepicker.pickAndStore(

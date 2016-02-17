@@ -9,6 +9,7 @@ import Main from './pages/main.jsx';
 import LandingPage from './pages/landingpage.jsx';
 import ScreenListPage from './pages/ScreenListPage.js';
 import AssetListPage from './pages/AssetListPage.js';
+import CalendarsPage from './pages/CalendarsPage.js';
 
 import GettingStarted from './pages/GettingStarted.jsx';
 import GettingStartedAssets from './pages/GettingStartedAssets.jsx';
@@ -18,8 +19,11 @@ import GettingStartedAssignments from './pages/GettingStartedAssignments.jsx';
 var LoginForm = require('./components/LoginForm.js');
 var LogOut = require('./components/LogOut.js');
 var Screen = require('./components/Screen.js');
-var FileRequest = require('./components/FileRequest.js');
 
+var FileRequest = require('./components/FileRequest.js');
+var GoogleEvents = require('./components/GoogleEvents.js');
+var Profile = require('./components/Profile.js');
+var SendFile = require('./components/SendFile.js');
 
 const historyOptions = {
   queryKey : false
@@ -33,8 +37,12 @@ const routes = (
     <Route path='/app' component={ App }>
       <IndexRoute component={ Main } />
       <Route path='screens' component={ ScreenListPage } />
+      <Route path='calendars' component={ CalendarsPage } />
       <Route path='assets' component={ AssetListPage } />
+      <Route path='events' component={ GoogleEvents } />
+      <Route path='profile' component={ Profile } />
       <Route path='filerequest/:id' component={ FileRequest } />
+      <Route path='sendfile' component={ SendFile } />
 
       <Route path='login' component={ LoginForm } />
       <Route path='logout' component={ LogOut } />
