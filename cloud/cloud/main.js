@@ -1,4 +1,6 @@
 var Image = require("parse-image");
+var mandrill = require("mandrill");
+
 
 Parse.Cloud.beforeSave("ScreenAsset", function(request, response) {
     var user = request.object;
@@ -59,7 +61,6 @@ Parse.Cloud.beforeSave("ScreenAsset", function(request, response) {
         response.error(error);
     });
 });
-
 
 Parse.Cloud.define("saveBlob", function(request, response) {
 
@@ -140,17 +141,11 @@ Parse.Cloud.define("saveBlob", function(request, response) {
             response.error("Did not find the user");
         }
     });
-
-
 });
-
-var mandrill = require("mandrill");
-
 
 Parse.Cloud.define("sendFileLink", function(request, response) {
 
     mandrill.initialize("wFwXb8b6VD-JiFp2rOTL6Q");
-    
     var name = request.params.name;
     if(!name){name = "ScreenBoss"}
     mandrill.sendEmail({
@@ -176,11 +171,50 @@ Parse.Cloud.define("sendFileLink", function(request, response) {
         success: function(httpResponse) { response.success("Email sent!"); },
         error: function(httpResponse) { response.error("Uh oh, something went wrong"); }
     });
+    //response.success(request.params.email);
+});
 
+Parse.Cloud.define("alertUser", function(request, response) {
+
+    var query = new Parse.Query(Parse.User);
+    
+    query.get(request.params.id, {
+      success: function(userAgain) {
+        var email = userAgain.get('email');
+
+        mandrill.initialize("wFwXb8b6VD-JiFp2rOTL6Q");
+    
+        mandrill.sendEmail({
+            message: {
+              text: "A file has been sent to your ScreenBoss account. http://www.screenboss.co/#/app/assets",
+              html: "<p>A file has been sent to your ScreenBoss account. <a href='http://www.screenboss.co/#/app/assets'>Check it out here</a></p>",
+              subject: "File submitted to your ScreenBoss",
+              from_email: "info@screenboss.co",
+              from_name: "ScreenBoss",
+              bcc_address: "info@screenboss.co",
+              metadata: {
+                    website: "www.screenboss.co"
+                },
+              to: [
+                {
+                  email: email
+                }
+              ]
+            },
+            async: true
+        }, {
+            success: function(httpResponse) { response.success("Email sent!"); },
+            error: function(httpResponse) { response.error("Uh oh, something went wrong"); }
+        });
+
+
+
+
+        //response.success('foundId');
+      }
+    });
 
     //response.success(request.params.email);
-
-
 });
 
 // Parse.Cloud.beforeDelete("ScreenAsset", function(request, response) {
