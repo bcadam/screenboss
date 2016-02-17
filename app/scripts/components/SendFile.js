@@ -71,8 +71,9 @@ var SendFile = React.createClass({
         //console.log(Parse.User.current().name);
         return (
             <div id="newScreenForm" className='col-xs-12'>
-                    <TextField fullWidth={true} id='email' hintText="target@nyu.edu" floatingLabelText="Email Address" onChange={self.handleChange.bind(self, 'email')} value={self.state.email} />
-                <RaisedButton fullWidth={true} label="Send email" secondary={true} onClick={self.sendEmail} />
+                <div className="col-xs-12"><h2>Who would you like to request a file from?</h2></div>
+                    <TextField fullWidth={true} id='email' hintText="target@nyu.edu" floatingLabelText="Email Address" onChange={self.handleChange.bind(self, 'email')} value={self.state.email} /><br />
+                <RaisedButton fullWidth={true} label="Send request" secondary={true} onClick={self.sendEmail} />
                 <div style={{marginBottom:"20px;"}} />
                 <Snackbar
                   open={this.state.open}
