@@ -49,7 +49,7 @@ var Profile = React.createClass({
                             
                             <div className="col-xs-8">
                                 <h3>{user.email}</h3>
-                                <h6>Member since: {moment(user.createdAt).format('MMM Do YY')}</h6>
+                                <h6>Member since: {moment(user.createdAt).format('MMM Do, YYYY')}</h6>
                                 <MenuItem primaryText={"Screens: " + self.data.screens.length} leftIcon={<Screen />} onTouchTap={function(){window.location.assign("/#/app/screens");}} />
                                 <MenuItem primaryText={"Files: " + self.data.screenassets.length} leftIcon={<File />} onTouchTap={function(){window.location.assign("/#/app/assets");}} />
                                 <MenuItem primaryText={"Calendars: " + self.data.calendars.length} leftIcon={<Calendars />} onTouchTap={function(){window.location.assign('/#/app/calendars')}} />
