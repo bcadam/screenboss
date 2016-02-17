@@ -40,7 +40,7 @@ var PickFile = React.createClass({
             });
 
             Parse.Cloud.run('alertUser', { 
-                id: Parse.User.current().id
+                id: userId
             }).then(function(result) {
               // ratings should be 4.5
               console.log(result);
