@@ -2,13 +2,11 @@
   "name": "ScreenBoss",
   "version": "1.0.1",
     "main": "serverindex.js",
-  "description": "Lightweight starting point for a react web app.",
+  "description": "Easily control and schedule content for displays",
   "keywords": [
+    "screen",
+    "enterprise",
     "react",
-    "starterkit",
-    "frontend",
-    "boilerplate",
-    "reflux",
     "react-router"
   ],
   "main": "index.html",
@@ -16,8 +14,8 @@
     "start": "gulp clean && gulp",
     "test": "jest"
   },
-  "author": "@moklick <mo@webkid.io>",
-  "license": "MIT",
+  "author": "Adam Cragg",
+  "license": "All rights reserved",
   "devDependencies": {
         "babel-core": "^6.1.2",
         "babel-jest": "^5.3.0",
