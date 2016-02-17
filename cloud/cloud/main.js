@@ -150,11 +150,11 @@ Parse.Cloud.define("sendFileLink", function(request, response) {
     if(!name){name = "ScreenBoss"}
     mandrill.sendEmail({
         message: {
-          text: "File Request - http://www.screenboss.co/#/app/filerequest/" + request.params.id,
-          html: "<p>File Request - <a href='http://www.screenboss.co/#/app/filerequest/" + request.params.id + "'>Submit file here</a></p>",
+          text: request.params.senderEmail + " has sent you a file Request - http://www.screenboss.co/#/app/filerequest/" + request.params.id + " " + request.params.message,
+          html: "<p>" + request.params.message + " - <br />" + request.params.name + "</p><p>You've been sent you a file Request - <a href='http://www.screenboss.co/#/app/filerequest/" + request.params.id + "'><b>Submit file here</b></a></p>",
           subject: "File Request from " + name,
-          from_email: "info@screenboss.co",
-          from_name: "ScreenBoss",
+          from_email: request.params.senderEmail,
+          from_name: request.params.senderEmail,
           bcc_address: "info@screenboss.co",
           metadata: {
                 website: "www.screenboss.co"
@@ -162,7 +162,7 @@ Parse.Cloud.define("sendFileLink", function(request, response) {
           to: [
             {
               email: request.params.email,
-              name: name
+              name: request.params.email
             }
           ]
         },

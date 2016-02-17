@@ -132,7 +132,6 @@ olark.identify('3932-129-10-4975');/*]]>*/
         display:'block'
     };
 
-
     var pLead = {
         fontSize: '21px',
         fontWeight: '200',
@@ -146,11 +145,6 @@ olark.identify('3932-129-10-4975');/*]]>*/
         WebkitMarginStart: '0px',
         WebkitMarginEnd: '0px'
     };
-
-
-
-
-
 
     var subHeaders = {color: '#777',
         fontWeight: '300',
@@ -174,10 +168,6 @@ olark.identify('3932-129-10-4975');/*]]>*/
         fontSize: '14px',
         lineHeight: '1.428571429'
     };
-
-
-
-    
 
     var pricingTableItem = {
         position: 'relative',
@@ -211,7 +201,6 @@ olark.identify('3932-129-10-4975');/*]]>*/
         fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif',
         lineHeight: '1.428571429'
     };
-
 
     var planPrice = {
         color: '#fff',

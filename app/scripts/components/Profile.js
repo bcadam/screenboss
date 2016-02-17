@@ -21,9 +21,6 @@ import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 var Profile = React.createClass({
     mixins: [ParseReact.Mixin],
     observe: function() {
-        // Subscribe to all Comment objects, ordered by creation date
-        // The results will be available at this.data.comments
-        //var user = Parse.User.current();
         return {
             user: (new Parse.Query('_User').equalTo('objectId',Parse.User.current().id)).limit(1),
             screenassets: new Parse.Query('ScreenAsset').descending('createdAt'),
@@ -44,7 +41,7 @@ var Profile = React.createClass({
                         <div className="row">
 
                             <div className="col-xs-4 hidden-xs">
-                                <img src="http://placehold.it/400?text=Profile+pictures+soon!" className="img-circle img img-responsive col-xs-12" />
+                                <img src="http://placehold.it/400?text=Profile+pictures+soon!" className="img-circle img img-responsive col-xs-12" style={{maxWidth:'300px',margin:'0 auto'}} />
                             </div>
                             
                             <div className="col-xs-8">
@@ -57,20 +54,7 @@ var Profile = React.createClass({
 
 
                             </div>
-                            
-                            {/*<div className="span2">
-                                                            <div className="btn-group">
-                                                                <a className="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
-                                                                    Action 
-                                                                    <span className="icon-cog icon-white"></span><span className="caret"></span>
-                                                                </a>
-                                                                <ul className="dropdown-menu">
-                                                                    <li><a href="#"><span className="icon-wrench"></span> Modify</a></li>
-                                                                    <li><a href="#"><span className="icon-trash"></span> Delete</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>*/}
-                    </div>
+                        </div>
                     </div>);
         }
         else{

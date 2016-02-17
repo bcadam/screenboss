@@ -14,7 +14,8 @@ var SendFile = React.createClass({
         return {
             email: '',
             autoHideDuration: 4000,
-            message: '',
+            message: 'Please send me the file so it can be displayed.',
+            snackMessage : '',
             open: false
         };
     },
@@ -25,19 +26,18 @@ var SendFile = React.createClass({
     },
     sendEmail: function() {
         var self = this;
-        //console.log(self.state.email);
 
         Parse.Cloud.run('sendFileLink', { 
             email: self.state.email,
             id: Parse.User.current().id,
-            name: Parse.User.current().name
+            name: Parse.User.current().get('username'),
+            senderEmail : Parse.User.current().get('email'),
+            message: self.state.message
         })
-
-
         .then(function(result) {
           // ratings should be 4.5
           console.log(result);
-          self.setState({message:result,open:true});
+          self.setState({snackMessage:result,open:true,message:"Please send me the file so it can be displayed.",email:""});
 
         });
         
@@ -69,16 +69,17 @@ var SendFile = React.createClass({
       },
     render: function() {
         var self = this;
-        //console.log(Parse.User.current().name);
+
         return (
             <div id="newScreenForm" className='col-xs-12'>
                 <div className="col-xs-12"><h2>Who would you like to request a file from?</h2></div>
-                    <TextField fullWidth={true} id='email' hintText="target@nyu.edu" floatingLabelText="Email Address" onChange={self.handleChange.bind(self, 'email')} value={self.state.email} /><br />
+                    <TextField fullWidth={true} id='email' hintText="target@nyu.edu" floatingLabelText="To Email Address" onChange={self.handleChange.bind(self, 'email')} value={self.state.email} /><br />
+                    <TextField fullWidth={true} id='message' hintText="Please send the file for your event." floatingLabelText="Message" onChange={self.handleChange.bind(self, 'message')} value={self.state.message} /><br />
                 <RaisedButton fullWidth={true} label="Send request" secondary={true} onClick={self.sendEmail} />
                 <div style={{marginBottom:"20px;"}} />
                 <Snackbar
                   open={this.state.open}
-                  message={this.state.message}
+                  message={this.state.snackMessage}
                   autoHideDuration={this.state.autoHideDuration}
                   onActionTouchTap={this.handleActionTouchTap}
                   onRequestClose={this.handleRequestClose}
