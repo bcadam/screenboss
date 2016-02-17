@@ -10,7 +10,7 @@ var PickFile = React.createClass({
     filer: function(){
         var self = this;
 
-        var userId = null;
+        var userId = self.props.userId;
 
         //console.log(!self.props.userId);
 
@@ -58,6 +58,7 @@ var PickFile = React.createClass({
     render: function() {
         // Render the text of each comment as a list item
         var self = this;
+
         //console.log(self.props.userId);
         return (
             <div className="btn btn-success col-xs-12" onClick={self.filer} style={{marginBottom:'20px'}}>Upload new file</div>
