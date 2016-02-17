@@ -90,6 +90,7 @@ var CalendarDisplay = React.createClass({
                 <Card>  
                       <CardHeader
                         title={self.props.asset.name}
+                        subtitle={self.props.asset.calendarId}
                         actAsExpander={false}
                         showExpandableButton={false}
                         initiallyExpanded={true}
