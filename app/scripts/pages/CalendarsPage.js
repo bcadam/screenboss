@@ -53,7 +53,7 @@ var ScreenListPage = React.createClass({
 
                 <div className="col-xs-12 col-sm-3">
                     <NewCalendarForm />
-                    <RaisedButton fullWidht={true} label="How do I find the calendar id?" onTouchTap={this.handleOpen} />
+                    <RaisedButton style={{marginBottom:'20px'}} fullWidth={true} label="How do I find the calendar id?" onTouchTap={this.handleOpen} />
                 </div>
 
                 <div className="col-xs-12 col-sm-9">
