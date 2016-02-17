@@ -48,7 +48,7 @@ var ScreenDisplayAnimator = React.createClass({
                   <div className="carousel-inner" role="listbox">
                     {this.data.calendars.map(function(c) {
                         return (
-                        <div key={c.objectId} className="product item active">
+                        <div key={c.objectId} className="product item">
                           <GoogleEvents title={c.name} calendarID={c.calendarId} />
                         </div>
                         );
@@ -64,7 +64,7 @@ var ScreenDisplayAnimator = React.createClass({
 
                     {this.data.firstScreen.map(function(c) {
                         return (
-                        <div key={c.objectId} className="product item">
+                        <div key={c.objectId} className="product item active">
                           <img src={c.screenAsset.file.url()} className="vcenter img img-responsive" style={holder.value}/>
                         </div>
                         );

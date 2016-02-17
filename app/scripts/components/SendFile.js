@@ -25,6 +25,7 @@ var SendFile = React.createClass({
     },
     sendEmail: function() {
         var self = this;
+        //console.log(self.state.email);
 
         Parse.Cloud.run('sendFileLink', { 
             email: self.state.email,
