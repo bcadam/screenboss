@@ -11,6 +11,9 @@ key = key.substring(count + 7, key.length);
 var LoginForm = require('./LoginForm.js');
 var GoogleEvents = require('./GoogleEvents.js');
 
+import Dialog from 'material-ui/lib/dialog';
+import FlatButton from 'material-ui/lib/flat-button';
+
 var ScreenDisplayAnimator = React.createClass({
     mixins: [ParseReact.Mixin],
     observe: function() {
@@ -34,6 +37,14 @@ var ScreenDisplayAnimator = React.createClass({
             self.props.user.requestChange(null);
         });
     },
+    getInitialState: function() {
+        return {
+            open: false
+        };
+    },
+    handleClose: function (){
+        this.setState({open: false});
+    },
     render: function() {
 
         //var imageClass = this.props.imageClass.value;
@@ -42,10 +53,26 @@ var ScreenDisplayAnimator = React.createClass({
         //console.log(this.data.firstScreen);
         console.log(this.data.calendar);
         console.log(this.data.calendarsSkip);
+        var self = this;
+
+        var actions = [
+          <FlatButton
+            label="No"
+            secondary={true}
+            onTouchTap={this.handleClose}
+          />,
+          <FlatButton
+            label="Yes"
+            primary={true}
+            keyboardFocused={true}
+            onTouchTap={this.logOut}
+          />
+        ];
 
         return (
-            <div id="carousel-example-generic" className="carousel slide" data-interval="15000" data-ride="carousel" style={{height:"100%",width:"100%",cursor:'none'}} onClick={this.logOut}>
-                  <div className="carousel-inner" role="listbox">
+            <div id="carousel-example-generic" className="carousel slide" data-interval="15000" data-ride="carousel" style={{height:"100%",width:"100%",cursor:'none'}} onClick={function(){self.setState({open:true});}}>
+                
+                <div className="carousel-inner" role="listbox">
                     {this.data.calendars.map(function(c) {
                         return (
                         <div key={c.objectId} className="product item">
@@ -77,9 +104,17 @@ var ScreenDisplayAnimator = React.createClass({
                         </div>
                         );
                     })}
-                    
-                  </div>
+
                 </div>
+                <Dialog
+                  title="Log Out"
+                  actions={actions}
+                  modal={false}
+                  open={this.state.open}
+                  onRequestClose={this.handleClose}>
+                  Would you like to log out?
+                </Dialog>
+            </div>
         );
     }
 });
