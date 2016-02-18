@@ -6,7 +6,6 @@ var ParseReact = require('parse-react');
 import RaisedButton from 'material-ui/lib/raised-button';
 import FlatButton from 'material-ui/lib/flat-button';
 import MenuItem from 'material-ui/lib/menus/menu-item';
-
 import Screen from 'material-ui/lib/svg-icons/hardware/cast';
 import File from 'material-ui/lib/svg-icons/file/attachment';
 import FileRequest from 'material-ui/lib/svg-icons/file/cloud-download';
@@ -15,8 +14,9 @@ import Dashboard from 'material-ui/lib/svg-icons/action/dashboard';
 import LogOut from 'material-ui/lib/svg-icons/action/input';
 import Calendars from 'material-ui/lib/svg-icons/action/today';
 import SendFile from 'material-ui/lib/svg-icons/communication/email';
-
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
+
+var CreditCard = require('./CreditCard.js');
 
 var Profile = React.createClass({
     mixins: [ParseReact.Mixin],
@@ -30,10 +30,7 @@ var Profile = React.createClass({
     },
     render: function() {
         var self = this;
-        //console.log(self.data.user[0]);
-
         var user = self.data.user[0];
-
         var display;
 
         if(user){
@@ -51,8 +48,7 @@ var Profile = React.createClass({
                                 <MenuItem primaryText={"Files: " + self.data.screenassets.length} leftIcon={<File />} onTouchTap={function(){window.location.assign("/#/app/assets");}} />
                                 <MenuItem primaryText={"Calendars: " + self.data.calendars.length} leftIcon={<Calendars />} onTouchTap={function(){window.location.assign('/#/app/calendars')}} />
                                 <MenuItem primaryText={"Send File Request"} leftIcon={<SendFile />} onTouchTap={function(){window.location.assign('/#/app/sendfile/')}} />
-
-
+                                <CreditCard />
                             </div>
                         </div>
                     </div>);

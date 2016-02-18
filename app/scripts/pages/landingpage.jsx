@@ -8,7 +8,7 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import Header from '../components/Header.js';
 import LeftSideBar from '../components/LeftSideBar.js';
 
-
+//https://www.google.com/design/spec/style/color.html#color-color-palette
 
 var Home = React.createClass({
 mixins: [LinkedStateMixin],
@@ -202,6 +202,7 @@ olark.identify('3932-129-10-4975');/*]]>*/
         lineHeight: '1.428571429'
     };
 
+
     var planPrice = {
         color: '#fff',
         backgroundColor: '#52b6ec',
@@ -217,6 +218,60 @@ olark.identify('3932-129-10-4975');/*]]>*/
         fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif',
         lineHeight: '1.428571429'
     };
+
+    var backgroundA = '#03A9F4';
+    var backgroundB = '#FFC107';
+    var backgroundC = '#009688';
+
+    var planPriceA = {
+        color: '#fff',
+        backgroundColor: backgroundA,
+        borderBottomColor: backgroundA,
+        margin: '0',
+        padding: '15px 0',
+        fontSize: '48px',
+        borderBottom: '1px dashed #eee',
+        boxSizing: 'border-box',
+        display: 'list-item',
+        textAlign: '-webkit-match-parent',
+        listStyle: 'none',
+        fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif',
+        lineHeight: '1.428571429'
+    };
+
+    var planPriceB = {
+        color: '#fff',
+        backgroundColor: backgroundB,
+        borderBottomColor: backgroundB,
+        margin: '0',
+        padding: '15px 0',
+        fontSize: '48px',
+        borderBottom: '1px dashed #eee',
+        boxSizing: 'border-box',
+        display: 'list-item',
+        textAlign: '-webkit-match-parent',
+        listStyle: 'none',
+        fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif',
+        lineHeight: '1.428571429'
+    };
+
+    var planPriceC = {
+        color: '#fff',
+        backgroundColor: backgroundC,
+        borderBottomColor: backgroundC,
+        margin: '0',
+        padding: '15px 0',
+        fontSize: '48px',
+        borderBottom: '1px dashed #eee',
+        boxSizing: 'border-box',
+        display: 'list-item',
+        textAlign: '-webkit-match-parent',
+        listStyle: 'none',
+        fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif',
+        lineHeight: '1.428571429'
+    };
+
+
 
     var planPriceFree = {
         padding: '15px 0',
@@ -270,7 +325,7 @@ olark.identify('3932-129-10-4975');/*]]>*/
                 <div className="container" style={itemContainer}>
                     <div className="carousel-content">
                         <h1 style={mainSliderH1}>Digital Signage Management</h1>
-                        <p className="lead hidden-xs" style={pLead}>Easily control and schedule content for displays.</p>
+                        <p className="lead hidden-xs" style={pLead}>Easily control and schedule content for electronic displays.</p>
                     </div>
                 </div>
             </div>
@@ -313,47 +368,71 @@ olark.identify('3932-129-10-4975');/*]]>*/
                 </div>
                 <div className="col-xs-12 col-sm-4" style={{textAlign:'center'}}>
                     <div style={{backgroundColor:"#2c3e50",height:'68px',width:'68px',borderRadius:'100%',float: 'none',margin:'0 auto'}}><i className="fa fa-chrome fa-3x" style={{color:'white',marginTop:'20%'}}></i></div>
-                        <div style={subHeaders}>No software only a browser</div><div style={subHeaderParagraph}>No need to download and manage new software on your sceens. Everything runs in the broswer.</div>
+                        <div style={subHeaders}>Show Google Calendars</div><div style={subHeaderParagraph}>No need to manually enter your events. Everything displays automatically.</div>
                 </div>
             </div>
         </section>
         <div id="pricing-table" className="col-xs-12">
             <div className="col-sm-4" style={pricingTableItem}>
                 <ul className="plan featured" style={pricingPlan}>
-                    <li className="plan-name" style={planName}>Beta Test</li>
-                    <li className="plan-price" style={planPrice}>Free</li>
+                    <li className="plan-name" style={planName}>Launch</li>
+                    <li className="plan-price" style={planPriceA}>$50<div style={{fontSize:'12pt',display:'inline'}}>/month</div></li>
+                    <li style={planLine}>1 Schedule</li>
+                    <li style={planLine}>25 Files</li>
                     <li style={planLine}>Unlimited Screens</li>
-                    <li style={planLine}>Unlimited Paterns</li>
-                    <li style={planLine}>Unlimited Files</li>
                     <li style={planLine}>Unlimited Team Uploads</li>
                     <li style={planLine}>Email Support</li>
                     <li style={planLine} className="plan-action"><a href="/#/app/" className="btn btn-primary btn-lg">Sign Up</a></li>
                 </ul>
             </div>
-            <div className="col-sm-4 blurry-text notPickable hidden-xs" style={pricingTableItem}>
-                <ul className="plan" style={pricingPlan}>
-                    <li className="plan-name" style={planName}>Standard</li>
-                    <li className="plan-price blurry-text" style={planPriceFree}>$49</li>
-                    <li style={{color:'#999 blurry-text'}}>10GB Storage</li>
-                    <li style={planLineBlur}>2GB RAM</li>
-                    <li style={planLineBlur}>1TB Bandwidth</li>
-                    <li style={planLineBlur}>100 Email Address</li>
-                    <li style={planLineBlur}>Forum Support</li>
-                    <li style={planLineBlur} className="plan-action"><a href="/#/app/" className="btn btn-primary btn-lg blurry-text" style={{WebkitUserSelect: 'none'}}>Signup</a></li>
+            <div className="col-sm-4" style={pricingTableItem}>
+                <ul className="plan featured" style={pricingPlan}>
+                    <li className="plan-name" style={planName}>Growth</li>
+                    <li className="plan-price" style={planPriceB}>$100<div style={{fontSize:'12pt',display:'inline'}}>/month</div></li>
+                    <li style={planLine}>3 Schedule</li>
+                    <li style={planLine}>100 Files</li>
+                    <li style={planLine}>Unlimited Screens</li>
+                    <li style={planLine}>Unlimited Team Uploads</li>
+                    <li style={planLine}>Email Support</li>
+                    <li style={planLine} className="plan-action"><a href="/#/app/" className="btn btn-primary btn-lg">Sign Up</a></li>
                 </ul>
             </div>
-            <div className="col-sm-4 blurry-text notPickable hidden-xs" style={pricingTableItem}>
-                <ul className="plan" style={pricingPlan}>
-                    <li className="plan-name" style={planName}>Advanced</li>
-                    <li style={planPriceFree} className="plan-price blurry-text">$199</li>
-                    <li style={planLineBlur}>30GB Storage</li>
-                    <li style={planLineBlur}>5GB RAM</li>
-                    <li style={planLineBlur}>5TB Bandwidth</li>
-                    <li style={planLineBlur}>1000 Email Address</li>
-                    <li style={planLineBlur}>Forum Support</li>
-                    <li style={planLineBlur} className="plan-action"><a href="/#/app/" className="btn btn-primary btn-lg blurry-text" style={{WebkitUserSelect: 'none'}}>Signup</a></li>
+            <div className="col-sm-4" style={pricingTableItem}>
+                <ul className="plan featured" style={pricingPlan}>
+                    <li className="plan-name" style={planName}>Scale</li>
+                    <li className="plan-price" style={planPriceC}>$300<div style={{fontSize:'12pt',display:'inline'}}>/month</div></li>
+                    <li style={planLine}>Unlimited Schedule</li>
+                    <li style={planLine}>Unlimited Files</li>
+                    <li style={planLine}>Unlimited Screens</li>
+                    <li style={planLine}>Unlimited Team Uploads</li>
+                    <li style={planLine}><b>Phone Support</b></li>
+                    <li style={planLine} className="plan-action"><a href="/#/app/" className="btn btn-primary btn-lg">Sign Up</a></li>
                 </ul>
             </div>
+            {/*<div className="col-sm-4 blurry-text notPickable hidden-xs" style={pricingTableItem}>
+                            <ul className="plan" style={pricingPlan}>
+                                <li className="plan-name" style={planName}>Growth Plan</li>
+                                <li className="plan-price blurry-text" style={planPriceFree}>$49</li>
+                                <li style={{color:'#999 blurry-text'}}>10GB Storage</li>
+                                <li style={planLineBlur}>2GB RAM</li>
+                                <li style={planLineBlur}>1TB Bandwidth</li>
+                                <li style={planLineBlur}>100 Email Address</li>
+                                <li style={planLineBlur}>Forum Support</li>
+                                <li style={planLineBlur} className="plan-action"><a href="/#/app/" className="btn btn-primary btn-lg blurry-text" style={{WebkitUserSelect: 'none'}}>Signup</a></li>
+                            </ul>
+                        </div>
+                        <div className="col-sm-4 blurry-text notPickable hidden-xs" style={pricingTableItem}>
+                            <ul className="plan" style={pricingPlan}>
+                                <li className="plan-name" style={planName}>Advanced</li>
+                                <li style={planPriceFree} className="plan-price blurry-text">$199</li>
+                                <li style={planLineBlur}>30GB Storage</li>
+                                <li style={planLineBlur}>5GB RAM</li>
+                                <li style={planLineBlur}>5TB Bandwidth</li>
+                                <li style={planLineBlur}>1000 Email Address</li>
+                                <li style={planLineBlur}>Forum Support</li>
+                                <li style={planLineBlur} className="plan-action"><a href="/#/app/" className="btn btn-primary btn-lg blurry-text" style={{WebkitUserSelect: 'none'}}>Signup</a></li>
+                            </ul>
+                        </div>*/}
         </div>
     </div>
     );

@@ -8,7 +8,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import Divider from 'material-ui/lib/divider';
 
 
-import Screen from 'material-ui/lib/svg-icons/hardware/cast';
+import Schedules from 'material-ui/lib/svg-icons/hardware/cast';
 import File from 'material-ui/lib/svg-icons/file/attachment';
 import FileRequest from 'material-ui/lib/svg-icons/file/cloud-download';
 import Profile from 'material-ui/lib/svg-icons/action/account-box';
@@ -62,7 +62,7 @@ var LeftSideBar = React.createClass({
 
                 <MenuItem primaryText="Dashboard" leftIcon={<Dashboard />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/");}} />
                 
-                <MenuItem primaryText="Screens" leftIcon={<Screen />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/screens");}} />
+                <MenuItem primaryText="Schedules" leftIcon={<Schedules />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/schedules");}} />
                 
                 <MenuItem primaryText="Files" leftIcon={<File />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/assets");}} />
 {/*                <MenuItem primaryText="File Request URL" leftIcon={<FileRequest />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign('/#/app/filerequest/' + Parse.User.current().id)}} />

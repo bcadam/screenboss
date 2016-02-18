@@ -7,7 +7,7 @@ import BlankApp from './pages/blankapp.jsx';
 import NotFound from './pages/notFound.jsx';
 import Main from './pages/main.jsx';
 import LandingPage from './pages/landingpage.jsx';
-import ScreenListPage from './pages/ScreenListPage.js';
+import ScheduleListPage from './pages/ScheduleListPage.js';
 import AssetListPage from './pages/AssetListPage.js';
 import CalendarsPage from './pages/CalendarsPage.js';
 
@@ -23,6 +23,7 @@ var Screen = require('./components/Screen.js');
 var FileRequest = require('./components/FileRequest.js');
 var GoogleEvents = require('./components/GoogleEvents.js');
 var Profile = require('./components/Profile.js');
+var CreditCard = require('./components/CreditCard.js');
 var SendFile = require('./components/SendFile.js');
 
 const historyOptions = {
@@ -36,11 +37,12 @@ const routes = (
     </Route>
     <Route path='/app' component={ App }>
       <IndexRoute component={ Main } />
-      <Route path='screens' component={ ScreenListPage } />
+      <Route path='schedules' component={ ScheduleListPage } />
       <Route path='calendars' component={ CalendarsPage } />
       <Route path='assets' component={ AssetListPage } />
       <Route path='events' component={ GoogleEvents } />
       <Route path='profile' component={ Profile } />
+      <Route path='creditcard' component={ CreditCard } />
       <Route path='filerequest/:id' component={ FileRequest } />
       <Route path='sendfile' component={ SendFile } />
 

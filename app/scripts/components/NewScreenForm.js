@@ -46,7 +46,7 @@ var NewScreenForm = React.createClass({
                     <TextField fullWidth={true} id='screenName' hintText="Main Lobby" floatingLabelText="Schedule Name" onChange={self.handleChange.bind(self, 'name')} value={self.state.name} />
                     <TextField fullWidth={true} id='screenDescription' hintText="Next two weeks" floatingLabelText="Description or use" onChange={self.handleChange.bind(self, 'description')} value={self.state.description} />
                 <RaisedButton fullWidth={true} label="Create Schedule" secondary={true} onClick={self.createScreen} />
-                <div style={{marginBottom:"20px;"}} />
+                <div style={{marginBottom:"20px"}} />
             </div>
         );
     }

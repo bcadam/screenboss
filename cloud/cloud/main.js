@@ -1,6 +1,12 @@
 var Image = require("parse-image");
 var mandrill = require("mandrill");
 
+var Stripe = require('stripe');
+var stripeKey = 'sk_live_se8HqxdcAA4qMWHxkl7uWsdp';
+//var stripeKey = 'sk_test_L5PJsag7Dw3xz6vlYKQwZxQe';
+
+Stripe.initialize(stripeKey); //replace *** with your key values
+//Stripe.initialize('sk_live_se8HqxdcAA4qMWHxkl7uWsdp'); //replace *** with your key values
 
 Parse.Cloud.beforeSave("ScreenAsset", function(request, response) {
     var user = request.object;
@@ -103,14 +109,14 @@ Parse.Cloud.define("saveBlob", function(request, response) {
                 return file.save();
 
             }).then(function(file) {
-                
+
                 //response.success(gameScore.objectId);
 
                 var custom_acl = new Parse.ACL();
                 custom_acl.setWriteAccess(userId, true);
                 custom_acl.setReadAccess(userId, true);
 
-                
+
 
                 var ScreenAsset = Parse.Object.extend("ScreenAsset");
                 var screenAsset = new ScreenAsset();
@@ -147,24 +153,22 @@ Parse.Cloud.define("sendFileLink", function(request, response) {
 
     mandrill.initialize("wFwXb8b6VD-JiFp2rOTL6Q");
     var name = request.params.name;
-    if(!name){name = "ScreenBoss"}
+    if (!name) { name = "ScreenBoss" }
     mandrill.sendEmail({
         message: {
-          text: request.params.senderEmail + " has sent you a file Request - http://www.screenboss.co/#/app/filerequest/" + request.params.id + " " + request.params.message,
-          html: "<p>" + request.params.message + " - <br />" + request.params.name + "</p><p>You've been sent you a file Request - <a href='http://www.screenboss.co/#/app/filerequest/" + request.params.id + "'><b>Submit file here</b></a></p>",
-          subject: "File Request from " + name,
-          from_email: request.params.senderEmail,
-          from_name: request.params.senderEmail,
-          bcc_address: "info@screenboss.co",
-          metadata: {
+            text: request.params.senderEmail + " has sent you a file Request - http://www.screenboss.co/#/app/filerequest/" + request.params.id + " " + request.params.message,
+            html: "<p>" + request.params.message + " - <br />" + request.params.name + "</p><p>You've been sent you a file Request - <a href='http://www.screenboss.co/#/app/filerequest/" + request.params.id + "'><b>Submit file here</b></a></p>",
+            subject: "File Request from " + name,
+            from_email: request.params.senderEmail,
+            from_name: request.params.senderEmail,
+            bcc_address: "info@screenboss.co",
+            metadata: {
                 website: "www.screenboss.co"
             },
-          to: [
-            {
-              email: request.params.email,
-              name: request.params.email
-            }
-          ]
+            to: [{
+                email: request.params.email,
+                name: request.params.email
+            }]
         },
         async: true
     }, {
@@ -177,45 +181,166 @@ Parse.Cloud.define("sendFileLink", function(request, response) {
 Parse.Cloud.define("alertUser", function(request, response) {
 
     var query = new Parse.Query(Parse.User);
-    
+
     query.get(request.params.id, {
-      success: function(userAgain) {
-        var email = userAgain.get('email');
+        success: function(userAgain) {
+            var email = userAgain.get('email');
 
-        mandrill.initialize("wFwXb8b6VD-JiFp2rOTL6Q");
-    
-        mandrill.sendEmail({
-            message: {
-              text: "A file has been sent to your ScreenBoss account. http://www.screenboss.co/#/app/assets",
-              html: "<p>A file has been sent to your ScreenBoss account. <a href='http://www.screenboss.co/#/app/assets'>Check it out here</a></p>",
-              subject: "File submitted to your ScreenBoss",
-              from_email: "info@screenboss.co",
-              from_name: "ScreenBoss",
-              bcc_address: "info@screenboss.co",
-              metadata: {
-                    website: "www.screenboss.co"
+            mandrill.initialize("wFwXb8b6VD-JiFp2rOTL6Q");
+
+            mandrill.sendEmail({
+                message: {
+                    text: "A file has been sent to your ScreenBoss account. http://www.screenboss.co/#/app/assets",
+                    html: "<p>A file has been sent to your ScreenBoss account. <a href='http://www.screenboss.co/#/app/assets'>Check it out here</a></p>",
+                    subject: "File submitted to your ScreenBoss",
+                    from_email: "info@screenboss.co",
+                    from_name: "ScreenBoss",
+                    bcc_address: "info@screenboss.co",
+                    metadata: {
+                        website: "www.screenboss.co"
+                    },
+                    to: [{
+                        email: email
+                    }]
                 },
-              to: [
-                {
-                  email: email
-                }
-              ]
-            },
-            async: true
-        }, {
-            success: function(httpResponse) { response.success("Email sent!"); },
-            error: function(httpResponse) { response.error("Uh oh, something went wrong"); }
-        });
+                async: true
+            }, {
+                success: function(httpResponse) { response.success("Email sent!"); },
+                error: function(httpResponse) { response.error("Uh oh, something went wrong"); }
+            });
 
 
 
 
-        //response.success('foundId');
-      }
+            //response.success('foundId');
+        }
     });
 
     //response.success(request.params.email);
 });
+
+Parse.Cloud.define("stripeToken", function(request, response) {
+
+    var token = request.params.token.id;
+
+    var query = new Parse.Query(Parse.User);
+
+    query.get(request.params.userId, {
+        success: function(userAgain) {
+            
+            var charge = Stripe.Customers.create({
+                card: token,
+                email : userAgain.get('email'),
+                description: request.params.userId,
+                plan: "firstplan",
+                quantity: "1"
+                // coupon: request.params.coupon, // email: request.params.email
+
+                },{
+                success: function(httpResponse) {
+                    console.log(httpResponse);
+                    userAgain.set('stripeId',httpResponse.id);
+                    userAgain.set('subscriptionId',httpResponse.subscriptions.data[0].id);
+
+                    userAgain.save();
+
+                    response.success(httpResponse);
+                },
+                error: function(httpResponse) {
+                    response.error("Error: "+httpResponse.message+"\n"+
+                           "Params:\n"+
+                           request.params.token+","+
+                           request.params.plan+","+
+                           request.params.quantity+
+                           "\n"
+                          );
+                }
+                });
+
+
+        },
+        error: function(){
+            response.error('could not find user');
+        }
+    });
+});
+
+Parse.Cloud.define("cancelSubscription", function(request, response) {
+
+    //var token = request.params.token.id;
+    //response.success('done');
+
+    var customerId = request.params.stripeId;
+    var subscriptionId = request.params.subscriptionId;
+
+    var query = new Parse.Query(Parse.User);
+
+    query.get(request.params.userId, {
+        success: function(userAgain) {
+            
+                    var cancel = Stripe.Customers.cancelSubscription(
+                      customerId,
+                      subscriptionId,
+                      {
+                        success: function(httpResponse) {
+                            console.log(httpResponse);
+                            userAgain.set('subscriptionId',null);
+                            userAgain.save();
+
+                            response.success(httpResponse);
+                        },
+                        error: function(httpResponse) {
+                            response.error("Error: "+httpResponse.message+"\n"+
+                                   "Params:\n"+
+                                   request.params.token+","+
+                                   request.params.plan+","+
+                                   request.params.quantity+
+                                   "\n"
+                                  );
+                        }
+                    }
+                    );
+
+        },
+        error: function(){
+            response.error('could not find user');
+        }
+    });
+});
+
+
+Parse.Cloud.define("renewSubscription", function(request, response) {
+
+    var stripeId = request.params.stripeId;
+    var query = new Parse.Query(Parse.User);
+
+    query.get(request.params.userId, {
+        success: function(userAgain) {
+            
+            Parse.Cloud.httpRequest({
+                method:"POST",
+                url: "https://" + stripeKey + ":@api.stripe.com/v1/customers/" + stripeId + "/subscriptions",
+                body:{
+                    "plan": "firstplan"
+                },
+                success: function(httpResponse) {
+                    userAgain.set('subscriptionId',httpResponse.data.id);
+                    userAgain.save();
+                    response.success(httpResponse);
+                },
+                    error: function(httpResponse) {
+                    response.error('Request failed with response code ' + httpResponse.status);
+                }
+            });
+
+
+        },
+        error: function(){
+            response.error('could not find user');
+        }
+    });
+});
+
 
 // Parse.Cloud.beforeDelete("ScreenAsset", function(request, response) {
 
