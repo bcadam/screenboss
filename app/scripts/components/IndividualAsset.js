@@ -38,7 +38,7 @@ var IndividualAsset = React.createClass({
         ];
 
         
-        var image = <img src={self.props.asset.file.url()} className="col-xs-12 img img-responsive" />;
+        var image = <img src={self.props.asset.fileThumbnail.url()} className="col-xs-12 img img-responsive" />;
        
 
         return (
