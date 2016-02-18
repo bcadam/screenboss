@@ -99,7 +99,7 @@ var CreditCard = React.createClass({
         var key = "pk_live_lji5reYLb5YYjHM75tJwd7UI";
         //var key = "pk_test_sd7yOGYw0CMM6FmSHdtnEqlr";
 
-        if(!subscriptionId && !stripeId){
+        if(Parse.User.current() && !subscriptionId && !stripeId){
             display = (<StripeCheckout
               name="ScreenBoss"
               description="Launch Plan"
@@ -169,6 +169,7 @@ var CreditCard = React.createClass({
         </Dialog></div>);
         }
 
+        
         if(!subscriptionId && stripeId)
         {
              display = (<RaisedButton
