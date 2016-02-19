@@ -43,7 +43,7 @@ var Display = React.createClass({
                     var id = results[0].id;
                     //console.log(results[0]);
 
-                    var screen = <div style={{margin:'0px',padding:'0px',background:'-webkit-radial-gradient(#494949, black)',background:'-o-radial-gradient(#494949, black)',background:'-moz-radial-gradient(#494949, black)',background:'radial-gradient(#494949, black)',color:'white',width:'100%',height:'100vh !important',position:'absolute',top:'0px',left:'0px'}}><h1 style={{position:'absolute',top:'30%',left:'28%'}}>Claim this screen with code: {id}</h1></div>;
+                    var screen = <div style={{cursor:'none !important',margin:'0px',padding:'0px',background:'-webkit-radial-gradient(#494949, black)',background:'-o-radial-gradient(#494949, black)',background:'-moz-radial-gradient(#494949, black)',background:'radial-gradient(#494949, black)',color:'white',width:'100%',height:'100vh !important',position:'absolute',top:'0px',left:'0px'}}><h1 style={{position:'absolute',top:'30%',left:'28%'}}>Claim this screen with code: {id}</h1></div>;
                     self.setState({message:screen});
                     //setTimeout(function(){ location.reload(); }, 7000);
                     window.setInterval(function(){
@@ -70,7 +70,7 @@ var Display = React.createClass({
                 if(results[0].get('owner'))
                 {
                     var location = results[0].get('location');
-                    var screen = <div style={{margin:'0px',padding:'0px',background:'-webkit-radial-gradient(#494949, black)',background:'-o-radial-gradient(#494949, black)',background:'-moz-radial-gradient(#494949, black)',background:'radial-gradient(#494949, black)',color:'white',width:'100%',height:'100vh !important',position:'absolute',top:'0px',left:'0px'}}><h1 style={{position:'absolute',top:'35%',left:'45%',textAlign:'center'}}><p>Done</p><p>{location}</p></h1></div>;
+                    var screen = <div style={{cursor:'none !important',margin:'0px',padding:'0px',background:'-webkit-radial-gradient(#494949, black)',background:'-o-radial-gradient(#494949, black)',background:'-moz-radial-gradient(#494949, black)',background:'radial-gradient(#494949, black)',color:'white',width:'100%',height:'100vh !important',position:'absolute',top:'0px',left:'0px'}}><h1 style={{position:'absolute',top:'35%',left:'45%',textAlign:'center'}}><p>Done</p><p>{location}</p></h1></div>;
                     self.setState({message:screen});
                 }
 
