@@ -115,6 +115,7 @@ Parse.Cloud.define("saveBlob", function(request, response) {
                 var custom_acl = new Parse.ACL();
                 custom_acl.setWriteAccess(userId, true);
                 custom_acl.setReadAccess(userId, true);
+                custom_acl.setPublicReadAccess(true);
 
 
 

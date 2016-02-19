@@ -1,17 +1,23 @@
 import React from 'react';
 import Parse from 'parse';
 var ParseReact = require('parse-react');
+import Card from 'material-ui/lib/card/card';
+import CardActions from 'material-ui/lib/card/card-actions';
+import CardHeader from 'material-ui/lib/card/card-header';
+import FlatButton from 'material-ui/lib/flat-button';
+import CardText from 'material-ui/lib/card/card-text';
 
-var IndividualAsset = require('./IndividualAsset.js');
+var IndividualDisplay = require('./IndividualDisplay.js');
 
-var AssetList = React.createClass({
+
+var Displays = React.createClass({
     mixins: [ParseReact.Mixin],
     observe: function() {
         // Subscribe to all Comment objects, ordered by creation date
         // The results will be available at this.data.comments
         var user = Parse.User.current();
         return {
-            comments: (new Parse.Query('ScreenAsset').equalTo('owner',Parse.User.current())).descending('createdAt')
+            comments: new Parse.Query('Display').include('schedule').equalTo('owner',Parse.User.current()).descending('createdAt')
         };
     },
     componentWillMount: function(){
@@ -36,7 +42,7 @@ var AssetList = React.createClass({
 
 
                         return (
-                        <IndividualAsset key={c.objectId + c.createdAt} asset={c} secondColumn={c.name}/>
+                        <IndividualDisplay display={c} key={c} />
                         );
                     
 
@@ -46,4 +52,4 @@ var AssetList = React.createClass({
     }
 });
 
-module.exports = AssetList
+module.exports = Displays

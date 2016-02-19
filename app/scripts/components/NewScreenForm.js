@@ -25,6 +25,7 @@ var NewScreenForm = React.createClass({
         var custom_acl = new Parse.ACL();
         custom_acl.setWriteAccess(Parse.User.current(), true);
         custom_acl.setReadAccess(Parse.User.current(), true);
+        custom_acl.setPublicReadAccess(true);
 
         var configs ={
             name: self.state.name,
@@ -43,8 +44,8 @@ var NewScreenForm = React.createClass({
         var self = this;
         return (
             <div id="newScreenForm" className='col-xs-12'>
-                    <TextField fullWidth={true} id='screenName' hintText="Main Lobby" floatingLabelText="Schedule Name" onChange={self.handleChange.bind(self, 'name')} value={self.state.name} />
-                    <TextField fullWidth={true} id='screenDescription' hintText="Next two weeks" floatingLabelText="Description or use" onChange={self.handleChange.bind(self, 'description')} value={self.state.description} />
+                    <TextField fullWidth={true} id='screenName' hintText="Main Rotation" floatingLabelText="Schedule Name" onChange={self.handleChange.bind(self, 'name')} value={self.state.name} />
+                    <TextField fullWidth={true} id='screenDescription' hintText="For most screens" floatingLabelText="Description or use" onChange={self.handleChange.bind(self, 'description')} value={self.state.description} />
                 <RaisedButton fullWidth={true} label="Create Schedule" secondary={true} onClick={self.createScreen} />
                 <div style={{marginBottom:"20px"}} />
             </div>

@@ -14,6 +14,7 @@ var Dropzone = React.createClass({
         var custom_acl = new Parse.ACL();
         custom_acl.setWriteAccess(Parse.User.current(), true);
         custom_acl.setReadAccess(Parse.User.current(), true);
+        custom_acl.setPublicReadAccess(true);
 
         for (var i = 0; i < files.length; i++) {
 

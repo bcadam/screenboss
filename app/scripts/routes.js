@@ -27,6 +27,7 @@ var Profile = require('./components/Profile.js');
 var CreditCard = require('./components/CreditCard.js');
 var SendFile = require('./components/SendFile.js');
 var Claim = require('./components/Claim.js');
+var Displays = require('./components/Displays.js');
 
 const historyOptions = {
   queryKey : false
@@ -44,7 +45,7 @@ const routes = (
     </Route>
 
     <Route path='/app' component={ App }>
-      <IndexRoute component={ Main } />
+      <IndexRoute component={ Profile } />
       <Route path='schedules' component={ ScheduleListPage } />
       <Route path='calendars' component={ CalendarsPage } />
       <Route path='assets' component={ AssetListPage } />
@@ -54,6 +55,7 @@ const routes = (
       <Route path='filerequest/:id' component={ FileRequest } />
       <Route path='sendfile' component={ SendFile } />
       <Route path='claim' component={ Claim } />
+      <Route path='displays' component={ Displays } />
 
       <Route path='login' component={ LoginForm } />
       <Route path='logout' component={ LogOut } />

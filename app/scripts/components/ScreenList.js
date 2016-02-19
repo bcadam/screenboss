@@ -11,7 +11,7 @@ var ScreenList = React.createClass({
         var owner = Parse.User.current();
 
         return {
-            comments: new Parse.Query('Screen').descending('createdAt')
+            comments: (new Parse.Query('Screen').equalTo('owner',Parse.User.current()))
         };
 
     },

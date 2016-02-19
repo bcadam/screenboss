@@ -40,9 +40,6 @@ var Claim = React.createClass({
           console.log(result);
           self.setState({snackMessage:result,open:true,code:'',location:''});
         });
-
-
-        
     },
     handleTouchTap: function() {
         this.setState({

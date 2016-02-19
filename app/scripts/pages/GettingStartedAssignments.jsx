@@ -148,6 +148,7 @@ var AddAssetDropDown = React.createClass({
         var custom_acl = new Parse.ACL();
         custom_acl.setWriteAccess(Parse.User.current(), true);
         custom_acl.setReadAccess(Parse.User.current(), true);
+        custom_acl.setPublicReadAccess(true);
 
         var configs ={
             screen : screen,

@@ -15,17 +15,21 @@ import LogOut from 'material-ui/lib/svg-icons/action/input';
 import Calendars from 'material-ui/lib/svg-icons/action/today';
 import SendFile from 'material-ui/lib/svg-icons/communication/email';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
+import DisplayIcon from 'material-ui/lib/svg-icons/av/airplay';
+
 
 var CreditCard = require('./CreditCard.js');
 
 var Profile = React.createClass({
     mixins: [ParseReact.Mixin],
     observe: function() {
+        console.log(Parse.User.current().id);
+        var userId = Parse.User.current().id;
         return {
             user: (new Parse.Query('_User').equalTo('objectId',Parse.User.current().id)).limit(1),
-            screenassets: new Parse.Query('ScreenAsset').descending('createdAt'),
-            screens: new Parse.Query('Screen').descending('createdAt'),
-            calendars: new Parse.Query('Calendar').descending('createdAt')
+            screenassets: (new Parse.Query('ScreenAsset').equalTo('owner',Parse.User.current())).descending('createdAt'),
+            screens: (new Parse.Query('Screen').equalTo('owner',Parse.User.current())).descending('createdAt'),
+            calendars: (new Parse.Query('Calendar').equalTo('owner',Parse.User.current())).descending('createdAt')
         };
     },
     render: function() {
@@ -47,7 +51,9 @@ var Profile = React.createClass({
                                 <MenuItem primaryText={"Schedules: " + self.data.screens.length} leftIcon={<Screen />} onTouchTap={function(){window.location.assign("/#/app/schedules");}} />
                                 <MenuItem primaryText={"Files: " + self.data.screenassets.length} leftIcon={<File />} onTouchTap={function(){window.location.assign("/#/app/assets");}} />
                                 <MenuItem primaryText={"Calendars: " + self.data.calendars.length} leftIcon={<Calendars />} onTouchTap={function(){window.location.assign('/#/app/calendars')}} />
+                                <MenuItem primaryText="Displays" leftIcon={<DisplayIcon />} onTouchTap={function(){window.location.assign('/#/app/displays/')}} />
                                 <MenuItem primaryText={"Send File Request"} leftIcon={<SendFile />} onTouchTap={function(){window.location.assign('/#/app/sendfile/')}} />
+
                                 <CreditCard />
                             </div>
                         </div>

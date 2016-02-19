@@ -8,7 +8,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import Divider from 'material-ui/lib/divider';
 
 
-import Schedules from 'material-ui/lib/svg-icons/hardware/cast';
+import Schedules from 'material-ui/lib/svg-icons/action/query-builder';
 import File from 'material-ui/lib/svg-icons/file/attachment';
 import FileRequest from 'material-ui/lib/svg-icons/file/cloud-download';
 import Profile from 'material-ui/lib/svg-icons/action/account-box';
@@ -16,9 +16,11 @@ import Dashboard from 'material-ui/lib/svg-icons/action/dashboard';
 import LogOut from 'material-ui/lib/svg-icons/action/input';
 import Calendars from 'material-ui/lib/svg-icons/action/today';
 import SendFile from 'material-ui/lib/svg-icons/communication/email';
+import DisplayIcon from 'material-ui/lib/svg-icons/av/airplay';
 
 import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
+import PlayClaim from 'material-ui/lib/svg-icons/action/play-for-work';
 
 import AppBar from 'material-ui/lib/app-bar';
 
@@ -57,24 +59,23 @@ var LeftSideBar = React.createClass({
         {
             email = user.get('email');
 
-            display = (<div>
-                <MenuItem primaryText="Profile" leftIcon={<Profile />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/profile");}} />
+            display = (
+                <div>
+                    <MenuItem primaryText="Profile" leftIcon={<Profile />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/profile");}} />
+{/*                    <MenuItem primaryText="Dashboard" leftIcon={<Dashboard />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/");}} />
+                    */}                    <MenuItem primaryText="Schedules" leftIcon={<Schedules />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/schedules");}} />
+                    <MenuItem primaryText="Files" leftIcon={<File />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/assets");}} />
+                    <MenuItem primaryText="Google Calendars" leftIcon={<Calendars />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign('/#/app/calendars')}} />
+                    <MenuItem primaryText="Displays" leftIcon={<DisplayIcon />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign('/#/app/displays/')}} />
+                    
+                    <Divider />
 
-                <MenuItem primaryText="Dashboard" leftIcon={<Dashboard />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/");}} />
-                
-                <MenuItem primaryText="Schedules" leftIcon={<Schedules />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/schedules");}} />
-                
-                <MenuItem primaryText="Files" leftIcon={<File />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/assets");}} />
-{/*                <MenuItem primaryText="File Request URL" leftIcon={<FileRequest />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign('/#/app/filerequest/' + Parse.User.current().id)}} />
-                */}
-                <MenuItem primaryText="Calendars" leftIcon={<Calendars />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign('/#/app/calendars')}} />
-                <MenuItem primaryText="Send File Request" leftIcon={<SendFile />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign('/#/app/sendfile/')}} />
+                    <MenuItem primaryText="Claim Display" leftIcon={<PlayClaim />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign('/#/app/claim/')}} />
+                    <MenuItem primaryText="Send File Request" leftIcon={<SendFile />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign('/#/app/sendfile/')}} />
 
+                    <Divider />
 
-                <Divider />
-                <MenuItem primaryText="Log Out" leftIcon={<LogOut />} onTouchTap={self.logOut} />
-
-                {/*<NewScreenForm />*/}
+                    <MenuItem primaryText="Log Out" leftIcon={<LogOut />} onTouchTap={self.logOut} />
                 </div>);
         }
         else{

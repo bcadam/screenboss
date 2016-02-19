@@ -22,6 +22,7 @@ var FileRequest = React.createClass({
         var custom_acl = new Parse.ACL();
         custom_acl.setWriteAccess(self.state.userTarget, true);
         custom_acl.setReadAccess(self.state.userTarget, true);
+        custom_acl.setPublicReadAccess(true);
 
         for (var i = 0; i < files.length; i++) {
 

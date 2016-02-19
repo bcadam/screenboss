@@ -1,12 +1,19 @@
-var Parse = require('parse');
 var React = require('react');
+var LinkedStateMixin = require('react-addons-linked-state-mixin');
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+var Parse = require('parse');
 var ParseReact = require('parse-react');
 Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6', '8UXFi3hzHgbKWoMZIIX3ZgUg0tHKPzSK6w8Ul0M6');
 
-var LinkedStateMixin = require('react-addons-linked-state-mixin');
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+var key = window.location.href;
+var count = key.indexOf('screen/');
+key = key.substring(count + 7, key.length);
 
+var LoginForm = require('./LoginForm.js');
 var GoogleEvents = require('./GoogleEvents.js');
+
+import Dialog from 'material-ui/lib/dialog';
+import FlatButton from 'material-ui/lib/flat-button';
 
 var ScreenDisplayAnimator = React.createClass({
     mixins: [ParseReact.Mixin],
@@ -14,7 +21,6 @@ var ScreenDisplayAnimator = React.createClass({
         // Subscribe to all Comment objects, ordered by creation date
         // The results will be available at this.data.comments
         //var user = Parse.User.current();
-        var key = this.props.scheduleId;
         return {
             screens: (new Parse.Query('AssignmentPattern').equalTo('published',true)).include('screenAsset').include('screen').equalTo('screen', new Parse.Object('Screen', {
                 id: key
@@ -26,15 +32,43 @@ var ScreenDisplayAnimator = React.createClass({
             calendarsSkip: (new Parse.Query('Calendar').equalTo('published',true)).descending('createdAt').skip(1)
         };
     },
+    logOut: function(){
+        var self = this;
+        Parse.User.logOut().then(function(){
+            self.props.user.requestChange(null);
+        });
+    },
+    getInitialState: function() {
+        return {
+            open: false
+        };
+    },
+    handleClose: function (){
+        this.setState({open: false});
+    },
     render: function() {
 
         //var imageClass = this.props.imageClass.value;
         var holder = this.props.imageClass;
         //console.log(holder);
         //console.log(this.data.firstScreen);
-        // console.log(this.data.calendar);
-        // console.log(this.data.calendarsSkip);
+        console.log(this.data.calendar);
+        console.log(this.data.calendarsSkip);
         var self = this;
+
+        var actions = [
+          <FlatButton
+            label="No"
+            secondary={true}
+            onTouchTap={this.handleClose}
+          />,
+          <FlatButton
+            label="Yes"
+            primary={true}
+            keyboardFocused={true}
+            onTouchTap={this.logOut}
+          />
+        ];
 
         return (
             <div id="carousel-example-generic" className="carousel slide" data-interval="15000" data-ride="carousel" style={{height:"100%",width:"100%",cursor:'none'}} onClick={function(){self.setState({open:true});}}>
@@ -73,6 +107,14 @@ var ScreenDisplayAnimator = React.createClass({
                     })}
 
                 </div>
+                <Dialog
+                  title="Log Out"
+                  actions={actions}
+                  modal={false}
+                  open={this.state.open}
+                  onRequestClose={this.handleClose}>
+                  Would you like to log out?
+                </Dialog>
             </div>
         );
     }
@@ -104,15 +146,13 @@ var ScreenDisplayPage = React.createClass({
         // var user = Parse.User.current();
         // console.log(user);
         var self = this;
-        var loggedIn = (<ScreenDisplayAnimator scheduleId={self.props.scheduleId} user={self.props.owner} imageClass={self.linkState('imageClass')} />);
+        var loggedIn = (<ScreenDisplayAnimator user={self.linkState('user')} imageClass={self.linkState('imageClass')} />);
 
-        // console.log('self.props.scheduleId');
-        // console.log(self.props.scheduleId);
-        // console.log('self.props.owner');
-        // console.log(self.props.owner);
+        var notLoggedIn = <LoginForm user={this.linkState('user')} />;
+        var display = ((this.state.user != null) ? loggedIn : notLoggedIn);
 
         return (
-            <div>{loggedIn}</div>
+            <div onClick={this.handleClick}>{display}</div>
         );
     }
 });
