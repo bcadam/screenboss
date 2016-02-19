@@ -311,6 +311,7 @@ Parse.Cloud.define("cancelSubscription", function(request, response) {
 Parse.Cloud.define("claimDisplay", function(request, response) {
 
     var query = new Parse.Query(Parse.User);
+    var location = request.params.location;
 
     query.get(request.params.user, {
         success: function(userAgain) {
@@ -320,7 +321,9 @@ Parse.Cloud.define("claimDisplay", function(request, response) {
             queryDisplay.get(request.params.code, {
                 success: function(display) {
 
-                    display.set('owner',userAgain).save();
+                    display.set('owner',userAgain);
+                    display.set('location',location);
+                    display.save();
 
                     response.success("Added the display to your account.");
                 },

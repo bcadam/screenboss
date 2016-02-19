@@ -16,7 +16,8 @@ var Claim = React.createClass({
             autoHideDuration: 4000,
             message: 'Please send me the file so it can be displayed.',
             snackMessage : '',
-            open: false
+            open: false,
+            location: ''
         };
     },
     handleChange: function(name, e) {
@@ -31,12 +32,13 @@ var Claim = React.createClass({
 
         Parse.Cloud.run('claimDisplay', { 
             code: self.state.code,
-            user: Parse.User.current().id
+            user: Parse.User.current().id,
+            location: self.state.location
         })
         .then(function(result) {
           // ratings should be 4.5
           console.log(result);
-          self.setState({snackMessage:result,open:true,code:''});
+          self.setState({snackMessage:result,open:true,code:'',location:''});
         });
 
 
@@ -74,8 +76,9 @@ var Claim = React.createClass({
             <div id="newScreenForm" className='col-xs-12'>
                 <div className="col-xs-12"><h2>Please enter the code you see on the screen.</h2></div>
                     <TextField fullWidth={true} id='code' hintText="1dsaf2" floatingLabelText="The code displayed on the screen" onChange={self.handleChange.bind(self, 'code')} value={self.state.code} /><br />
+                    <TextField fullWidth={true} id='location' hintText="Entrance display" floatingLabelText="Where is this screen located" onChange={self.handleChange.bind(self, 'location')} value={self.state.location} /><br />
                 <RaisedButton fullWidth={true} label="Claim" secondary={true} onClick={self.claimDisplay} />
-                <div style={{marginBottom:"20px;"}} />
+                <div style={{marginBottom:"20px"}} />
                 <Snackbar
                   open={this.state.open}
                   message={this.state.snackMessage}
