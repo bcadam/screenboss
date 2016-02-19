@@ -42,7 +42,7 @@ var Displays = React.createClass({
 
 
                         return (
-                        <IndividualDisplay display={c} key={c} />
+                        <IndividualDisplay display={c} key={c.id} />
                         );
                     
 

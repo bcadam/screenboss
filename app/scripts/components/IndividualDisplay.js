@@ -31,6 +31,7 @@ var IndividualDisplay = React.createClass({
             <AppBar
                 title={c.location + "... set to: " + name}
                 showMenuIconButton={false}
+                style={{marginBottom:'20px'}}
                 iconElementRight={
                   <div><IconMenu
                     iconButtonElement={
