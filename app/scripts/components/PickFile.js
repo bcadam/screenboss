@@ -44,6 +44,7 @@ var PickFile = React.createClass({
             }).then(function(result) {
               // ratings should be 4.5
               console.log(result);
+              window.location.reload();
             });
 
           },

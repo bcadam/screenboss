@@ -37,6 +37,7 @@ var NewCalendarForm = React.createClass({
 
         var newScreen = ParseReact.Mutation.Create('Calendar',configs).dispatch(function(){
             self.setState({name:'',description:''});
+            window.location.reload();
         });
         
     },
