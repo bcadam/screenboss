@@ -103,10 +103,24 @@ var Display = React.createClass({
                           success: function(myObject) {
                             // The object was refreshed successfully.
                             console.log('Checking for schedule change...');
+                            // console.log(myObject.get('schedule'));
+                            // if(!myObject.get('schedule').id)
+                            // {
+                            //     window.location.reload();
+                            // }
+
+
+
+                            if(myObject.get('owner') == null)
+                            {
+                                window.location.reload();
+                            }
+
                             if(myObject.get('schedule').id != scheduleId)
                             {
                                 window.location.reload();
                             }
+                            
                           },
                           error: function(myObject, error) {
                             // The object was not refreshed successfully.
