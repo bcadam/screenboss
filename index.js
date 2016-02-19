@@ -16,9 +16,6 @@ app.use('/js', express.static('dist/js'));
 app.use('/fonts', express.static('dist/fonts'));
 
 
-
-
-
 app.get('/*', function(req, res) {
     res.sendFile('app/index.html', {
         root: __dirname

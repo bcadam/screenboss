@@ -161,25 +161,25 @@ var CalEvent = React.createClass({
     //console.log(event);
 
     return(
-            <tr style={calendarCard}>
-                <td className="agenda-date" style={calendarCardDate}>
-                    <div className="dayofmonth">{startDate.format('DD')}</div>
-                    <div className="dayofweek">{startDate.format('dddd')}</div>
+            <div style={calendarCard} className="col-xs-12">
+                <div className="col-xs-3 agenda-date" style={calendarCardDate}>
+                    <div className="dayofmonth"><div style={{fontSize:'50px',marginTop:'10px'}}>{startDate.format('ddd')}</div></div><br/>
+                    <div className="dayofweek">{startDate.format('DD')}</div>
                     <div className="shortdate text-muted">{startDate.format('MMMM')}</div>
-                </td>
-                <td className="agenda-time" style={calendarCardTime}>
-                    {startDate.format('h:mm a')} - {endTimeShowing}
-                </td>
-                <td className="agenda-events">
-                    <div className="agenda-event">
+                </div>
+                <div className="col-xs-3" style={calendarCardTime}>
+                    <div style={{marginTop:'30px !important'}}>{startDate.format('h:mm a')}-<br/>{endTimeShowing}</div>
+                </div>
+                <div className="col-xs-6 agenda-events">
+                    <div className="agenda-event" style={{marginTop:'10px !important'}}>
                         {/*<i className="glyphicon glyphicon-repeat text-muted" title="Repeating event"></i> */}
-                        <h3 style={{margin:'0px'}}>{event.summary.replace('&amp;',' ')}</h3>
+                        <h2 style={{margin:'0px'}}>{event.summary.replace('&amp;',' ')}</h2>
                         <h5 style={{margin:'0px'}}>{/*event.htmlLink*/}</h5>
                         <div className="dayofmonth" style={{marginBottom:'10px'}}>{event.description}</div>
                         <div className="dayofmonth">{event.location}</div>
                     </div>
-                </td>
-            </tr>
+                </div>
+            </div>
     );
 }
 });
@@ -247,16 +247,9 @@ var GoogleEvents = React.createClass({displayName: 'CalEvents',
     return(
         <div className="agenda"  style={calendar}>
         <h2 style={{padding:'10px',marginBottom:'10px'}}>{self.props.title}</h2>
-        <div className="table-responsive">
-            <table className="table table-condensed table-bordered">
-                <thead>
-                    {/*<tr style={{border:'none !important'}}>
-                                            <th>Date</th>
-                                            <th>Time</th>
-                                            <th>Event</th>
-                                        </tr>*/}
-                </thead>
-                <tbody>
+        <div>
+            <div>
+                <div>
                     {self.state.events.map(function (event) {
           var today = new Date;
           today = today.toISOString();
@@ -268,8 +261,8 @@ var GoogleEvents = React.createClass({displayName: 'CalEvents',
             );
           }
         })}
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
     </div>
 
