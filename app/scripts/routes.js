@@ -19,12 +19,14 @@ import GettingStartedAssignments from './pages/GettingStartedAssignments.jsx';
 var LoginForm = require('./components/LoginForm.js');
 var LogOut = require('./components/LogOut.js');
 var Screen = require('./components/Screen.js');
+var Display = require('./components/Display.js');
 
 var FileRequest = require('./components/FileRequest.js');
 var GoogleEvents = require('./components/GoogleEvents.js');
 var Profile = require('./components/Profile.js');
 var CreditCard = require('./components/CreditCard.js');
 var SendFile = require('./components/SendFile.js');
+var Claim = require('./components/Claim.js');
 
 const historyOptions = {
   queryKey : false
@@ -32,9 +34,15 @@ const historyOptions = {
 
 const routes = (
   <Router history={createHistory(historyOptions)}>
-    <Route path='/screen/' component={ BlankApp }>
+    
+    <Route path='screen' component={ BlankApp }>
       <Route path=':id' component={ Screen } />
     </Route>
+
+    <Route path='display' component={ BlankApp }>
+      <Route path=':id' component={ Display } />
+    </Route>
+
     <Route path='/app' component={ App }>
       <IndexRoute component={ Main } />
       <Route path='schedules' component={ ScheduleListPage } />
@@ -45,6 +53,7 @@ const routes = (
       <Route path='creditcard' component={ CreditCard } />
       <Route path='filerequest/:id' component={ FileRequest } />
       <Route path='sendfile' component={ SendFile } />
+      <Route path='claim' component={ Claim } />
 
       <Route path='login' component={ LoginForm } />
       <Route path='logout' component={ LogOut } />
@@ -55,7 +64,9 @@ const routes = (
       <Route path='gettingstartedassignments' component={ GettingStartedAssignments } />
 
       <Route path='*' component={NotFound}/>
+
     </Route>
+
     <Route path='/' component={ BlankApp }>
       <IndexRoute component={ LandingPage }/>
       <Route path='*' component={NotFound}/>

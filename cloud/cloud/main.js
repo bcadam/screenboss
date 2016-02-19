@@ -308,6 +308,35 @@ Parse.Cloud.define("cancelSubscription", function(request, response) {
     });
 });
 
+Parse.Cloud.define("claimDisplay", function(request, response) {
+
+    var query = new Parse.Query(Parse.User);
+
+    query.get(request.params.user, {
+        success: function(userAgain) {
+
+            var queryDisplay = new Parse.Query("Display");
+
+            queryDisplay.get(request.params.code, {
+                success: function(display) {
+
+                    display.set('owner',userAgain).save();
+
+                    response.success("Added the display to your account.");
+                },
+                error: function(error){
+                    response.success("Could not find that code! Please double check it.");
+                }
+            });
+
+
+
+        },
+        error: function(code,coder){
+            response.error(code);
+        }
+    });
+});
 
 Parse.Cloud.define("renewSubscription", function(request, response) {
 
@@ -340,6 +369,54 @@ Parse.Cloud.define("renewSubscription", function(request, response) {
         }
     });
 });
+
+Parse.Cloud.afterSave("Display", function(request, response) {
+    
+    var display = request.object;
+
+    if (!display.get("key")) {
+    response.error('A Display must have a key.');
+      } else {
+        var Display = Parse.Object.extend("Display");
+        var query = new Parse.Query(Display);
+
+        query.descending("createdAt");
+        query.equalTo("key", display.get("key"));
+        
+        query.find({
+          success: function(objects) {
+            if (objects) {
+
+                if(objects.length>1)
+                {
+                    objects[0].destroy({
+                      success: function(myObject) {
+                        // The object was deleted from the Parse Cloud.
+                      },
+                      error: function(myObject, error) {
+                        // The delete failed.
+                        // error is a Parse.Error with an error code and message.
+                      }
+                    });
+                }
+
+
+
+              response.error("A Display with this key already exists.");
+            } else {
+              response.success();
+            }
+          },
+          error: function(error) {
+            response.error("Could not validate uniqueness for this Display object.");
+          }
+        });
+      }
+    
+});
+
+
+
 
 
 // Parse.Cloud.beforeDelete("ScreenAsset", function(request, response) {
