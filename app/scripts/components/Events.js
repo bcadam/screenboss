@@ -116,7 +116,7 @@ var Events = React.createClass({
                 }
 
                 var eventSingle = (
-                    <div className='col-xs-4' key={self.state.events[i].id}>
+                    <div className='col-xs-12' key={self.state.events[i].id}>
                         <div className='col-xs-6'>
                             <p>{eventMonth} {eventDay}</p>
                         </div>
@@ -144,7 +144,7 @@ var Events = React.createClass({
 
         return (
             
-            <div className="container">
+            <div className="container row">
                    
                 {livewhale}
                            

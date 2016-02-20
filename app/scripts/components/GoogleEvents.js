@@ -138,45 +138,31 @@ var CalEvent = React.createClass({
     var event = this.props.event;
     var eventDateTime = this.props.event.start.dateTime;
     eventDateTime = eventDateTime.split("T");
-    // var eventTime = this._formatTime(eventDateTime[1]);
-    // var eventDate = this._formatDate(eventDateTime[0]);
 
     var startDate = new Date(event.start.dateTime);
     var endDate = new Date(event.end.dateTime);
     var startDate = moment(startDate);
     var endDate = moment(endDate);
 
-    // console.log('event.start.dateTime');
-    // console.log(event.description);
-    // console.log(event.summary);
-
-    // console.log('event.end.dateTime');
-    // console.log(event.end.dateTime);
-
     var endTimeShowing = endDate.format('h:mm a');
     if(startDate.format('YYYY MM') != endDate.format('YYYY MM')){
         console.log('not equal');
         endTimeShowing = endDate.format('Do MMM h:mm a');
     }
-    //console.log(event);
 
     return(
-            <div style={calendarCard} className="col-xs-12">
-                <div className="col-xs-3 agenda-date" style={calendarCardDate}>
-                    <div className="dayofmonth"><div style={{fontSize:'50px',marginTop:'10px'}}>{startDate.format('ddd')}</div></div><br/>
-                    <div className="dayofweek">{startDate.format('DD')}</div>
-                    <div className="shortdate text-muted">{startDate.format('MMMM')}</div>
+            <div className="col-xs-12 col-sm-6 col-md-4 panel" style={{padding:'10px',height:'300px'}}>
+                <div className="col-xs-4" style={{height:'100%',backgroundColor:'#139BA6',color:'white'}}>
+                    <div><h1>{startDate.format('ddd')}</h1></div>
+                    <div><h2>{startDate.format('Do')}</h2></div>
+                    <div><h2>{startDate.format('MMM')}</h2></div>
                 </div>
-                <div className="col-xs-3" style={calendarCardTime}>
-                    <div style={{marginTop:'30px !important'}}>{startDate.format('h:mm a')}-<br/>{endTimeShowing}</div>
-                </div>
-                <div className="col-xs-6 agenda-events">
-                    <div className="agenda-event" style={{marginTop:'10px !important'}}>
-                        {/*<i className="glyphicon glyphicon-repeat text-muted" title="Repeating event"></i> */}
-                        <h2 style={{margin:'0px'}}>{event.summary.replace('&amp;',' ')}</h2>
-                        <h5 style={{margin:'0px'}}>{/*event.htmlLink*/}</h5>
-                        <div className="dayofmonth" style={{marginBottom:'10px'}}>{event.description}</div>
-                        <div className="dayofmonth">{event.location}</div>
+                <div className="col-xs-8">
+                    <div>
+                        <div><h3>{event.summary.replace('&amp;',' ')}</h3></div>
+                        <div><p>{event.description}</p></div>
+                        <div><h4>{startDate.format('h:mm a')} - {endTimeShowing}</h4></div>
+                        <div><p style={{color:'#666666'}}>{event.location}</p></div>
                     </div>
                 </div>
             </div>
@@ -245,7 +231,7 @@ var GoogleEvents = React.createClass({displayName: 'CalEvents',
 
 
     return(
-        <div className="agenda"  style={calendar}>
+        <div className='col-xs-12'>
         <h2 style={{padding:'10px',marginBottom:'10px'}}>{self.props.title}</h2>
         <div>
             <div>

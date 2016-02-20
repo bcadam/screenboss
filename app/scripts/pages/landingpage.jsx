@@ -389,7 +389,7 @@ olark.identify('3932-129-10-4975');/*]]>*/
                 <ul className="plan featured" style={pricingPlan}>
                     <li className="plan-name" style={planName}>Growth</li>
                     <li className="plan-price" style={planPriceB}>$100<div style={{fontSize:'12pt',display:'inline'}}>/month</div></li>
-                    <li style={planLine}>3 Schedule</li>
+                    <li style={planLine}>3 Schedules</li>
                     <li style={planLine}>100 Files</li>
                     <li style={planLine}>Unlimited Screens</li>
                     <li style={planLine}>Unlimited Team Uploads</li>
@@ -401,7 +401,7 @@ olark.identify('3932-129-10-4975');/*]]>*/
                 <ul className="plan featured" style={pricingPlan}>
                     <li className="plan-name" style={planName}>Scale</li>
                     <li className="plan-price" style={planPriceC}>$300<div style={{fontSize:'12pt',display:'inline'}}>/month</div></li>
-                    <li style={planLine}>Unlimited Schedule</li>
+                    <li style={planLine}>Unlimited Schedules</li>
                     <li style={planLine}>Unlimited Files</li>
                     <li style={planLine}>Unlimited Screens</li>
                     <li style={planLine}>Unlimited Team Uploads</li>

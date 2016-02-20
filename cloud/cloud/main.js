@@ -152,13 +152,18 @@ Parse.Cloud.define("saveBlob", function(request, response) {
 
 Parse.Cloud.define("sendFileLink", function(request, response) {
 
+    var senderEmail = request.params.senderEmail;
+    var id = request.params.id;
+    var message = request.params.message;
+    var name = request.params.name;
+    
     mandrill.initialize("wFwXb8b6VD-JiFp2rOTL6Q");
     var name = request.params.name;
     if (!name) { name = "ScreenBoss" }
     mandrill.sendEmail({
         message: {
-            text: request.params.senderEmail + " has sent you a file Request - http://www.screenboss.co/#/app/filerequest/" + request.params.id + " " + request.params.message,
-            html: "<p>" + request.params.message + " - <br />" + request.params.name + "</p><p>You've been sent you a file Request - <a href='http://www.screenboss.co/#/app/filerequest/" + request.params.id + "'><b>Submit file here</b></a></p>",
+            text: senderEmail + " has sent you a file Request - http://www.screenboss.co/#/app/filerequest/" + id + " " + message,
+            html: "<p>" + message + " - <br />" + name + "</p><p>You've been sent you a file Request - <a href='http://www.screenboss.co/#/app/filerequest/" + id + "'><b>Submit file here</b></a></p>",
             subject: "File Request from " + name,
             from_email: request.params.senderEmail,
             from_name: request.params.senderEmail,
@@ -180,6 +185,22 @@ Parse.Cloud.define("sendFileLink", function(request, response) {
 });
 
 Parse.Cloud.define("alertUser", function(request, response) {
+    // Parse.Cloud.run('alertUser', {
+    //           id: userId,
+    //           title: self.state.title,
+    //           description: self.state.description,
+    //           location: self.state.location,
+    //           date: self.state.date,
+    //           time: self.state.time
+    //         })
+
+    var emailInfo=[request.params.title,request.params.description,request.params.location,request.params.date,request.params.time];
+
+    for (var i = 0; i < emailInfo.length; i++) {
+        if(!emailInfo[i]){
+            emailInfo = '';
+        }
+    }
 
     var query = new Parse.Query(Parse.User);
 
@@ -192,7 +213,7 @@ Parse.Cloud.define("alertUser", function(request, response) {
             mandrill.sendEmail({
                 message: {
                     text: "A file has been sent to your ScreenBoss account. http://www.screenboss.co/#/app/assets",
-                    html: "<p>A file has been sent to your ScreenBoss account. <a href='http://www.screenboss.co/#/app/assets'>Check it out here</a></p>",
+                    html: "<p><b><a href='http://www.screenboss.co/#/app/assets'>A file was submitted to your account.</a></b></p><p>" + request.params.title + "</p><p>" + request.params.description + "</p><p>" + request.params.location + "</p><p>" + request.params.date + "</p><p>" + request.params.time + "</p>",
                     subject: "File submitted to your ScreenBoss",
                     from_email: "info@screenboss.co",
                     from_name: "ScreenBoss",

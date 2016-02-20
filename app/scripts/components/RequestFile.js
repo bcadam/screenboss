@@ -1,9 +1,7 @@
 import React from 'react';
 import Parse from 'parse';
 var ParseReact = require('parse-react');
-
 import TextField from 'material-ui/lib/text-field';
-
 
 var PickFile = React.createClass({
     componentWillMount: function() {
@@ -11,7 +9,6 @@ var PickFile = React.createClass({
     },
     handleChange: function(name, e) {
         var self = this;
-
         var change = {};
         change[name] = e.target.value;
         this.setState(change);
@@ -32,8 +29,6 @@ var PickFile = React.createClass({
     filer: function(){
         var self = this;
         var userId = self.props.userId;
-
-        //console.log(!self.props.userId);
 
         if (! self.props.userId)
         {
@@ -60,13 +55,18 @@ var PickFile = React.createClass({
               console.log(response);
             });
 
-            // Parse.Cloud.run('alertUser', {
-            //     id: userId
-            // }).then(function(result) {
-            //   // ratings should be 4.5
-            //   console.log(result);
-            //   setTimeout(function(){ window.location.reload(); }, 750);
-            // });
+            Parse.Cloud.run('alertUser', {
+              id: userId,
+              title: self.state.title,
+              description: self.state.description,
+              location: self.state.location,
+              date: self.state.date,
+              time: self.state.time
+            }).then(function(result) {
+              // ratings should be 4.5
+              console.log(result);
+              setTimeout(function(){ window.location.reload(); }, 750);
+            });
 
           },
           function(error){
@@ -80,12 +80,31 @@ var PickFile = React.createClass({
     render: function() {
         // Render the text of each comment as a list item
         var self = this;
-
         //console.log(self.props.userId);
         return (
           <div>
-            <div className='col-xs-12'>
-              <div id='fileButton' className="btn btn-success col-xs-12" onClick={self.filer} style={{marginBottom:'20px'}}>Upload new file</div>
+            <div className='col-xs-12 col-md-6'>
+              <div>
+                <TextField fullWidth={true} id='eventTitle' floatingLabelText="Event or File Title" onChange={self.handleChange.bind(self, 'title')} value={self.state.title} />
+              </div>
+              <div>
+                <TextField fullWidth={true} id='description' floatingLabelText="Description" onChange={self.handleChange.bind(self, 'description')} value={self.state.description} />
+              </div>
+              <div>
+                <TextField fullWidth={true} id='location' floatingLabelText="Location" onChange={self.handleChange.bind(self, 'location')} value={self.state.location} />
+              </div>
+              <div>
+                <TextField fullWidth={true} id='date' floatingLabelText="Date" onChange={self.handleChange.bind(self, 'date')} value={self.state.date} />
+              </div>
+              <div>
+                <TextField fullWidth={true} id='time' floatingLabelText="Start and stop time" onChange={self.handleChange.bind(self, 'time')} value={self.state.time} />
+              </div>
+            </div>
+            <div className='col-xs-12 col-md-6'>
+              <div id='fileButton' className="btn btn-success col-xs-12 disabled" onClick={self.filer} style={{marginBottom:'20px'}}>Upload new file</div>
+            </div>
+            <div className='col-xs-12 col-md-6'>
+              <div><h3>Please include any information relevant to your file.</h3></div>
             </div>
           </div>
             );

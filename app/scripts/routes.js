@@ -21,7 +21,7 @@ var LogOut = require('./components/LogOut.js');
 var Screen = require('./components/Screen.js');
 var Display = require('./components/Display.js');
 
-var FileRequest = require('./components/FileRequest.js');
+var RequestFile = require('./components/RequestFile.js');
 var GoogleEvents = require('./components/GoogleEvents.js');
 var Profile = require('./components/Profile.js');
 var CreditCard = require('./components/CreditCard.js');
@@ -52,7 +52,7 @@ const routes = (
       <Route path='events' component={ GoogleEvents } />
       <Route path='profile' component={ Profile } />
       <Route path='creditcard' component={ CreditCard } />
-      <Route path='filerequest/:id' component={ FileRequest } />
+      <Route path='filerequest/:id' component={ RequestFile } />
       <Route path='sendfile' component={ SendFile } />
       <Route path='claim' component={ Claim } />
       <Route path='displays' component={ Displays } />
