@@ -1,6 +1,7 @@
 var React = require('react');
 var Parse = require('parse');
 var ParseReact = require('parse-react');
+
 var AddAssetDropDown = require('./AddAssetDropDown');
 var AssignmentWithToggle = require('./AssignmentWithToggle');
 
@@ -8,11 +9,6 @@ import Dialog from 'material-ui/lib/dialog';
 
 import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
-
-import Toolbar from 'material-ui/lib/toolbar/toolbar';
-import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
-import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
-import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 
 import Card from 'material-ui/lib/card/card';
 import CardActions from 'material-ui/lib/card/card-actions';

@@ -1,7 +1,6 @@
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
 
-
 import React from 'react';
 var Parse = require('parse');
 var ParseReact = require('parse-react');

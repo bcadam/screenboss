@@ -2,7 +2,6 @@ var React = require('react');
 var Parse = require('parse');
 var ParseReact = require('parse-react');
 
-import RaisedButton from 'material-ui/lib/raised-button';
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 

@@ -1,9 +1,6 @@
 import React from 'react';
 var SiteDemoSimple = require('../components/SiteDemoSimple.js');
 
-
-
-
 var OffCanvas = React.createClass({
     render: function() {
         // Render the text of each comment as a list item

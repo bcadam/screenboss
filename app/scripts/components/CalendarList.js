@@ -3,7 +3,6 @@ var Parse = require('parse');
 var ParseReact = require('parse-react');
 
 var CalendarDisplay = require('./CalendarDisplay.js');
-var NewScreenForm = require('./NewScreenForm.js');
 
 var ScreenList = React.createClass({
     mixins: [ParseReact.Mixin],

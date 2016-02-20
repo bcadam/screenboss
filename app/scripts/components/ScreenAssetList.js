@@ -4,7 +4,6 @@ var ParseReact = require('parse-react');
 
 var AssetWithToggle = require('./AssetWithToggle.js');
 
-
 var ScreenAssetList = React.createClass({
     mixins: [ParseReact.Mixin],
     observe: function() {

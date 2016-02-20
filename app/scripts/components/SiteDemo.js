@@ -1,7 +1,6 @@
 var React = require('react');
 import RaisedButton from 'material-ui/lib/raised-button';
 
-
 var SiteDemo = React.createClass({
     getInitialState: function(){
         return{
@@ -11,24 +10,6 @@ var SiteDemo = React.createClass({
     },
     handleChange: function(){
         var self = this;
-        // Parse.User.current().set('tutorialOpen', !self.state.tutorialOpen).save().then(function(){
-
-        //     var otherWording;
-        //     if (self.state.wording == 'Show tutorial')
-        //     {
-        //         otherWording = 'Hide tutorial';
-        //     }
-        //     else {
-        //         otherWording = 'Show tutorial'
-        //     }
-
-        //     self.setState({
-        //         tutorialOpen : ! self.state.tutorialOpen,
-        //         wording : otherWording
-        //     });
-        // });
-
-
             var otherWording;
             if (self.state.wording == 'Show tutorial')
             {
@@ -42,13 +23,10 @@ var SiteDemo = React.createClass({
                 tutorialOpen : ! self.state.tutorialOpen,
                 wording : otherWording
             });
-
     },
     render: function() {
         var self = this;
         var showClass;
-
-        //console.log(self.state.tutorialOpen);
 
         if (self.state.tutorialOpen == true){
             showClass = "showingClass";

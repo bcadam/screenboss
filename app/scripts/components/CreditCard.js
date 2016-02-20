@@ -6,8 +6,6 @@ var StripeCheckout = require('react-stripe-checkout');
 
 import RaisedButton from 'material-ui/lib/raised-button';
 import FlatButton from 'material-ui/lib/flat-button';
-import FontIcon from 'material-ui/lib/font-icon';
-import LockOpen from 'material-ui/lib/svg-icons/action/lock-open';
 import ActionAndroid from 'material-ui/lib/svg-icons/action/android';
 import Dialog from 'material-ui/lib/dialog';
 
@@ -131,8 +129,7 @@ var CreditCard = React.createClass({
                   label="Subscribe at $50/month"
                   linkButton={true}
                   secondary={true}
-                  style={styles.button}
-                    icon={<ActionAndroid />}
+                  icon={<ActionAndroid />}
                 />
             </StripeCheckout>);
         }

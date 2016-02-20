@@ -1,6 +1,7 @@
 import React from 'react';
 import Parse from 'parse';
 var ParseReact = require('parse-react');
+
 import TextField from 'material-ui/lib/text-field';
 
 var PickFile = React.createClass({

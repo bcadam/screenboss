@@ -11,10 +11,10 @@ import ScheduleListPage from './pages/ScheduleListPage.js';
 import AssetListPage from './pages/AssetListPage.js';
 import CalendarsPage from './pages/CalendarsPage.js';
 
-import GettingStarted from './pages/GettingStarted.jsx';
-import GettingStartedAssets from './pages/GettingStartedAssets.jsx';
-import GettingStartedScreens from './pages/GettingStartedScreens.jsx';
-import GettingStartedAssignments from './pages/GettingStartedAssignments.jsx';
+// import GettingStarted from './pages/GettingStarted.jsx';
+// import GettingStartedAssets from './pages/GettingStartedAssets.jsx';
+// import GettingStartedScreens from './pages/GettingStartedScreens.jsx';
+// import GettingStartedAssignments from './pages/GettingStartedAssignments.jsx';
 
 var LoginForm = require('./components/LoginForm.js');
 var LogOut = require('./components/LogOut.js');
@@ -60,10 +60,10 @@ const routes = (
       <Route path='login' component={ LoginForm } />
       <Route path='logout' component={ LogOut } />
 
-      <Route path='gettingstarted' component={ GettingStarted } />
-      <Route path='gettingstartedassets' component={ GettingStartedAssets } />
-      <Route path='gettingstartedscreens' component={ GettingStartedScreens } />
-      <Route path='gettingstartedassignments' component={ GettingStartedAssignments } />
+      {/*<Route path='gettingstarted' component={ GettingStarted } />
+            <Route path='gettingstartedassets' component={ GettingStartedAssets } />
+            <Route path='gettingstartedscreens' component={ GettingStartedScreens } />
+            <Route path='gettingstartedassignments' component={ GettingStartedAssignments } />*/}
 
       <Route path='*' component={NotFound}/>
 

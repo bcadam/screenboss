@@ -1,14 +1,8 @@
 import React from 'react';
 import Parse from 'parse';
 var ParseReact = require('parse-react');
-import Card from 'material-ui/lib/card/card';
-import CardActions from 'material-ui/lib/card/card-actions';
-import CardHeader from 'material-ui/lib/card/card-header';
-import FlatButton from 'material-ui/lib/flat-button';
-import CardText from 'material-ui/lib/card/card-text';
 
 var IndividualDisplay = require('./IndividualDisplay.js');
-
 
 var Displays = React.createClass({
     mixins: [ParseReact.Mixin],

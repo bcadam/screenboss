@@ -31,8 +31,6 @@ import Link from 'react-router';
 import LeftNav from 'material-ui/lib/left-nav';
 
 
-
-
 var Header = React.createClass({
     render: function() {
         // Render the text of each comment as a list item
