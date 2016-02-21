@@ -15,6 +15,7 @@ var Display = React.createClass({
     componentDidMount() {
         var self = this;
 
+        var timeBetweenChecks = 1000;
 
         var Display = Parse.Object.extend("Display");
         var query = new Parse.Query(Display);
@@ -31,8 +32,12 @@ var Display = React.createClass({
             self.setState({results:results});
 
             if(results.length == 0){
+
+                var number = Math.floor((Math.random() * 10000000));
+
                 ParseReact.Mutation.Create('Display', {
-                  key: key
+                  key: key,
+                  randomNumber : number
                 }).dispatch().then(function(object){
                     console.log(object);
                     window.location.reload();
@@ -63,7 +68,7 @@ var Display = React.createClass({
                                 window.location.reload();
                           }
                         });
-                    }, 1000);
+                    }, timeBetweenChecks);
 
                 }
                 else if(results[0].get('owner') && !results[0].get('schedule'))
@@ -75,6 +80,11 @@ var Display = React.createClass({
                           success: function(myObject) {
                             // The object was refreshed successfully.
                             console.log('Checking for schedule assignment...');
+                            if(!myObject.get('owner'))
+                            {
+                                window.location.reload();
+                            }
+
                             if(myObject.get('schedule'))
                             {
                                 window.location.reload();
@@ -87,7 +97,7 @@ var Display = React.createClass({
                                 window.location.reload();
                           }
                         });
-                    }, 1000);
+                    }, timeBetweenChecks);
 
                 }
                 else if(results[0].get('owner') && results[0].get('schedule'))
@@ -114,6 +124,9 @@ var Display = React.createClass({
                                 window.location.reload();
                             }
 
+                            if(!myObject.get('schedule')){
+                                window.location.reload();
+                            }
                             if(myObject.get('schedule').id != scheduleId)
                             {
                                 window.location.reload();
@@ -126,7 +139,7 @@ var Display = React.createClass({
                                 window.location.reload();
                           }
                         });
-                    }, 1000);
+                    }, timeBetweenChecks);
 
                 }
 
@@ -174,7 +187,7 @@ var Display = React.createClass({
 
                 if(!self.state.results[0].get('owner'))
                 {
-                    var id = self.state.results[0].id;
+                    var id = self.state.results[0].get('randomNumber');
                     screen = <div style={{cursor:'none !important',margin:'0px',padding:'0px',background:'-webkit-radial-gradient(#494949, black)',background:'-o-radial-gradient(#494949, black)',background:'-moz-radial-gradient(#494949, black)',background:'radial-gradient(#494949, black)',color:'white',width:'100%',height:'100vh !important',position:'absolute',top:'0px',left:'0px'}}><h1 style={{position:'absolute',top:'30%',left:'28%'}}>Claim this screen with code: {id}</h1></div>;
                 }
                 else if(self.state.results[0].get('owner') && !self.state.results[0].get('schedule'))
@@ -185,7 +198,7 @@ var Display = React.createClass({
                 else if(self.state.results[0].get('owner') && self.state.results[0].get('schedule'))
                 {
                     var scheduleId = self.state.results[0].get('schedule').id;
-                    var owner = self.state.results[0].get('owner').id;
+                    var owner = self.state.results[0].get('owner');
                     screen = <Screen scheduleId={scheduleId} owner={owner} />;
                 }
 

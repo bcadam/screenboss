@@ -2,110 +2,11 @@ window.React    = require("react");
 var request  = require("superagent");
 var moment = require('moment');
 
-var calendar = {
-    backgroundColor: '#fff',
-    WebkitBorderRadius: '50px',
-    MozBorderRadius: '50px',
-    borderRadius: '50px',
-    //color: '#18bdca',
-    width: '90%',
-    //height: '800px',
-    left: '0',
-    margin: 'auto',
-    padding: '20px 60px',
-    position: 'relative',
-    textAlign: 'center',
-    top: '50px',
-    WebkitTransition: 'all .5s ease-in-out',
-    MozTransition: 'all .5s ease-in-out',
-    OTransition: 'all .5s ease-in-out',
-    transition: 'all .5s ease-in-out'
-};
-
-var calendarLogo = {
-    marginTop: '-10px'
-};
-
-var calendarH1 = {
-    paddingBottom: '30px'
-};
-
-var calendarCard = {
-    backgroundColor: '#fff',
-    border: '1px solid #18bdca',
-    //color: '#18bdca',
-    height: '180px',
-    overflow: 'hidden',
-    marginBottom: '30px',
-    textAlign: 'left'
-};
-
-var calendarCardToday = {
-    border: '1px solid orange'
-};
-
-var calendarCardTodayDatetime = {
-    backgroundColor: 'orange'
-};
-
-var calendarCardDatetime = {
-    backgroundColor: '#18bdca',
-    color: '#fff',
-    fontFamily: 'Arial',
-    height: '180px',
-    paddingTop: '0',
-    paddingLeft: '20px'
-};
-
-var calendarCardDate = {
-    fontSize: '34pt'
-};
-
-var calendarCardDateMonth = {
-    verticalAlign: 'super'
-};
-
-var calendarCardDateSlash = {
-    fontSize: '48pt'
-};
-
-var calendarCardDateDay = {
-    verticalAlign: 'sub'
-};
-
-var calendarCardWeekday = {
-    fontSize: '24pt',
-    marginTop: '-10pt'
-};
-
-var calendarCardTime = {
-    //fontSize: '14pt',
-    fontSize: '25pt',
-    fontStyle: 'italic',
-    marginTop: '0'
-};
-
-var calendarCardTitle = {
-    color: '#18bdca',
-    fontSize: '16pt',
-    fontWeight: '700',
-    lineHeight: '1.2em',
-    padding: '10px 10px 10px 0'
-};
-
-var calendarCardLocation = {
-    color: '#a6a6a6',
-    fontStyle: 'italic',
-    fontSize: '12pt'
-};
-
-
-
+import Dialog from 'material-ui/lib/dialog';
+import FlatButton from 'material-ui/lib/flat-button';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 var CalEvent = React.createClass({
-
-  displayName: 'CalEvent',
-
   _formatTime: function(time) {
     time = time.substring(0, time.length - 6);
     var parts = time.split(':');
@@ -121,7 +22,6 @@ var CalEvent = React.createClass({
       return time += 'AM';
     }
   },
-
   _formatDate: function(date) {
     date = date.split("-");
     var eventYear = date.shift();
@@ -129,12 +29,20 @@ var CalEvent = React.createClass({
     date = date.join("/");
     return date;
   },
+  getInitialState() {
+      return {
+          open:false  
+      };
+  },
+  handleOpen(){
+    this.setState({open: true});
+  },
 
-  componentDidMount:function() {
-    
-
+  handleClose(){
+    this.setState({open: false});
   },
   render: function () {
+    var self = this;
     var event = this.props.event;
     var eventDateTime = this.props.event.start.dateTime;
     eventDateTime = eventDateTime.split("T");
@@ -150,8 +58,16 @@ var CalEvent = React.createClass({
         endTimeShowing = endDate.format('Do MMM h:mm a');
     }
 
+    var actions = [
+      <FlatButton
+        label="Close"
+        secondary={true}
+        onTouchTap={this.handleClose}
+      />
+    ];
+
     return(
-            <div className="col-xs-12 col-sm-6 col-md-4 panel" style={{padding:'10px',height:'300px'}}>
+            <div className="col-xs-12 col-sm-6 col-md-4 panel" style={{padding:'10px',height:'300px'}} onClick={self.handleOpen}>
                 <div className="col-xs-4" style={{height:'100%',backgroundColor:'#139BA6',color:'white'}}>
                     <div><h1>{startDate.format('ddd')}</h1></div>
                     <div><h2>{startDate.format('Do')}</h2></div>
@@ -160,11 +76,22 @@ var CalEvent = React.createClass({
                 <div className="col-xs-8">
                     <div>
                         <div><h3>{event.summary.replace('&amp;',' ')}</h3></div>
-                        <div><p>{event.description}</p></div>
                         <div><h4>{startDate.format('h:mm a')} - {endTimeShowing}</h4></div>
                         <div><p style={{color:'#666666'}}>{event.location}</p></div>
                     </div>
                 </div>
+                <Dialog
+                  title={event.summary.replace('&amp;',' ')}
+                  actions={actions}
+                  modal={false}
+                  open={this.state.open}
+                  onRequestClose={this.handleClose}
+                >
+                <div><p>{event.description}</p></div>
+                <div><h4>{startDate.format('h:mm a')} - {endTimeShowing}</h4></div>
+                <div><p style={{color:'#666666'}}>{event.location}</p></div>
+
+                </Dialog>
             </div>
     );
 }
@@ -190,19 +117,12 @@ var GoogleEvents = React.createClass({displayName: 'CalEvents',
   },
   componentWillMount: function() {
     var self = this;
-
     var tempID = encodeURI(self.props.calendarID);
-
     var targetURL = 'https://www.googleapis.com/calendar/v3/calendars/' + tempID + '/events?fields=items(kind,etag,id,status,htmlLink,created,updated,summary,description,location,colorId,creator,organizer,start,end,endTimeUnspecified,recurrence,recurringEventId,originalStartTime,transparency,visibility,attendees,hangoutLink,gadget,anyoneCanAddSelf)&key=' + self.props.apiKey;
     
-    //console.log(targetURL);
-
     $.get( targetURL, function( data ) {
-
         var holder = [];
-        var currentDate = new Date();
-        // console.log(data);
-        
+        var currentDate = new Date();        
         data['items'].map(function(event){
             var eventDate = new Date(event.end.dateTime);
             if(eventDate > currentDate){
@@ -218,18 +138,11 @@ var GoogleEvents = React.createClass({displayName: 'CalEvents',
         });
         
         self.setState({events:holder});
-        //console.log(data)
     });
 
   },
-
   render: function() {
     var self = this;
-    //console.log('self.state.events');
-    // console.log(self.state.events[0]);
-    // console.log('done');
-
-
     return(
         <div className='col-xs-12'>
         <h2 style={{padding:'10px',marginBottom:'10px'}}>{self.props.title}</h2>
@@ -240,8 +153,6 @@ var GoogleEvents = React.createClass({displayName: 'CalEvents',
           var today = new Date;
           today = today.toISOString();
           if(event.start.dateTime >  today) {
-            //console.log(event);
-
             return(
               <CalEvent className="events__item" key={event.id} event={event} />
             );

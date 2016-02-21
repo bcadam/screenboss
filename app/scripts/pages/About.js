@@ -319,121 +319,14 @@ olark.identify('3932-129-10-4975');/*]]>*/
     return (
       <div>
       <Header open={this.linkState('open')} /><LeftSideBar open={this.linkState('open')} />
-    <section id="main-slider" className="carousel" style={mainSlider}>
-        <div className="carousel-inner" style={carouselInner}>
-            <div className="item active" style={itemActive}>
-                <div className="container" style={itemContainer}>
-                    <div className="carousel-content">
-                        <h1 style={mainSliderH1}>Digital Signage Management</h1>
-                        <p className="lead hidden-xs" style={pLead}>Easily control and schedule content for electronic displays.</p>
-                    </div>
-                </div>
-            </div>
-            {/*<div className="item">
-                            <div className="container">
-                                <div className="carousel-content">
-                                    <h1>ShapeBootstrap.net</h1>
-                                    <p className="lead">Download free but 100% premium quaility twitter Bootstrap based WordPress and HTML themes <br />from shapebootstrap.net</p>
-                                </div>
-                            </div>
-                        </div>*/}
-        </div>
-        {/*<a className="prev" href="#main-slider" data-slide="prev"><i className="icon-angle-left"></i></a>
-                <a className="next" href="#main-slider" data-slide="next"><i className="icon-angle-right"></i></a>*/}
-    </section>
         <section className="content col-xs-12">
             <div className='row'>
-                <div className="col-xs-12 col-sm-4" style={{textAlign:'center'}}>
-                    <div style={{backgroundColor:"#e74c3c",height:'68px',width:'68px',borderRadius:'100%',float: 'none',margin:'0 auto'}}><i className="fa fa-calendar fa-3x" style={{color:'white',marginTop:'20%'}}></i></div>
-                        <div style={subHeaders}>Set a schedule</div><div style={subHeaderParagraph}>Set the date that files are added to the the screens. Never have to remember to add something again.</div>
-                    </div>
-                <div className="col-xs-12 col-sm-4" style={{textAlign:'center'}}>
-                    <div style={{backgroundColor:"#2ecc71",height:'68px',width:'68px',borderRadius:'100%',float: 'none',margin:'0 auto'}}><i className="fa fa-repeat fa-3x" style={{color:'white',marginTop:'20%'}}></i></div>
-                        <div style={subHeaders}>Share and reuse content</div><div style={subHeaderParagraph}>Re-use your best content and share it across mutliple screens.</div>
-                </div>
-                <div className="col-xs-12 col-sm-4" style={{textAlign:'center'}}>
-                    <div style={{backgroundColor:"#3498db",height:'68px',width:'68px',borderRadius:'100%',float: 'none',margin:'0 auto'}}><i className="fa fa-cloud-upload fa-3x" style={{color:'white',marginTop:'20%'}}></i></div>
-                        <div style={subHeaders}>Request files</div><div style={subHeaderParagraph}>Easily get new files to display from colleagues and clients.</div>
-                </div>
+                <div style={{textAlign: 'center'}}><h1>About</h1></div>
             </div>
-            <br />
-            <div className='row'>
-                <div className="col-xs-12 col-sm-4" style={{textAlign:'center'}}>
-                    <div style={{backgroundColor:"#8e44ad",height:'68px',width:'68px',borderRadius:'100%',float: 'none',margin:'0 auto'}}><i className="fa fa-mobile fa-3x" style={{color:'white',marginTop:'20%'}}></i></div>
-                        <div style={subHeaders}>Manage from your phone</div><div style={subHeaderParagraph}>Easily upload files and change patterns from your phone. Manage all your screens while on the go.</div>
-                </div>
-                <div className="col-xs-12 col-sm-4" style={{textAlign:'center'}}>
-                    <div style={{backgroundColor:"#1abc9c",height:'68px',width:'68px',borderRadius:'100%',float: 'none',margin:'0 auto'}}><i className="fa fa-wrench fa-3x" style={{color:'white',marginTop:'20%'}}></i></div>
-                        <div style={subHeaders}>Easy to setup</div><div style={subHeaderParagraph}>Get started quickly. No complicated code, no system logs. Just click and go.</div>
-                </div>
-                <div className="col-xs-12 col-sm-4" style={{textAlign:'center'}}>
-                    <div style={{backgroundColor:"#2c3e50",height:'68px',width:'68px',borderRadius:'100%',float: 'none',margin:'0 auto'}}><i className="fa fa-chrome fa-3x" style={{color:'white',marginTop:'20%'}}></i></div>
-                        <div style={subHeaders}>Show Google Calendars</div><div style={subHeaderParagraph}>No need to manually enter your events. Everything displays automatically.</div>
-                </div>
+            <div className='col-xs-12'>
+                <p>About coming soon...</p>
             </div>
         </section>
-        <div id="pricing-table" className="col-xs-12">
-            <div className="col-sm-4" style={pricingTableItem}>
-                <ul className="plan featured" style={pricingPlan}>
-                    <li className="plan-name" style={planName}>Launch</li>
-                    <li className="plan-price" style={planPriceA}>$50<div style={{fontSize:'12pt',display:'inline'}}>/month</div></li>
-                    <li style={planLine}>1 Schedule</li>
-                    <li style={planLine}>25 Files</li>
-                    <li style={planLine}>Unlimited Screens</li>
-                    <li style={planLine}>Unlimited Team Uploads</li>
-                    <li style={planLine}>Email Support</li>
-                    <li style={planLine} className="plan-action"><a href="/#/app/login" className="btn btn-primary btn-lg">Sign Up</a></li>
-                </ul>
-            </div>
-            <div className="col-sm-4" style={pricingTableItem}>
-                <ul className="plan featured" style={pricingPlan}>
-                    <li className="plan-name" style={planName}>Growth</li>
-                    <li className="plan-price" style={planPriceB}>$100<div style={{fontSize:'12pt',display:'inline'}}>/month</div></li>
-                    <li style={planLine}>3 Schedules</li>
-                    <li style={planLine}>100 Files</li>
-                    <li style={planLine}>Unlimited Screens</li>
-                    <li style={planLine}>Unlimited Team Uploads</li>
-                    <li style={planLine}>Email Support</li>
-                    <li style={planLine} className="plan-action"><a href="/#/app/login" className="btn btn-primary btn-lg">Sign Up</a></li>
-                </ul>
-            </div>
-            <div className="col-sm-4" style={pricingTableItem}>
-                <ul className="plan featured" style={pricingPlan}>
-                    <li className="plan-name" style={planName}>Scale</li>
-                    <li className="plan-price" style={planPriceC}>$300<div style={{fontSize:'12pt',display:'inline'}}>/month</div></li>
-                    <li style={planLine}>Unlimited Schedules</li>
-                    <li style={planLine}>Unlimited Files</li>
-                    <li style={planLine}>Unlimited Screens</li>
-                    <li style={planLine}>Unlimited Team Uploads</li>
-                    <li style={planLine}><b>Phone Support</b></li>
-                    <li style={planLine} className="plan-action"><a href="/#/app/login" className="btn btn-primary btn-lg">Sign Up</a></li>
-                </ul>
-            </div>
-            {/*<div className="col-sm-4 blurry-text notPickable hidden-xs" style={pricingTableItem}>
-                            <ul className="plan" style={pricingPlan}>
-                                <li className="plan-name" style={planName}>Growth Plan</li>
-                                <li className="plan-price blurry-text" style={planPriceFree}>$49</li>
-                                <li style={{color:'#999 blurry-text'}}>10GB Storage</li>
-                                <li style={planLineBlur}>2GB RAM</li>
-                                <li style={planLineBlur}>1TB Bandwidth</li>
-                                <li style={planLineBlur}>100 Email Address</li>
-                                <li style={planLineBlur}>Forum Support</li>
-                                <li style={planLineBlur} className="plan-action"><a href="/#/app/" className="btn btn-primary btn-lg blurry-text" style={{WebkitUserSelect: 'none'}}>Signup</a></li>
-                            </ul>
-                        </div>
-                        <div className="col-sm-4 blurry-text notPickable hidden-xs" style={pricingTableItem}>
-                            <ul className="plan" style={pricingPlan}>
-                                <li className="plan-name" style={planName}>Advanced</li>
-                                <li style={planPriceFree} className="plan-price blurry-text">$199</li>
-                                <li style={planLineBlur}>30GB Storage</li>
-                                <li style={planLineBlur}>5GB RAM</li>
-                                <li style={planLineBlur}>5TB Bandwidth</li>
-                                <li style={planLineBlur}>1000 Email Address</li>
-                                <li style={planLineBlur}>Forum Support</li>
-                                <li style={planLineBlur} className="plan-action"><a href="/#/app/" className="btn btn-primary btn-lg blurry-text" style={{WebkitUserSelect: 'none'}}>Signup</a></li>
-                            </ul>
-                        </div>*/}
-        </div>
     </div>
     );
   }

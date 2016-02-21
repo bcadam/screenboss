@@ -72,7 +72,7 @@ var Claim = React.createClass({
         return (
             <div id="newScreenForm" className='col-xs-12'>
                 <div className="col-xs-12"><h2>Please enter the code you see on the screen.</h2></div>
-                    <TextField fullWidth={true} id='code' hintText="1dsaf2" floatingLabelText="The code displayed on the screen" onChange={self.handleChange.bind(self, 'code')} value={self.state.code} /><br />
+                    <TextField fullWidth={true} id='code' hintText="132123" floatingLabelText="The code displayed on the screen" onChange={self.handleChange.bind(self, 'code')} value={self.state.code} /><br />
                     <TextField fullWidth={true} id='location' hintText="Entrance display" floatingLabelText="Where is this screen located" onChange={self.handleChange.bind(self, 'location')} value={self.state.location} /><br />
                 <RaisedButton fullWidth={true} label="Claim" secondary={true} onClick={self.claimDisplay} />
                 <div style={{marginBottom:"20px"}} />

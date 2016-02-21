@@ -334,26 +334,70 @@ Parse.Cloud.define("claimDisplay", function(request, response) {
 
     var query = new Parse.Query(Parse.User);
     var location = request.params.location;
+    var code = parseInt(request.params.code);
+
 
     query.get(request.params.user, {
         success: function(userAgain) {
 
-            var queryDisplay = new Parse.Query("Display");
 
-            queryDisplay.get(request.params.code, {
-                success: function(display) {
 
-                    display.set('owner',userAgain);
-                    display.set('location',location);
-                    display.save();
+            var Display = Parse.Object.extend("Display");
+            var query = new Parse.Query(Display);
 
-                    response.success("Added the display to your account.");
-                },
-                error: function(error){
-                    response.success("Could not find that code! Please double check it.");
+            query.equalTo("randomNumber", code);
+            //console.log(code);
+            query.find({
+              success: function(results) {
+                // alert("Successfully retrieved " + results.length + " scores.");
+                // Do something with the returned Parse.Object values
+                if(results.length == 0){
+                    response.success("Could not find that screen");
                 }
+                console.log(results);
+
+                results[0].set('owner',userAgain);
+                results[0].set('location',location);
+                results[0].save();
+                response.success("Claimed the display");
+
+              },
+              error: function(error) {
+                response.error("Could not find that code! Please double check it.");
+              }
             });
 
+
+
+            // var queryDisplay = new Parse.Query("Display");
+            // console.log("///////////////////////////////////////////////////////////////////////////////////////");
+            // console.log("///////////////////////////////////////////////////////////////////////////////////////");
+            // console.log("///////////////////////////////////////////////////////////////////////////////////////");
+            // console.log("///////////////////////////////////////////////////////////////////////////////////////");
+            // console.log("///////////////////////////////////////////////////////////////////////////////////////");
+            // console.log("///////////////////////////////////////////////////////////////////////////////////////");
+            // console.log("///////////////////////////////////////////////////////////////////////////////////////");
+            // console.log(code);
+            // query.equalTo("randomNumber", code);
+
+            // query.find({
+            //   success: function(display) {
+            //     // Successfully retrieved the object.
+            //     if(display.length == 0){
+            //         response.success("Could not find that screen");
+            //     }
+
+
+            //     display[0].set('owner',userAgain);
+            //     display[0].set('location',location);
+            //     display[0].save();
+            //     response.success("Added the display to your account.");
+
+            //   },
+            //   error: function(error) {
+            //     response.success("Could not find that code! Please double check it.");
+            //   }
+            // });
 
 
         },
@@ -361,6 +405,13 @@ Parse.Cloud.define("claimDisplay", function(request, response) {
             response.error(code);
         }
     });
+
+
+
+
+
+
+
 });
 
 Parse.Cloud.define("renewSubscription", function(request, response) {

@@ -26,7 +26,7 @@ var LoginForm = React.createClass({
         Parse.User.logIn(this.state.name, this.state.password,{
           success: function(user) {
             // Do stuff after successful login.
-            self.props.user.requestChange(user);
+            //self.props.user.requestChange(user);
             window.location.assign("/#/app/");
           },
           error: function(user, error) {

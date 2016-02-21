@@ -11,10 +11,8 @@ var GoogleEvents = require('./GoogleEvents.js');
 var ScreenDisplayAnimator = React.createClass({
     mixins: [ParseReact.Mixin],
     observe: function() {
-        // Subscribe to all Comment objects, ordered by creation date
-        // The results will be available at this.data.comments
-        //var user = Parse.User.current();
         var key = this.props.scheduleId;
+        var owner = this.props.user;
         return {
             screens: (new Parse.Query('AssignmentPattern').equalTo('published',true)).include('screenAsset').include('screen').equalTo('screen', new Parse.Object('Screen', {
                 id: key
@@ -22,22 +20,28 @@ var ScreenDisplayAnimator = React.createClass({
             firstScreen: (new Parse.Query('AssignmentPattern').equalTo('published',true)).include('screenAsset').include('screen').equalTo('screen', new Parse.Object('Screen', {
                 id: key
             })).descending('createdAt').limit(1),
-            calendars: (new Parse.Query('Calendar').equalTo('published',true)).descending('createdAt').limit(1),
-            calendarsSkip: (new Parse.Query('Calendar').equalTo('published',true)).descending('createdAt').skip(1)
+            calendars: (new Parse.Query('Calendar').equalTo('owner',owner).equalTo('published',true)).descending('createdAt').limit(1),
+            calendarsSkip: (new Parse.Query('Calendar').equalTo('owner',owner).equalTo('published',true)).descending('createdAt').skip(1)
         };
     },
-    render: function() {
+    componentDidMount:function() {
+            
+            $(document).ready(function() {
+                
+                //$('.item').first().addClass('active');
+                $('.carousel').carousel({
+                    interval: 2000,
+                    cycle:true
+                })
+            }); 
 
-        //var imageClass = this.props.imageClass.value;
+    },
+    render: function() {
         var holder = this.props.imageClass;
-        //console.log(holder);
-        //console.log(this.data.firstScreen);
-        // console.log(this.data.calendar);
-        // console.log(this.data.calendarsSkip);
         var self = this;
 
         return (
-            <div id="carousel-example-generic" className="carousel slide" data-interval="15000" data-ride="carousel" style={{height:"100%",width:"100%",cursor:'none'}} onClick={function(){self.setState({open:true});}}>
+            <div id="carousel-example-generic" className="carousel slide" style={{height:"100%",width:"100%",cursor:'none'}}>
                 
                 <div className="carousel-inner" role="listbox">
                     {this.data.calendars.map(function(c) {
@@ -58,7 +62,7 @@ var ScreenDisplayAnimator = React.createClass({
 
                     {this.data.firstScreen.map(function(c) {
                         return (
-                        <div key={c.objectId} className="product item active">
+                        <div key={c.objectId} className="product item">
                           <img src={c.screenAsset.file.url()} className="vcenter img img-responsive" style={holder.value}/>
                         </div>
                         );
@@ -102,14 +106,8 @@ var ScreenDisplayPage = React.createClass({
     },
     render() {
         // var user = Parse.User.current();
-        // console.log(user);
         var self = this;
         var loggedIn = (<ScreenDisplayAnimator scheduleId={self.props.scheduleId} user={self.props.owner} imageClass={self.linkState('imageClass')} />);
-
-        // console.log('self.props.scheduleId');
-        // console.log(self.props.scheduleId);
-        // console.log('self.props.owner');
-        // console.log(self.props.owner);
 
         return (
             <div>{loggedIn}</div>

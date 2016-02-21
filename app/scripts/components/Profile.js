@@ -22,9 +22,25 @@ var CreditCard = require('./CreditCard.js');
 
 var Profile = React.createClass({
     mixins: [ParseReact.Mixin],
+    componentWillMount:function() {
+        var currentUser = Parse.User.current();
+
+        if(!currentUser)
+        {
+            window.location.assign("#/app/login");
+        }
+    },
     observe: function() {
-        console.log(Parse.User.current().id);
-        var userId = Parse.User.current().id;
+        //console.log(Parse.User.current());
+        var currentUser = Parse.User.current();
+
+        if(!currentUser)
+        {
+            window.location.assign("#/app/login");
+        }
+
+
+
         return {
             user: (new Parse.Query('_User').equalTo('objectId',Parse.User.current().id)).limit(1),
             screenassets: (new Parse.Query('ScreenAsset').equalTo('owner',Parse.User.current())).descending('createdAt'),
@@ -45,7 +61,7 @@ var Profile = React.createClass({
                                 <img src="http://placehold.it/400?text=Profile+pictures+soon!" className="img-circle img img-responsive col-xs-12" style={{maxWidth:'300px',margin:'0 auto'}} />
                             </div>
                             
-                            <div className="col-xs-8">
+                            <div className="col-sm-8 col-xs-12">
                                 <h3>{user.email}</h3>
                                 <h6>Member since: {moment(user.createdAt).format('MMM Do, YYYY')}</h6>
                                 <div><a href='https://drive.google.com/open?id=0B3fMsATjcJxAZkk5bmk3Z2VSdHM' target="_blank">Download installer</a></div>

@@ -10,6 +10,7 @@ import LandingPage from './pages/landingpage.jsx';
 import ScheduleListPage from './pages/ScheduleListPage.js';
 import AssetListPage from './pages/AssetListPage.js';
 import CalendarsPage from './pages/CalendarsPage.js';
+import About from './pages/About.js';
 
 // import GettingStarted from './pages/GettingStarted.jsx';
 // import GettingStartedAssets from './pages/GettingStartedAssets.jsx';
@@ -71,6 +72,7 @@ const routes = (
 
     <Route path='/' component={ BlankApp }>
       <IndexRoute component={ LandingPage }/>
+      <Route path='about' component={ About } />
       <Route path='*' component={NotFound}/>
     </Route>
 
