@@ -1,12 +1,31 @@
 var express = require('express');
+
 var app = express();
-
-
 var favicon = require('serve-favicon');
 
+
+
+
+// var ParseServer = require('parse-server').ParseServer;
+
+// var databaseUri = process.env.DATABASE_URI || process.env.MONGOLAB_URI;
+// if (!databaseUri) {
+//   console.log('DATABASE_URI not specified, falling back to localhost.');
+// }
+
+// var api = new ParseServer({
+//   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+//   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/cloud/main.js',
+//   appId: 'pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6',
+//   masterKey: 'Pp9mBdqFMmnjFLT4skUMif2Tz7bie3hCqKv5CfRj' //Add your master key here. Keep it secret!
+// });
+// var mountPath = process.env.PARSE_MOUNT || '/parse';
+// app.use(mountPath, api);
+
+
+
+
 app.use(favicon('app/images/favicon.ico'));
-
-
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/'));
 app.set('view engine', 'ejs');
@@ -25,29 +44,29 @@ app.get('/*', function(req, res) {
 
 
 
-app.get('/index.html', function(req, res) {
-    res.sendFile('app/home.html', {
-        root: __dirname
-    });
-});
+// app.get('/index.html', function(req, res) {
+//     res.sendFile('app/home.html', {
+//         root: __dirname
+//     });
+// });
 
-app.get('/index', function(req, res) {
-    res.sendFile('app/home.html', {
-        root: __dirname
-    });
-});
+// app.get('/index', function(req, res) {
+//     res.sendFile('app/home.html', {
+//         root: __dirname
+//     });
+// });
 
-app.get('/', function(req, res) {
-    res.sendFile('app/home.html', {
-        root: __dirname
-    });
-});
+// app.get('/', function(req, res) {
+//     res.sendFile('app/home.html', {
+//         root: __dirname
+//     });
+// });
 
-app.get('/app.html', function(req, res) {
-    res.sendFile('app/index.html', {
-        root: __dirname
-    });
-});
+// app.get('/app.html', function(req, res) {
+//     res.sendFile('app/index.html', {
+//         root: __dirname
+//     });
+// });
 
 
 app.listen(app.get('port'), function() {

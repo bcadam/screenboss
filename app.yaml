@@ -1,0 +1,12 @@
+runtime: nodejs
+vm: true
+
+env_variables:
+  # --REQUIRED--
+  DATABASE_URI: mongodb://main:main@ds013918.mongolab.com:13918/screenboss
+  APP_ID: pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6
+  MASTER_KEY: p9mBdqFMmnjFLT4skUMif2Tz7bie3hCqKv5CfRj
+  # --OPTIONAL--
+  # FILE_KEY: <your-file-key>
+  # PARSE_MOUNT: /parse
+  # CLOUD_CODE_MAIN:  

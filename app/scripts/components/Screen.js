@@ -24,26 +24,11 @@ var ScreenDisplayAnimator = React.createClass({
                 .lessThan('startDate',todaysDate)
                 .greaterThan('endDate',todaysDate)
                 .equalTo('screen', new Parse.Object('Screen', {id: key}))
-                .descending('createdAt')
-                .skip(1),
-            firstScreen: (new Parse.Query('AssignmentPattern')
-                .equalTo('published',true))
-                .include('screenAsset')
-                .include('screen')
-                .lessThan('startDate',todaysDate)
-                .greaterThan('endDate',todaysDate)
-                .equalTo('screen', new Parse.Object('Screen', {id: key}))
-                .descending('createdAt')
-                .limit(1),
+                .descending('createdAt'),
             calendars: (new Parse.Query('Calendar')
                 .equalTo('owner',owner)
                 .equalTo('published',true))
                 .descending('createdAt')
-                .limit(1),
-            calendarsSkip: (new Parse.Query('Calendar')
-                .equalTo('owner',owner)
-                .equalTo('published',true))
-                .descending('createdAt').skip(1)
         };
     },
     componentDidMount:function() {
@@ -62,7 +47,7 @@ var ScreenDisplayAnimator = React.createClass({
 
         $(document).ready(function() {
             setTimeout(function(){ 
-                $('.item').last().addClass('active');
+                $('.item').first().addClass('active');
                 $('.carousel').carousel({
                     interval: 15000,
                     cycle:true
@@ -70,7 +55,7 @@ var ScreenDisplayAnimator = React.createClass({
             }, 1000);
 
             setInterval(function(){
-                existingLengthOfAssignmentPatters = self.data.screens.length + self.data.firstScreen.length;
+                existingLengthOfAssignmentPatters = self.data.screens.length;
                 query.find({
                   success: function(results) {
                     if(results.length != existingLengthOfAssignmentPatters){
@@ -81,7 +66,7 @@ var ScreenDisplayAnimator = React.createClass({
                     alert("Error: " + error.code + " " + error.message);
                   }
                 });
-            },15000);
+            },1000);
         }); 
 
     },
@@ -93,29 +78,7 @@ var ScreenDisplayAnimator = React.createClass({
             <div id="carousel-example-generic" className="carousel slide" style={{height:"100%",width:"100%",cursor:'none'}}>
                 
                 <div className="carousel-inner" role="listbox">
-                    {this.data.calendars.map(function(c) {
-                        return (
-                        <div key={c.objectId} className="product item">
-                          <GoogleEvents title={c.name} calendarID={c.calendarId} />
-                        </div>
-                        );
-                    })}
-
-                    {this.data.calendarsSkip.map(function(c) {
-                        return (
-                        <div key={c.objectId} className="product item">
-                          <GoogleEvents title={c.name} calendarID={c.calendarId} />
-                        </div>
-                        );
-                    })}
-
-                    {this.data.firstScreen.map(function(c) {
-                        return (
-                        <div key={c.objectId} className="product item">
-                          <img src={c.screenAsset.file.url()} className="vcenter img img-responsive" style={holder.value}/>
-                        </div>
-                        );
-                    })}
+                    
 
                     {this.data.screens.map(function(c) {
                         return (
@@ -125,6 +88,13 @@ var ScreenDisplayAnimator = React.createClass({
                         );
                     })}
 
+                    {this.data.calendars.map(function(c) {
+                        return (
+                        <div key={c.objectId} className="product item">
+                          <GoogleEvents title={c.name} calendarID={c.calendarId} />
+                        </div>
+                        );
+                    })}
                 </div>
             </div>
         );
