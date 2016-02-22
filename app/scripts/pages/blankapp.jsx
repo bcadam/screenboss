@@ -1,7 +1,4 @@
 import React from 'react';
-var Header = require('../components/Header.js');
-var LeftSideBar = require('../components/LeftSideBar.js');
-
 
 var BlankApp = React.createClass({
    

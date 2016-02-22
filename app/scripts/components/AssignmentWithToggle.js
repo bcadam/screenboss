@@ -108,11 +108,11 @@ var AssignmentWithToggle = React.createClass({
         return (
 
             <div className='row' style={{marginTop:'15px'}}>
-                <div className='col-xs-4'>{self.props.asset.screenAsset.name}</div>
-                <div className='col-xs-2'><img onClick={self.handleCloseViewer} src={self.props.asset.screenAsset.fileThumbnail.url()} className='img img-responsive'/></div>
-                <div className='col-xs-3'>{startDate}<br />{endDate}</div>
-                <div className='col-xs-1'><Toggle style={{margin:'40%'}} toggled={self.props.asset.published} onToggle={self.handleToggle} /></div>
-                <div className='col-xs-1'><FlatButton label="Delete" primary={true} onClick={self.handleChange} /></div>
+                <div className='col-xs-12 col-md-4' style={{marginBottom:'10px'}}>{self.props.asset.screenAsset.name}</div>
+                <div className='col-xs-12 col-md-2'><img style={{marginBottom:'10px'}} onClick={self.handleCloseViewer} src={self.props.asset.screenAsset.fileThumbnail.url()} className='img img-responsive'/></div>
+                <div className='col-xs-12 col-md-3'>{startDate}<br />{endDate}</div>
+                <div className='col-xs-6 col-md-1'><Toggle toggled={self.props.asset.published} onToggle={self.handleToggle} /></div>
+                <div className='col-xs-6 col-md-1'><FlatButton label="Delete" primary={true} onClick={self.handleChange} /></div>
                 <Dialog
                   modal={false}
                   open={self.state.viewerOpen}

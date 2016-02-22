@@ -38,7 +38,6 @@ var SendFile = React.createClass({
           // ratings should be 4.5
           console.log(result);
           self.setState({snackMessage:result,open:true,message:"Please send me the file so it can be displayed.",email:""});
-
         });
         
     },
@@ -76,7 +75,7 @@ var SendFile = React.createClass({
                     <TextField fullWidth={true} id='email' hintText="target@nyu.edu" floatingLabelText="To Email Address" onChange={self.handleChange.bind(self, 'email')} value={self.state.email} /><br />
                     <TextField fullWidth={true} id='message' hintText="Please send the file for your event." floatingLabelText="Message" onChange={self.handleChange.bind(self, 'message')} value={self.state.message} /><br />
                 <RaisedButton fullWidth={true} label="Send request" secondary={true} onClick={self.sendEmail} />
-                <div style={{marginBottom:"20px;"}} />
+                <div style={{marginBottom:"20px"}} />
                 <Snackbar
                   open={this.state.open}
                   message={this.state.snackMessage}

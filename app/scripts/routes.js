@@ -1,6 +1,5 @@
 import React from 'react';
-import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
-import createHistory from 'history/lib/createHashHistory'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import App from './pages/app.jsx';
 import BlankApp from './pages/blankapp.jsx';
@@ -12,16 +11,10 @@ import AssetListPage from './pages/AssetListPage.js';
 import CalendarsPage from './pages/CalendarsPage.js';
 import About from './pages/About.js';
 
-// import GettingStarted from './pages/GettingStarted.jsx';
-// import GettingStartedAssets from './pages/GettingStartedAssets.jsx';
-// import GettingStartedScreens from './pages/GettingStartedScreens.jsx';
-// import GettingStartedAssignments from './pages/GettingStartedAssignments.jsx';
-
 var LoginForm = require('./components/LoginForm.js');
 var LogOut = require('./components/LogOut.js');
 var Screen = require('./components/Screen.js');
 var Display = require('./components/Display.js');
-
 var RequestFile = require('./components/RequestFile.js');
 var GoogleEvents = require('./components/GoogleEvents.js');
 var Profile = require('./components/Profile.js');
@@ -30,12 +23,9 @@ var SendFile = require('./components/SendFile.js');
 var Claim = require('./components/Claim.js');
 var Displays = require('./components/Displays.js');
 
-const historyOptions = {
-  queryKey : false
-};
 
 const routes = (
-  <Router history={createHistory(historyOptions)}>
+  <Router>
     
     <Route path='screen' component={ BlankApp }>
       <Route path=':id' component={ Screen } />
@@ -61,11 +51,6 @@ const routes = (
       <Route path='login' component={ LoginForm } />
       <Route path='logout' component={ LogOut } />
 
-      {/*<Route path='gettingstarted' component={ GettingStarted } />
-            <Route path='gettingstartedassets' component={ GettingStartedAssets } />
-            <Route path='gettingstartedscreens' component={ GettingStartedScreens } />
-            <Route path='gettingstartedassignments' component={ GettingStartedAssignments } />*/}
-
       <Route path='*' component={NotFound}/>
 
     </Route>
@@ -80,3 +65,15 @@ const routes = (
 );
 
 export default routes;
+
+
+// import GettingStarted from './pages/GettingStarted.jsx';
+// import GettingStartedAssets from './pages/GettingStartedAssets.jsx';
+// import GettingStartedScreens from './pages/GettingStartedScreens.jsx';
+// import GettingStartedAssignments from './pages/GettingStartedAssignments.jsx';
+   {/*<Route path='gettingstarted' component={ GettingStarted } />
+            <Route path='gettingstartedassets' component={ GettingStartedAssets } />
+            <Route path='gettingstartedscreens' component={ GettingStartedScreens } />
+            <Route path='gettingstartedassignments' component={ GettingStartedAssignments } />*/}
+
+            

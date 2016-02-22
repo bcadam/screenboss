@@ -6,6 +6,9 @@ var AddAssetDropDown = require('./AddAssetDropDown');
 var AssignmentWithToggle = require('./AssignmentWithToggle');
 
 import Dialog from 'material-ui/lib/dialog';
+import AppBar from 'material-ui/lib/app-bar';
+import IconButton from 'material-ui/lib/icon-button';
+import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 
 import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
@@ -21,7 +24,6 @@ import TableRow from 'material-ui/lib/table/table-row';
 import TableHeader from 'material-ui/lib/table/table-header';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
 import TableBody from 'material-ui/lib/table/table-body';
-
 
 var ScreenDisplay = React.createClass({
     mixins: [ParseReact.Mixin],
@@ -80,20 +82,21 @@ var ScreenDisplay = React.createClass({
             publishedButton = (<RaisedButton secondary={true} name="checkboxName2" value="checkboxValue2" label={stringOfPublished} defaultChecked={self.props.asset.published} onClick={self.handleChangePublished} />)
         }
 
-
         return (
             <div>
                 <Card>
-                    <CardHeader
-                      title={self.props.asset.name}
-                      subtitle={self.props.asset.description}
-                      actAsExpander={true}
-                      showExpandableButton={true}
-
+                    <AppBar
+                        title={self.props.asset.name}
+                        iconElementLeft={<IconButton><NavigationClose /></IconButton>}
+                        actAsExpander={true}
+                        showMenuIconButton={false}
+                        style={{backgroundColor:'#0D83CC'}}
+                        iconClassNameRight="muidocs-icon-navigation-expand-more"
                     />
-                    <CardText expandable={true}>
-                        <AddAssetDropDown asset={self.props.asset} />
 
+                    <CardText expandable={true}>
+                        
+                        <AddAssetDropDown asset={self.props.asset} />
                         <div selectable={false}>
                             <div>
                               {self.data.comments.map(function(c) {
@@ -103,22 +106,22 @@ var ScreenDisplay = React.createClass({
                                     })}
                             </div>
                         </div>
+                    </CardText>
 
-                        </CardText>
+                    <CardActions expandable={true}>
+                        {publishedButton}
+                        <FlatButton label="Delete Schedule" primary={true} onClick={self.handleChange} />
+                    </CardActions>
 
-                        <CardActions expandable={true}>
-                            {publishedButton}
-                            <FlatButton label="Delete Schedule" primary={true} onClick={self.handleChange} />
-                        </CardActions>
-                        <Dialog
-                          title='Delete Asset?'
-                          actions={actions}
-                          modal={false}
-                          open={self.state.deleteOpen}
-                          onRequestClose={this.handleChange}>
-                          Are you sure you would like to delete your schedule? This means that you will have to change the url of each of your screens. This cannot be undone.
-                        </Dialog>
-                    </Card>
+                    <Dialog
+                      title='Delete Asset?'
+                      actions={actions}
+                      modal={false}
+                      open={self.state.deleteOpen}
+                      onRequestClose={this.handleChange}>
+                      Are you sure you would like to delete your schedule? This means that you will have to change the url of each of your screens. This cannot be undone.
+                    </Dialog>
+                </Card>
                     <br />
             </div>
         );

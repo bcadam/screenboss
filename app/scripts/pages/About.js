@@ -1,7 +1,5 @@
 import React from 'react';
-
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
-
 
 import Header from '../components/Header.js';
 import LeftSideBar from '../components/LeftSideBar.js';
@@ -24,6 +22,8 @@ var Home = React.createClass({
         // sr.reveal('.firstPrice',{delay:0});
         // sr.reveal('.secondPrice',{delay:100});
         // sr.reveal('.thirdPrice',{delay:200});
+        sr.reveal('.left',{origin:'left'});
+        sr.reveal('.right',{origin:'right'});
 
     },
     onStatusChange(state) {
@@ -51,9 +51,18 @@ var Home = React.createClass({
                     <div className="container" style={style.itemContainer}>
                         <div className="carousel-content">
                             <h1 style={style.mainSliderH1} className="title">About</h1>
-                            <p className="lead hidden-xs" style={style.pLead}>We are here to make managing screens easier.</p>
+                            <p className="lead" style={style.pLead}>We are here to make managing screens easier.</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+        <section className='col-xs-12' style={{marginTop:'10px'}}>
+            <div>
+                <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97350&w=350&h=350" className="hidden-xs left col-xs-3 img img-responsive" />
+                <div className='col-xs-12 col-sm-9 right'>
+                    <h3>Title</h3>
+                    <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed vel felis eget diam venenatis accumsan et nec erat. Fusce viverra nibh neque, et viverra diam molestie vel. Quisque viverra quis nisl at efficitur. Nullam eu urna fermentum, commodo nunc nec, suscipit neque. Aliquam erat volutpat. Nullam suscipit efficitur ante sit amet iaculis. Integer maximus quam at nisl rutrum auctor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin ornare est turpis, eu viverra eros vestibulum quis. Proin tellus neque, pulvinar eu massa vel, placerat mollis justo. Morbi volutpat, mi condimentum vulputate feugiat, erat leo interdum magna, sed malesuada massa lectus ac quam. Proin at orci eleifend, pulvinar eros a, eleifend ligula. Donec hendrerit mi quis volutpat consectetur. Donec ac sapien elementum, feugiat nibh non, suscipit velit.</p>
                 </div>
             </div>
         </section>

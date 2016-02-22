@@ -64,11 +64,11 @@ var AddAssetDropDown = React.createClass({
 
                 <div className='col-xs-12 col-md-6'>
                     <div className='col-xs-12'>
-                        <DropDownMenu autoWidth={false} value={self.state.index} style={{width:"100%"}} onChange={this.handleChange}>
+                        <DropDownMenu full={true} value={self.state.index} style={{width:"100%",marginLeft:'-50px',padding:'0px'}} onChange={this.handleChange}>
                                 {this.data.comments.map(function(c) {
                                     i = i +1;
                                 return (
-                                <MenuItem key={c.id} value={i} primaryText={c.name} />
+                                <MenuItem key={c.id} style={{width:"100% !important"}} value={i} primaryText={c.name} fullWidth={{true}} />
                                 );
                                 })}
                         </DropDownMenu>

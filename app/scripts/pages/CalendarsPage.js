@@ -6,7 +6,6 @@ var CalendarList = require('../components/CalendarList.js');
 var NewCalendarForm = require('../components/NewCalendarForm.js');
 
 import Dialog from 'material-ui/lib/dialog';
-import RaisedButton from 'material-ui/lib/raised-button';
 import Card from 'material-ui/lib/card/card';
 import CardActions from 'material-ui/lib/card/card-actions';
 import CardHeader from 'material-ui/lib/card/card-header';
@@ -53,7 +52,7 @@ var ScreenListPage = React.createClass({
 
                 <div className="col-xs-12 col-sm-3">
                     <NewCalendarForm />
-                    <RaisedButton style={{marginBottom:'20px'}} fullWidth={true} label="How do I find the calendar id?" onTouchTap={this.handleOpen} />
+                    <FlatButton style={{marginBottom:'20px'}} fullWidth={true} label="How do I find the calendar id?" onTouchTap={this.handleOpen} />
                 </div>
 
                 <div className="col-xs-12 col-sm-9">

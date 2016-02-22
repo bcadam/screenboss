@@ -1,5 +1,7 @@
 var Image = require("parse-image");
+
 var mandrill = require("mandrill");
+mandrill.initialize('wFwXb8b6VD-JiFp2rOTL6Q');
 
 var Stripe = require('stripe');
 var stripeKey = 'sk_live_se8HqxdcAA4qMWHxkl7uWsdp';
@@ -156,10 +158,10 @@ Parse.Cloud.define("sendFileLink", function(request, response) {
     var id = request.params.id;
     var message = request.params.message;
     var name = request.params.name;
-    
-    mandrill.initialize("wFwXb8b6VD-JiFp2rOTL6Q");
-    var name = request.params.name;
+    var toEmail = request.params.email;
+
     if (!name) { name = "ScreenBoss" }
+
     mandrill.sendEmail({
         message: {
             text: senderEmail + " has sent you a file Request - http://www.screenboss.co/#/app/filerequest/" + id + " " + message,
@@ -181,11 +183,7 @@ Parse.Cloud.define("sendFileLink", function(request, response) {
         success: function(httpResponse) { response.success("Email sent!"); },
         error: function(httpResponse) { response.error("Uh oh, something went wrong"); }
     });
-    //response.success(request.params.email);
-
-
-
-    
+    //response.success(request.params.email);  
 });
 
 Parse.Cloud.define("alertUser", function(request, response) {
@@ -409,13 +407,6 @@ Parse.Cloud.define("claimDisplay", function(request, response) {
             response.error(code);
         }
     });
-
-
-
-
-
-
-
 });
 
 Parse.Cloud.define("renewSubscription", function(request, response) {
@@ -491,8 +482,7 @@ Parse.Cloud.afterSave("Display", function(request, response) {
             response.error("Could not validate uniqueness for this Display object.");
           }
         });
-      }
-    
+      } 
 });
 
 
