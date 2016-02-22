@@ -47,8 +47,11 @@ var ScreenDisplay = React.createClass({
         };
     },
     handleChange: function(){
-        var self = this;
-        this.setState({deleteOpen: !self.state.deleteOpen});
+      var self = this;
+      this.setState({deleteOpen: !self.state.deleteOpen});
+    },
+    handleClose:function(){
+      this.setState({});
     },
     render: function() {
         // Render the text of each comment as a list item
@@ -91,49 +94,15 @@ var ScreenDisplay = React.createClass({
                     <CardText expandable={true}>
                         <AddAssetDropDown asset={self.props.asset} />
 
-                        <Table selectable={false}>
-                            <TableHeader adjustForCheckbox={false} >
-                              <TableRow>
-                                <TableHeaderColumn>File Name</TableHeaderColumn>
-                                <TableHeaderColumn>Image</TableHeaderColumn>
-                                <TableHeaderColumn>Date</TableHeaderColumn>
-                                <TableHeaderColumn>Published</TableHeaderColumn>
-                                <TableHeaderColumn>Delete</TableHeaderColumn>
-                              </TableRow>
-                            </TableHeader>
-                            <TableBody>
+                        <div selectable={false}>
+                            <div>
                               {self.data.comments.map(function(c) {
                                     return (
                                     <AssignmentWithToggle key={c.id} asset={c} />
                                     );
                                     })}
-                            </TableBody>
-                        </Table>
-
-
-
-
-
-                          {/*<div className="table-responsive">
-                                                      <table className="table table-condensed">
-                                                          <thead>
-                                                              <tr>
-                                                                  <th>File</th>
-                                                                  <th>Image</th>
-                                                                  <th>Date</th>
-                                                                  <th>Delete</th>
-                                                              </tr>
-                                                          </thead>
-                          
-                                                          <tbody>
-                                                              {self.data.comments.map(function(c) {
-                                                              return (
-                                                              <AssignmentWithToggle key={c.id} asset={c} />
-                                                              );
-                                                              })}
-                                                          </tbody>
-                                                      </table>
-                                                      </div>*/}
+                            </div>
+                        </div>
 
                         </CardText>
 
@@ -146,12 +115,12 @@ var ScreenDisplay = React.createClass({
                           actions={actions}
                           modal={false}
                           open={self.state.deleteOpen}
-                          onRequestClose={this.handleClose}>
+                          onRequestClose={this.handleChange}>
                           Are you sure you would like to delete your schedule? This means that you will have to change the url of each of your screens. This cannot be undone.
                         </Dialog>
                     </Card>
                     <br />
-                    </div>
+            </div>
         );
     }
 });

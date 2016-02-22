@@ -5,8 +5,6 @@ var ScreenDisplay = require('../components/ScreenDisplay.js');
 var ScreenList = require('../components/ScreenList.js');
 var NewScreenForm = require('../components/NewScreenForm.js');
 
-
-
 var ScreenListPage = React.createClass({
     componentWillMount: function(){
 
@@ -16,14 +14,12 @@ var ScreenListPage = React.createClass({
             {
                 window.location.assign("#/app/login");
             }
-              
         }, 
     render: function() {
         // Render the text of each comment as a list item
         var self = this;
         return (
             <div className="col-xs-12">
-
                 <div className="col-xs-12 col-sm-3">
                     <NewScreenForm />
                 </div>
@@ -31,7 +27,6 @@ var ScreenListPage = React.createClass({
                 <div className="col-xs-12 col-sm-9">
                     <ScreenList />
                 </div>
-
             </div>
         );
     }

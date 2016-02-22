@@ -6,16 +6,26 @@ Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6', '8UXFi3hzHgbKWoMZII
 var key = window.location.href;
 var count = key.indexOf('display/');
 key = key.substring(count + 8, key.length);
-//console.log(key);
 
 var Screen = require('./Screen.js');
-
 
 var Display = React.createClass({
     componentDidMount() {
         var self = this;
 
+        //////////////////////////////////////////////////
+        //////////////////////////////////////////////////
+        //////////////////////////////////////////////////
+        //////////////////////////////////////////////////
+        //////////////////////////////////////////////////
+        //////////////////////////////////////////////////
         var timeBetweenChecks = 1000;
+        //////////////////////////////////////////////////
+        //////////////////////////////////////////////////
+        //////////////////////////////////////////////////
+        //////////////////////////////////////////////////
+        //////////////////////////////////////////////////
+        //////////////////////////////////////////////////
 
         var Display = Parse.Object.extend("Display");
         var query = new Parse.Query(Display);
@@ -26,15 +36,12 @@ var Display = React.createClass({
         query.limit(1);
         query.find({
           success: function(results) {
-            //console.log("query run");
-            //console.log(results.length);Display
 
             self.setState({results:results});
 
             if(results.length == 0){
 
                 var number = Math.floor((Math.random() * 10000000));
-
                 ParseReact.Mutation.Create('Display', {
                   key: key,
                   randomNumber : number
@@ -49,9 +56,7 @@ var Display = React.createClass({
                 if(!results[0].get('owner'))
                 {
                     var id = results[0].id;
-                    //console.log(results[0]);
-                    //setTimeout(function(){ location.reload(); }, 7000);
-                    
+
                     window.setInterval(function(){                    
                     results[0].fetch({
                           success: function(myObject) {
@@ -91,13 +96,11 @@ var Display = React.createClass({
                             }
                           },
                           error: function(myObject, error) {
-                            // The object was not refreshed successfully.
-                            // error is a Parse.Error with an error code and message.
                                 console.log(error);
                                 window.location.reload();
                           }
                         });
-                    }, timeBetweenChecks);
+                    }, timeBetweenChecks * 10);
 
                 }
                 else if(results[0].get('owner') && results[0].get('schedule'))
@@ -111,13 +114,6 @@ var Display = React.createClass({
                           success: function(myObject) {
                             // The object was refreshed successfully.
                             console.log('Checking for schedule change...');
-                            // console.log(myObject.get('schedule'));
-                            // if(!myObject.get('schedule').id)
-                            // {
-                            //     window.location.reload();
-                            // }
-
-
 
                             if(myObject.get('owner') == null)
                             {
@@ -139,7 +135,7 @@ var Display = React.createClass({
                                 window.location.reload();
                           }
                         });
-                    }, timeBetweenChecks);
+                    }, timeBetweenChecks * 5);
 
                 }
 
@@ -150,12 +146,6 @@ var Display = React.createClass({
             alert("Error: " + error.code + " " + error.message);
           }
         });
-
-
-
-
-
-
     },
     getInitialState() {
         return {
@@ -164,22 +154,9 @@ var Display = React.createClass({
             results: null
         };
     },
-    componentWillMount() {
-          
-        // var self = this;
-        //     ParseReact.Mutation.Create('Display', {
-        //       key: key
-        //     }).dispatch();
-
-    },
     render() {
         // var user = Parse.User.current();     
         var self = this;
-        //var message = (<div></div>);
-        //console.log(self.data.displays[0]);
-        //var messageNotClaimed;
-        //console.log(self.state.results);
-
         var screen;
         if(self.state.results){
         if(self.state.results.length == 1){

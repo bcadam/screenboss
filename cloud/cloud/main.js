@@ -182,6 +182,10 @@ Parse.Cloud.define("sendFileLink", function(request, response) {
         error: function(httpResponse) { response.error("Uh oh, something went wrong"); }
     });
     //response.success(request.params.email);
+
+
+
+    
 });
 
 Parse.Cloud.define("alertUser", function(request, response) {

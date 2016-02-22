@@ -20,6 +20,7 @@ var AssignmentWithToggle = React.createClass({
             deleteOpen : false,
             startDate: this.props.asset.startDate,
             endDate: this.props.asset.endDate,
+            viewerOpen:false,
             code: (    <DatePicker
                             autoOk={true}
                             hintText="Start"
@@ -48,6 +49,10 @@ var AssignmentWithToggle = React.createClass({
         //console.log(end);
         self.setState({startDate: end});
         ParseReact.Mutation.Set(self.props.asset.id, {endDate:end}).dispatch();    },
+    handleCloseViewer: function(){
+        var holder = this.state.viewerOpen;
+        this.setState({viewerOpen : !holder});
+    },
     resetStartDate:function(){
         this.setState({startDate:null});
         ParseReact.Mutation.Set(this.props.asset.id, {startDate:null}).dispatch();
@@ -102,21 +107,27 @@ var AssignmentWithToggle = React.createClass({
 
         return (
 
-            <TableRow>
-                <TableRowColumn>{self.props.asset.screenAsset.name}</TableRowColumn>
-                <TableRowColumn><img src={self.props.asset.screenAsset.fileThumbnail.url()} className='img img-responsive'/></TableRowColumn>
-                <TableRowColumn>{startDate}<br />{endDate}</TableRowColumn>
-                <TableRowColumn><Toggle style={{margin:'40%'}} toggled={self.props.asset.published} onToggle={self.handleToggle} /></TableRowColumn>
-                <TableRowColumn><FlatButton label="Delete" primary={true} onClick={self.handleChange} /></TableRowColumn>
+            <div className='row' style={{marginTop:'15px'}}>
+                <div className='col-xs-4'>{self.props.asset.screenAsset.name}</div>
+                <div className='col-xs-2'><img onClick={self.handleCloseViewer} src={self.props.asset.screenAsset.fileThumbnail.url()} className='img img-responsive'/></div>
+                <div className='col-xs-3'>{startDate}<br />{endDate}</div>
+                <div className='col-xs-1'><Toggle style={{margin:'40%'}} toggled={self.props.asset.published} onToggle={self.handleToggle} /></div>
+                <div className='col-xs-1'><FlatButton label="Delete" primary={true} onClick={self.handleChange} /></div>
+                <Dialog
+                  modal={false}
+                  open={self.state.viewerOpen}
+                  onRequestClose={self.handleCloseViewer}>
+                  <img src={self.props.asset.screenAsset.fileThumbnail.url()} style={{display: 'block',marginLeft: 'auto',marginRight:' auto'}} className='img img-responsive'/>
+                </Dialog>
                 <Dialog
                   title='Delete Asset?'
                   actions={actions}
                   modal={false}
                   open={self.state.deleteOpen}
-                  onRequestClose={self.handleClose}>
+                  onRequestClose={self.handleChange}>
                   Are you sure you would like to delete your assignment? This will not delete the file from your database. This cannot be undone.
                 </Dialog>
-            </TableRow>
+            </div>
 
         );
     }

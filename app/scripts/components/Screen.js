@@ -13,27 +13,76 @@ var ScreenDisplayAnimator = React.createClass({
     observe: function() {
         var key = this.props.scheduleId;
         var owner = this.props.user;
+        var todaysDate = new Date(); 
+        //console.log(todaysDate);
+
         return {
-            screens: (new Parse.Query('AssignmentPattern').equalTo('published',true)).include('screenAsset').include('screen').equalTo('screen', new Parse.Object('Screen', {
-                id: key
-            })).descending('createdAt').skip(1),
-            firstScreen: (new Parse.Query('AssignmentPattern').equalTo('published',true)).include('screenAsset').include('screen').equalTo('screen', new Parse.Object('Screen', {
-                id: key
-            })).descending('createdAt').limit(1),
-            calendars: (new Parse.Query('Calendar').equalTo('owner',owner).equalTo('published',true)).descending('createdAt').limit(1),
-            calendarsSkip: (new Parse.Query('Calendar').equalTo('owner',owner).equalTo('published',true)).descending('createdAt').skip(1)
+            screens: (new Parse.Query('AssignmentPattern')
+                .equalTo('published',true))
+                .include('screenAsset')
+                .include('screen')
+                .lessThan('startDate',todaysDate)
+                .greaterThan('endDate',todaysDate)
+                .equalTo('screen', new Parse.Object('Screen', {id: key}))
+                .descending('createdAt')
+                .skip(1),
+            firstScreen: (new Parse.Query('AssignmentPattern')
+                .equalTo('published',true))
+                .include('screenAsset')
+                .include('screen')
+                .lessThan('startDate',todaysDate)
+                .greaterThan('endDate',todaysDate)
+                .equalTo('screen', new Parse.Object('Screen', {id: key}))
+                .descending('createdAt')
+                .limit(1),
+            calendars: (new Parse.Query('Calendar')
+                .equalTo('owner',owner)
+                .equalTo('published',true))
+                .descending('createdAt')
+                .limit(1),
+            calendarsSkip: (new Parse.Query('Calendar')
+                .equalTo('owner',owner)
+                .equalTo('published',true))
+                .descending('createdAt').skip(1)
         };
     },
     componentDidMount:function() {
-            
-            $(document).ready(function() {
-                
-                //$('.item').first().addClass('active');
+        var self = this;
+        var key = this.props.scheduleId;
+
+        var AssignmentPattern = Parse.Object.extend("AssignmentPattern");
+        var query = new Parse.Query(AssignmentPattern);
+        var existingLengthOfAssignmentPatters;
+        var todaysDate = new Date(); 
+
+        query.equalTo('published',true);
+        query.equalTo('screen', new Parse.Object('Screen', {id: key}));
+        query.lessThan('startDate',todaysDate);
+        query.greaterThan('endDate',todaysDate);
+
+        $(document).ready(function() {
+            setTimeout(function(){ 
+                $('.item').last().addClass('active');
                 $('.carousel').carousel({
-                    interval: 2000,
+                    interval: 15000,
                     cycle:true
-                })
-            }); 
+                });
+            }, 1000);
+
+            setInterval(function(){
+                existingLengthOfAssignmentPatters = self.data.screens.length + self.data.firstScreen.length;
+                query.find({
+                  success: function(results) {
+                    if(results.length != existingLengthOfAssignmentPatters){
+                        window.location.reload();
+                    }
+                  },
+                  error: function(error) {
+                    alert("Error: " + error.code + " " + error.message);
+                  }
+                });
+            },15000);
+        }); 
 
     },
     render: function() {
@@ -86,7 +135,6 @@ var ScreenDisplayPage = React.createClass({
     mixins: [LinkedStateMixin],
 
     returnSomething(something) {
-        //this is only for testing purposes. Check /test/components/App-test.js
         return something;
     },
     getInitialState() {

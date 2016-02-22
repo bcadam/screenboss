@@ -16,10 +16,7 @@ var AssetListPage = React.createClass({
         var self = this;
         //<th>Published</th>
         return (
-            
-            <div className="row">
-{/*                <Dropzone />
-                */}                
+            <div className="row">            
                 <PickFile />
                 <AssetList />                
             </div>

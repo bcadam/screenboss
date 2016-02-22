@@ -10,19 +10,11 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 var AddAssetDropDown = React.createClass({
     mixins: [ParseReact.Mixin],
     observe: function() {
-        // Subscribe to all Comment objects, ordered by creation date
-        // The results will be available at this.data.comments
-        //var id = this.props.asset.objectId;
         return {
             comments: new Parse.Query('ScreenAsset').descending('createdAt')
         };
     },
     handleChange:function(e, index, value){
-        //console.log(e);
-        //console.log(index);
-        //console.log(value);
-        //console.log(this.props.asset.id);
-        //console.log(this.data.comments[value]);
         this.setState({index:index});
     },
     getInitialState: function(){
@@ -63,8 +55,6 @@ var AddAssetDropDown = React.createClass({
         {
             img = <img className='img-responsive' style={{maxHeight:"200px"}} src={self.data.comments[self.state.index].fileThumbnail.url()} />;
         }
-        
-        //console.log(self.data.comments[self.state.index]);
         return (
             <div className='col-xs-12 row'>
                 
@@ -74,7 +64,7 @@ var AddAssetDropDown = React.createClass({
 
                 <div className='col-xs-12 col-md-6'>
                     <div className='col-xs-12'>
-                        <DropDownMenu value={self.state.index} style={{width:"100%"}} onChange={this.handleChange}>
+                        <DropDownMenu autoWidth={false} value={self.state.index} style={{width:"100%"}} onChange={this.handleChange}>
                                 {this.data.comments.map(function(c) {
                                     i = i +1;
                                 return (
@@ -85,10 +75,6 @@ var AddAssetDropDown = React.createClass({
                     </div>
                     <div className='col-xs-12' style={{marginTop:"20px"}}>
                         <RaisedButton label="Add file" secondary={true} onClick={self.addAsset} />
-                    </div>
-
-                    <div className='col-xs-12' style={{marginTop:"20px"}}>
-                        <a href={'/#/screen/' + self.props.asset.objectId} target="_blank"><h3>Screen URL</h3></a>
                     </div>
                 </div>
 
