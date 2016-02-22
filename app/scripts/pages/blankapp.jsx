@@ -1,7 +1,7 @@
 import React from 'react';
 
 var BlankApp = React.createClass({
-   
+	
         render() {
             // const version = packageJSON.version;
 

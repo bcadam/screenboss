@@ -19,6 +19,12 @@
     <script src="https://cdn.jsdelivr.net/g/intro.js@2.0.0"></script>
     <link href="https://cdn.jsdelivr.net/intro.js/2.0.0/introjs.min.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script>
+            window.alert = function ( text ) { console.log( 'tried to alert: ' + text ); return true; };
+            alert( new Date() ); 
+
+            alert("done"); 
+    </script>
 
     <style>
                 /* CSS for Credit Card Payment form */

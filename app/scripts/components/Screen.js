@@ -52,12 +52,15 @@ var ScreenDisplayAnimator = React.createClass({
                     interval: 15000,
                     cycle:true
                 });
-            }, 1000);
 
-            setInterval(function(){
+
+                setInterval(function(){
+                //console.log(self.data.screens);
                 existingLengthOfAssignmentPatters = self.data.screens.length;
                 query.find({
                   success: function(results) {
+
+                    //console.log(results);
                     if(results.length != existingLengthOfAssignmentPatters){
                         window.location.reload();
                     }
@@ -67,6 +70,14 @@ var ScreenDisplayAnimator = React.createClass({
                   }
                 });
             },1000);
+
+
+
+            }, 1000);
+
+            
+
+
         }); 
 
     },
