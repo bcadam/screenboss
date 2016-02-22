@@ -37,7 +37,7 @@ const routes = (
 
     <Route path='/app' component={ App }>
       <IndexRoute component={ Profile } />
-      <Route path='schedules' component={ ScheduleListPage } />
+      <Route path='playlists' component={ ScheduleListPage } />
       <Route path='calendars' component={ CalendarsPage } />
       <Route path='assets' component={ AssetListPage } />
       <Route path='events' component={ GoogleEvents } />
@@ -76,4 +76,3 @@ export default routes;
             <Route path='gettingstartedscreens' component={ GettingStartedScreens } />
             <Route path='gettingstartedassignments' component={ GettingStartedAssignments } />*/}
 
-            

@@ -63,7 +63,7 @@ var LeftSideBar = React.createClass({
                 <div>
                     <MenuItem primaryText="Profile" leftIcon={<Profile />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/profile");}} />
 {/*                    <MenuItem primaryText="Dashboard" leftIcon={<Dashboard />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/");}} />
-                    */}                    <MenuItem primaryText="Schedules" leftIcon={<Schedules />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/schedules");}} />
+                    */}                    <MenuItem primaryText="Playlists" leftIcon={<Schedules />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/playlists");}} />
                     <MenuItem primaryText="Files" leftIcon={<File />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign("/#/app/assets");}} />
                     <MenuItem primaryText="Google Calendars" leftIcon={<Calendars />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign('/#/app/calendars')}} />
                     <MenuItem primaryText="Displays" leftIcon={<DisplayIcon />} onTouchTap={function(){self.props.open.requestChange(false);window.location.assign('/#/app/displays/')}} />

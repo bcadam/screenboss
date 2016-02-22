@@ -16,6 +16,7 @@ import Calendars from 'material-ui/lib/svg-icons/action/today';
 import SendFile from 'material-ui/lib/svg-icons/communication/email';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import DisplayIcon from 'material-ui/lib/svg-icons/av/airplay';
+import Schedules from 'material-ui/lib/svg-icons/action/query-builder';
 
 
 var CreditCard = require('./CreditCard.js');
@@ -65,7 +66,7 @@ var Profile = React.createClass({
                                 <h3>{user.email}</h3>
                                 <h6>Member since: {moment(user.createdAt).format('MMM Do, YYYY')}</h6>
                                 <div><a href='https://drive.google.com/open?id=0B3fMsATjcJxAZkk5bmk3Z2VSdHM' target="_blank">Download installer</a></div>
-                                <MenuItem primaryText={"Schedules: " + self.data.screens.length} leftIcon={<Screen />} onTouchTap={function(){window.location.assign("/#/app/schedules");}} />
+                                <MenuItem primaryText={"Playlists: " + self.data.screens.length} leftIcon={<Schedules />} onTouchTap={function(){window.location.assign("/#/app/schedules");}} />
                                 <MenuItem primaryText={"Files: " + self.data.screenassets.length} leftIcon={<File />} onTouchTap={function(){window.location.assign("/#/app/assets");}} />
                                 <MenuItem primaryText={"Calendars: " + self.data.calendars.length} leftIcon={<Calendars />} onTouchTap={function(){window.location.assign('/#/app/calendars')}} />
                                 <MenuItem primaryText="Displays" leftIcon={<DisplayIcon />} onTouchTap={function(){window.location.assign('/#/app/displays/')}} />
