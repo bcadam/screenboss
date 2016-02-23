@@ -8,6 +8,36 @@ var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 var GoogleEvents = require('./GoogleEvents.js');
 
+if(Array.prototype.equals)
+    console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");
+// attach the .equals method to Array's prototype to call it on any array
+Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
+
+    // compare lengths - can save a lot of time 
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l=this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].equals(array[i]))
+                return false;       
+        }           
+        else if (this[i] != array[i]) { 
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;   
+        }           
+    }       
+    return true;
+}
+// Hide method from for-in loops
+Object.defineProperty(Array.prototype, "equals", {enumerable: false});
+
+
 var ScreenDisplayAnimator = React.createClass({
     mixins: [ParseReact.Mixin],
     observe: function() {
@@ -54,22 +84,36 @@ var ScreenDisplayAnimator = React.createClass({
                 });
 
 
-                setInterval(function(){
-                //console.log(self.data.screens);
-                existingLengthOfAssignmentPatters = self.data.screens.length;
-                query.find({
-                  success: function(results) {
 
-                    //console.log(results);
-                    if(results.length != existingLengthOfAssignmentPatters){
-                        window.location.reload();
+
+                existingLengthOfAssignmentPatters = self.data.screens.length;
+
+                var subscriptionIds = [];
+
+                for (var i = 0; i < self.data.screens.length; i++) {
+                        subscriptionIds.push(self.data.screens[i].id.objectId);
                     }
-                  },
-                  error: function(error) {
-                    alert("Error: " + error.code + " " + error.message);
-                  }
-                });
-            },1000);
+
+
+                setInterval(function(){                
+                    query.find({
+                      success: function(results) {
+                        
+                        var resultsId = [];
+
+                        for (var i = 0; i < results.length; i++) {
+                            resultsId.push(results[i].id);
+                        }
+                        if(!subscriptionIds.equals(resultsId)){
+                            console.log("Something changed");
+                            window.location.reload();
+                        }
+                      },
+                      error: function(error) {
+                        alert("Error: " + error.code + " " + error.message);
+                      }
+                    });
+                },5000);
 
 
 

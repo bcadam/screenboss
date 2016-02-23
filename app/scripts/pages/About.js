@@ -1,3 +1,4 @@
+import Parse from 'parse';
 import React from 'react';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 
@@ -17,11 +18,19 @@ var Home = React.createClass({
     },
     componentDidMount() {
 
+        // Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6','Pp9mBdqFMmnjFLT4skUMif2Tz7bie3hCqKv5CfRj');
+        // var obj = new Parse.Object('GameScore');
+        // obj.set('score',1337);
+        // obj.save().then(function(obj) {
+        //   console.log(obj.toJSON());
+        //   var query = new Parse.Query('GameScore');
+        //   query.get(obj.id).then(function(objAgain) {
+        //     console.log(objAgain.toJSON());
+        //   }, function(err) {console.log(err); });
+        // }, function(err) { console.log(err); });
+
+
         window.sr = ScrollReveal();
-        // sr.reveal('.title');
-        // sr.reveal('.firstPrice',{delay:0});
-        // sr.reveal('.secondPrice',{delay:100});
-        // sr.reveal('.thirdPrice',{delay:200});
         sr.reveal('.left',{origin:'left'});
         sr.reveal('.right',{origin:'right'});
 
