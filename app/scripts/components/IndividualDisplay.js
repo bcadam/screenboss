@@ -125,12 +125,12 @@ var IndividualDisplay = React.createClass({
 
         if(self.props.display.schedule != null)
         {
-          var button = <RaisedButton style={{marginTop:'30px !important'}} label="Delete schedule" primary={true} onTouchTap={self.handleOpen} />;
+          var button = <RaisedButton fullWidth={true} style={{maxWidth:'300px !important'}} label="Delete schedule" primary={true} onTouchTap={self.handleOpen} />;
         }
         //console.log(self.props.display);
         if(self.props.display.schedule  == null)
         {
-          var button = <RaisedButton style={{marginTop:'30px !important'}} label="Delete display" primary={true} onTouchTap={self.deleteOpen} />;
+          var button = <RaisedButton fullWidth={true} style={{maxWidth:'300px !important'}} label="Delete display" primary={true} onTouchTap={self.deleteOpen} />;
         }
 
         return (
@@ -142,7 +142,6 @@ var IndividualDisplay = React.createClass({
               </div>
               <div className="col-xs-12" style={{marginTop:'30px !important'}}>
                 <div className="col-xs-6">
-                  {button}
                   <Dialog
                     title="Delete Schedule"
                     actions={actionsDeleteScreen}
@@ -162,8 +161,11 @@ var IndividualDisplay = React.createClass({
                     Are you sure you want to delete this display from your account.
                   </Dialog>
                 </div>
-                <div className="col-xs-6">
+                <div className="col-xs-12">
                   <h3><AddSchedule asset={self.props.display} /></h3>
+                </div>
+                <div className="col-xs-12" style={{marginBottom:'10px',marginTop:'10px'}}>
+                  {button}
                 </div>
               </div>
             </Card>

@@ -71,9 +71,12 @@ var ScreenDisplayAnimator = React.createClass({
         var todaysDate = new Date(); 
 
         query.equalTo('published',true);
-        query.equalTo('screen', new Parse.Object('Screen', {id: key}));
+        query.include('screenAsset');
+        query.include('screen');
         query.lessThan('startDate',todaysDate);
         query.greaterThan('endDate',todaysDate);
+        query.equalTo('screen', new Parse.Object('Screen', {id: key}));
+        query.descending('createdAt');
 
         $(document).ready(function() {
             setTimeout(function(){ 
@@ -98,15 +101,23 @@ var ScreenDisplayAnimator = React.createClass({
                 setInterval(function(){                
                     query.find({
                       success: function(results) {
-                        
+
                         var resultsId = [];
 
                         for (var i = 0; i < results.length; i++) {
                             resultsId.push(results[i].id);
                         }
+
+                        //self.data.screens = results;
+
+                        // console.log(resultsId);
+                        // console.log(subscriptionIds);
+
                         if(!subscriptionIds.equals(resultsId)){
                             console.log("Something changed");
                             window.location.reload();
+                            // self.data.screens = results;
+                            // self.setState({counter : self.state.counter + 1});
                         }
                       },
                       error: function(error) {
