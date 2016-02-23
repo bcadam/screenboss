@@ -85,7 +85,7 @@ var IndividualDisplay = React.createClass({
         var self = this;
         var c = self.props.display;
 
-        var name = '';
+        var name = 'Not set';
 
         if(c.schedule){
             name = c.schedule.name
@@ -137,12 +137,25 @@ var IndividualDisplay = React.createClass({
 
             <Card style={{marginBottom:'20px'}}>
               <div className="col-xs-12">
-                <div className="pull-right col-xs-6"><h3 style={{textAlign:'right'}}>{name}</h3></div>
-                <div className="col-xs-6"><h3>{/*<a target="_blank" href={"/#/display/" + c.key} >*/}{c.location + ": "}</h3></div>
+                
+                <div className="col-xs-6"><h3>{c.location}</h3></div>
+                <div className="col-xs-6"><h3 style={{textAlign:'right'}}>Playlist: {name}</h3></div>
+              
               </div>
+
               <div className="col-xs-12" style={{marginTop:'30px !important'}}>
-                <div className="col-xs-6">
-                  <Dialog
+                
+                <div className="col-xs-12">
+                  <h3><AddSchedule asset={self.props.display} /></h3>
+                </div>
+
+                <div className="col-xs-12 col-md-6 col-md-4" style={{marginBottom:'15px',marginTop:'40px'}}>
+                  {button}
+                </div>
+              </div>
+
+
+              <Dialog
                     title="Delete Schedule"
                     actions={actionsDeleteScreen}
                     modal={false}
@@ -151,7 +164,7 @@ var IndividualDisplay = React.createClass({
                   >
                     Are you sure you want to delete this schedule from this screen.
                   </Dialog>
-                  <Dialog
+              <Dialog
                     title="Delete Display"
                     actions={actionsDeleteDisplay}
                     modal={false}
@@ -160,14 +173,6 @@ var IndividualDisplay = React.createClass({
                   >
                     Are you sure you want to delete this display from your account.
                   </Dialog>
-                </div>
-                <div className="col-xs-12">
-                  <h3><AddSchedule asset={self.props.display} /></h3>
-                </div>
-                <div className="col-xs-12" style={{marginBottom:'10px',marginTop:'10px'}}>
-                  {button}
-                </div>
-              </div>
             </Card>
 
         );
