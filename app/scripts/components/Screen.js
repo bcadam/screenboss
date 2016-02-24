@@ -40,23 +40,26 @@ Object.defineProperty(Array.prototype, "equals", {enumerable: false});
 
 var ScreenDisplayAnimator = React.createClass({
     mixins: [ReactFireMixin,ParseReact.Mixin],
-    updateScreen: function(name) {
+    updateScreen: function(screenShowing) {
+
+        var screenShowing = ((screenShowing) ? screenShowing : 'http://placehold.it/320x180?text=Calendar');
+
+        var scheduleId = this.props.scheduleId;
         //var ref = new Firebase("https://screenboss.firebaseio.com/displays");
         //this.bindAsArray(ref, "displays");
         //var name = 'cat';
         // console.log('this.state.displays');
         // console.log(this.state.displays);
-        // var displayRef = new Firebase("https://screenboss.firebaseio.com/displays");
-        // var hopperRef = displayRef.child(name);
-        // hopperRef.update({
-        //   "screen": "Amazing Grace"
-        // });
+        var displayRef = new Firebase("https://screenboss.firebaseio.com/livedisplays");
+        var hopperRef = displayRef.child(scheduleId);
+        hopperRef.update({
+          "screen": screenShowing
+        });
     },
     observe: function() {
         var key = this.props.scheduleId;
         var owner = this.props.user;
         var todaysDate = new Date(); 
-        //console.log(todaysDate);
 
         return {
             screens: (new Parse.Query('AssignmentPattern')
@@ -104,11 +107,12 @@ var ScreenDisplayAnimator = React.createClass({
 
 
 
-               // $('.carousel').on('slide.bs.carousel', function (e) {
-               //      var slideFrom = $(this).find('.active').attr('src');
-               //      var slideTo = $(e.relatedTarget).index();
-               //      console.log(slideFrom+' => '+slideTo);
-               //  });
+               $('.carousel').on('slide.bs.carousel', function (e) {
+                    var slideFrom = $(this).find('.active').index();
+                    var slideTo = $(e.relatedTarget).attr('src');
+                    console.log(slideFrom+' => '+slideTo);
+                    self.updateScreen(slideTo);
+                });
 
                 existingLengthOfAssignmentPatters = self.data.screens.length;
 
@@ -160,6 +164,7 @@ var ScreenDisplayAnimator = React.createClass({
     render: function() {
         var holder = this.props.imageClass;
         var self = this;
+        //console.log(self.props.scheduleId);
 
         return (
             <div id="carousel-example-generic" className="carousel slide" style={{height:"100%",width:"100%",cursor:'none'}}>

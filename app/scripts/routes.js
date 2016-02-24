@@ -22,6 +22,7 @@ var CreditCard = require('./components/CreditCard.js');
 var SendFile = require('./components/SendFile.js');
 var Claim = require('./components/Claim.js');
 var Displays = require('./components/Displays.js');
+var Overview = require('./components/Overview.js');
 
 
 const routes = (
@@ -54,6 +55,15 @@ const routes = (
       <Route path='*' component={NotFound}/>
 
     </Route>
+
+    <Route path='/admin' component={ App }>
+      <IndexRoute component={ Profile } />
+      <Route path='overview' component={ Overview } />
+
+      <Route path='*' component={NotFound}/>
+
+    </Route>
+
 
     <Route path='/' component={ BlankApp }>
       <IndexRoute component={ LandingPage }/>
