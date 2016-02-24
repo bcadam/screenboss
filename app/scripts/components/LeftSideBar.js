@@ -47,7 +47,7 @@ var LeftSideBar = React.createClass({
         var self = this;
         Parse.User.logOut().then(function(){
             console.log(self.props.user);
-            self.state.user.requestChange(null);
+            //self.state.user.requestChange(null);
             window.location.assign("/#/");
         });
 
