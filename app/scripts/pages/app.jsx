@@ -13,18 +13,19 @@ var App = React.createClass({
     mixins: [LinkedStateMixin],
 
         getInitialState() {
+        	var user = Parse.User.current()
+        	//console.log(user);
             return {
-                user: Parse.User.current(),
+                user: user,
                 open: false,
             };
         },
         
         render() {
-        
 
             return (
 				<div>
-			        <Header open={this.linkState('open')} /><LeftSideBar open={this.linkState('open')} />
+			        <Header open={this.linkState('open')} /><LeftSideBar open={this.linkState('open')} user={this.linkState('user')} />
 			        {/*<div className="wrapper row-offcanvas row-offcanvas-left">
 			        			        	<LeftSideBar />
 

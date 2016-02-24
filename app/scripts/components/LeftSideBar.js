@@ -37,12 +37,17 @@ var LeftSideBar = React.createClass({
         this.setState({open: false});
     },
     getInitialState:function() {
+        //console.log(Parse.User.current());
+
         return {
-              user : Parse.User.current()
+              user : this.props.user
         };
     },
     logOut: function(){
+        var self = this;
         Parse.User.logOut().then(function(){
+            console.log(self.props.user);
+            self.state.user.requestChange(null);
             window.location.assign("/#/");
         });
 
@@ -52,8 +57,12 @@ var LeftSideBar = React.createClass({
         var user = Parse.User.current();
         var self = this;
         var email = '';
-
         var display;
+
+        //console.log(self.state.user);
+
+
+
 
         if(user)
         {

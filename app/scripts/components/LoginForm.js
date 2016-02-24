@@ -10,7 +10,8 @@ var LoginForm = React.createClass({
     getInitialState: function() {
         return {
             name: '',
-            password: ''
+            password: '',
+            user: this.props.user
         };
     },
     handleChange: function(name, e) {
@@ -26,8 +27,9 @@ var LoginForm = React.createClass({
         Parse.User.logIn(this.state.name, this.state.password,{
           success: function(user) {
             // Do stuff after successful login.
-            //self.props.user.requestChange(user);
+            self.props.user.requestChange(user);
             window.location.assign("/#/app/");
+            
           },
           error: function(user, error) {
             // The login failed. Check error to see why.
@@ -64,8 +66,8 @@ var LoginForm = React.createClass({
         user.signUp(null, {
           success: function(user) {
             //Hooray! Let them use the app now.
-            self.props.user.requestChange(user);
-            window.location.assign("/#/app/");
+            this.props.user.requestChange(user)
+            //window.location.assign("/#/app/");
           },
           error: function(user, error) {
             // Show the error message somewhere and let the user try again.
@@ -85,6 +87,7 @@ var LoginForm = React.createClass({
 
     },
     render: function() {
+        console.log(this.state.user);
         return (
                   <div>
                     <div className="container">
