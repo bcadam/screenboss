@@ -146,6 +146,7 @@ var Display = React.createClass({
             alert("Error: " + error.code + " " + error.message);
           }
         });
+
     },
     getInitialState() {
         return {

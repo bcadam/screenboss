@@ -39,7 +39,19 @@ Object.defineProperty(Array.prototype, "equals", {enumerable: false});
 
 
 var ScreenDisplayAnimator = React.createClass({
-    mixins: [ParseReact.Mixin],
+    mixins: [ReactFireMixin,ParseReact.Mixin],
+    updateScreen: function(name) {
+        //var ref = new Firebase("https://screenboss.firebaseio.com/displays");
+        //this.bindAsArray(ref, "displays");
+        //var name = 'cat';
+        // console.log('this.state.displays');
+        // console.log(this.state.displays);
+        // var displayRef = new Firebase("https://screenboss.firebaseio.com/displays");
+        // var hopperRef = displayRef.child(name);
+        // hopperRef.update({
+        //   "screen": "Amazing Grace"
+        // });
+    },
     observe: function() {
         var key = this.props.scheduleId;
         var owner = this.props.user;
@@ -79,15 +91,24 @@ var ScreenDisplayAnimator = React.createClass({
         query.descending('createdAt');
 
         $(document).ready(function() {
+            
             setTimeout(function(){ 
                 $('.item').first().addClass('active');
+                
                 $('.carousel').carousel({
                     interval: 15000,
-                    cycle:true
+                    cycle:true,
+                    pause: false
                 });
 
 
 
+
+               // $('.carousel').on('slide.bs.carousel', function (e) {
+               //      var slideFrom = $(this).find('.active').attr('src');
+               //      var slideTo = $(e.relatedTarget).index();
+               //      console.log(slideFrom+' => '+slideTo);
+               //  });
 
                 existingLengthOfAssignmentPatters = self.data.screens.length;
 
@@ -148,9 +169,7 @@ var ScreenDisplayAnimator = React.createClass({
 
                     {this.data.screens.map(function(c) {
                         return (
-                        <div key={c.objectId} className="product item">
-                          <img src={c.screenAsset.file.url()} className="vcenter img img-responsive" style={holder.value}/>
-                        </div>
+                          <img key={c.objectId} src={c.screenAsset.file.url()} className="product item vcenter img img-responsive" style={holder.value}/>
                         );
                     })}
 
