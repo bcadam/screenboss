@@ -1,9 +1,9 @@
-var express = require('express');
+var express = require('express')
+  , cors = require('cors')
+  , app = express();
 
-var cors = require('cors');
-var app = express();
 app.use(cors());
-
+app.options('*', cors());
 
 var favicon = require('serve-favicon');
 
@@ -21,6 +21,9 @@ var api = new ParseServer({
 });
 var mountPath = process.env.PARSE_MOUNT || '/parse';
 app.use(mountPath, api);
+
+
+
 
 
 app.use(favicon('app/images/favicon.ico'));
