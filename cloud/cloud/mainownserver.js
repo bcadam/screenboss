@@ -4,7 +4,9 @@
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6');
 
-
+function test(){
+    console.log('test');
+}
 
 // var Stripe = require('stripe');
 var stripe = require("stripe")(

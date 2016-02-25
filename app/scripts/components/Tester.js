@@ -3,16 +3,16 @@ var Parse = require('parse');
 var ParseReact = require('parse-react');
 
 
-Parse.initialize("pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6");
-Parse.serverURL = 'http://screenboss.co/parse';
+// Parse.initialize("pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6");
+// Parse.serverURL = 'http://screenboss.co/parse';
 
-// Parse.initialize('<MY_APP_ID>', '<MY_JS_KEY>');
-// Parse.serverURL = 'https://<MY_HEROKU_APP_NAME>.herokuapp.com/Parse'
-var TestObject = Parse.Object.extend("TestObject");
-var testObject = new TestObject();
-    testObject.save({foo: "bar"}).then(function(object) {
-    alert("yay! it worked");
-});
+// // Parse.initialize('<MY_APP_ID>', '<MY_JS_KEY>');
+// // Parse.serverURL = 'https://<MY_HEROKU_APP_NAME>.herokuapp.com/Parse'
+// var TestObject = Parse.Object.extend("TestObject");
+// var testObject = new TestObject();
+//     testObject.save({foo: "bar"}).then(function(object) {
+//     alert("yay! it worked");
+// });
 
 
 
