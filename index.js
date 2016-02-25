@@ -1,9 +1,12 @@
 var express = require('express');
-var app = express();
-var favicon = require('serve-favicon');
-var cors = require('cors');
 
+var cors = require('cors');
+var app = express();
 app.use(cors());
+
+
+var favicon = require('serve-favicon');
+
 
 var ParseServer = require('parse-server').ParseServer;
 var databaseUri = process.env.DATABASE_URI || process.env.MONGOLAB_URI;

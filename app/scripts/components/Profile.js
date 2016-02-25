@@ -7,6 +7,7 @@ import { Link } from 'react-router'
 
 import RaisedButton from 'material-ui/lib/raised-button';
 import FlatButton from 'material-ui/lib/flat-button';
+
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import Screen from 'material-ui/lib/svg-icons/hardware/cast';
 import File from 'material-ui/lib/svg-icons/file/attachment';
@@ -20,6 +21,9 @@ import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import DisplayIcon from 'material-ui/lib/svg-icons/av/airplay';
 import Schedules from 'material-ui/lib/svg-icons/action/query-builder';
 
+import Dialog from 'material-ui/lib/dialog';
+import PlayClaim from 'material-ui/lib/svg-icons/action/play-for-work';
+
 var CreditCard = require('./CreditCard.js');
 
 var Profile = React.createClass({
@@ -32,9 +36,16 @@ var Profile = React.createClass({
             window.location.assign("#/app/login");
         }
     },
-    getInitialState() {
+    handleOpen:function() {
+        this.setState({open: true});
+    },
+    handleClose:function() {
+        this.setState({open: false});
+    },
+    getInitialState: function() {
         return {
-            user: Parse.User.current() 
+            user: Parse.User.current(),
+            open:false
         };
     },
     observe: function() {
@@ -63,35 +74,53 @@ var Profile = React.createClass({
         var display;
         //console.log(this.props);
 
-        if(self.state.user){
-            display = (<div className="col-xs-12 well">
-                        <div className="row">
-
-                            <div className="col-xs-4 hidden-xs">
-                                <img src="http://placehold.it/400?text=Profile+pictures+soon!" className="img-circle img img-responsive col-xs-12" style={{maxWidth:'300px',margin:'0 auto'}} />
-                            </div>
-                            
-                            <div className="col-sm-8 col-xs-12">
-                                <h3>{user.get('email')}</h3>
-                                <h6>Member since: {moment(user.createdAt).format('MMM Do, YYYY')}</h6>
-                                <div><a href='/public/install' target="_blank"><h4>Download installer</h4></a></div>
-                                <Link to="app/playlists"><MenuItem primaryText={"Playlists: " + self.data.screens.length} leftIcon={<Schedules />} /></Link>
-                                <Link to="app/assets"><MenuItem primaryText={"Files: " + self.data.screenassets.length} leftIcon={<File />} /></Link>
-                                <Link to="app/calendars"><MenuItem primaryText={"Calendars: " + self.data.calendars.length} leftIcon={<Calendars />} /></Link>
-                                <Link to="app/displays"><MenuItem primaryText="Displays" leftIcon={<DisplayIcon />} /></Link>
-                                <Link to="app/sendfile"><MenuItem primaryText={"Send File Request"} leftIcon={<SendFile />} /></Link>
-                                <CreditCard />
-                            </div>
-                        </div>
-                    </div>);
-        }
-        else{
-            display = (<div></div>);
-        }
-
         return (
             <div className="col-xs-12">
-                {display}
+                <div className="col-xs-12 well">
+                    <div className="row">
+
+                        <div className="col-xs-4 hidden-xs">
+                            <img src="http://placehold.it/400?text=Profile+pictures+soon!" className="img-circle img img-responsive col-xs-12" style={{maxWidth:'300px',margin:'0 auto'}} />
+                        </div>
+                        <Dialog
+                          title="Installation Instructions"
+                          modal={false}
+                          open={this.state.open}
+                          onRequestClose={this.handleClose} >
+                            <div className='row'>
+                                <div className='col-xs-12'>
+                                    <div className='col-xs-12 col-sm-4 text-center'>
+                                        <h3>Download</h3>
+                                        <a href='/public/install'><i className="col-xs-12 fa fa-cloud-download fa-5x well"></i></a>
+                                        <p>Download this file to any mac with Google Chrome installed</p>
+                                    </div>
+                                    <div className='col-xs-12 col-sm-4 text-center'>
+                                        <h3>Run</h3>
+                                        <i className="col-xs-12 fa fa-cogs fa-5x well"></i>
+                                        <p>Run the file once</p>
+                                    </div>
+                                    <div className='col-xs-12 col-sm-4 text-center'>
+                                        <h3>Claim</h3>
+                                        <i className="col-xs-12 fa fa-check-square-o fa-5x well"></i>
+                                        <p>From your ScreenBoss account, claim the screen</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </Dialog>
+                        <div className="col-sm-8 col-xs-12">
+                            <h3>{user.get('email')}</h3>
+                            <h6>Member since: {moment(user.createdAt).format('MMM Do, YYYY')}</h6>
+                            <FlatButton label="Installation Instructions" onTouchTap={this.handleOpen} />
+                            <Link to="app/playlists"><MenuItem primaryText={"Playlists: " + self.data.screens.length} leftIcon={<Schedules />} /></Link>
+                            <Link to="app/assets"><MenuItem primaryText={"Files: " + self.data.screenassets.length} leftIcon={<File />} /></Link>
+                            <Link to="app/calendars"><MenuItem primaryText={"Calendars: " + self.data.calendars.length} leftIcon={<Calendars />} /></Link>
+                            <Link to="app/displays"><MenuItem primaryText="Displays" leftIcon={<DisplayIcon />} /></Link>
+                            <Link to="app/sendfile"><MenuItem primaryText={"Send File Request"} leftIcon={<SendFile />} /></Link>
+                            <CreditCard />
+                        </div>
+
+                    </div>
+                </div>
             </div>
         );
 
