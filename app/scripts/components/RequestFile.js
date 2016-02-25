@@ -57,7 +57,7 @@ var PickFile = React.createClass({
             });
 
             Parse.Cloud.run('alertUser', {
-              id: userId,
+              id: self.props.params.id,
               title: self.state.title,
               description: self.state.description,
               location: self.state.location,
@@ -81,7 +81,7 @@ var PickFile = React.createClass({
     render: function() {
         // Render the text of each comment as a list item
         var self = this;
-        //console.log(self.props.userId);
+        //console.log(self.props.params.id);
         return (
           <div>
             <div className='col-xs-12 col-md-6'>

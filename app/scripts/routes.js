@@ -25,6 +25,9 @@ var Displays = require('./components/Displays.js');
 var Overview = require('./components/Overview.js');
 
 
+var Tester = require('./components/Tester.js');
+
+
 const routes = (
   <Router>
     
@@ -48,9 +51,15 @@ const routes = (
       <Route path='sendfile' component={ SendFile } />
       <Route path='claim' component={ Claim } />
       <Route path='displays' component={ Displays } />
+      <Route path='tester' component={ Displays } />
 
       <Route path='login' component={ LoginForm } />
       <Route path='logout' component={ LogOut } />
+
+
+
+
+      <Route path='tester' component={ Tester } />
 
       <Route path='*' component={NotFound}/>
 

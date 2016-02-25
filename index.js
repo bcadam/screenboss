@@ -1,8 +1,9 @@
 var express = require('express');
 var app = express();
 var favicon = require('serve-favicon');
+var cors = require('cors');
 
-
+app.use(cors());
 
 var ParseServer = require('parse-server').ParseServer;
 var databaseUri = process.env.DATABASE_URI || process.env.MONGOLAB_URI;
@@ -27,7 +28,7 @@ app.use('/css', express.static('dist/css'));
 app.use('/images', express.static('dist/images'));
 app.use('/js', express.static('dist/js'));
 app.use('/fonts', express.static('dist/fonts'));
-app.use('/public/screenboss', express.static('public/ScreenBossLocal.zip'));
+app.use('/public/install', express.static('public/ScreenBossLocal.zip'));
 app.use('/public', express.static('public'));
 
 

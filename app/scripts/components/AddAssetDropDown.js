@@ -56,14 +56,13 @@ var AddAssetDropDown = React.createClass({
         {
             img = <img className='img-responsive' style={{maxHeight:"200px"}} src={self.data.comments[self.state.index].fileThumbnail.url()} />;
         }
-        return (
-            <div className='col-xs-12 row'>
-                
-                <div className='col-xs-12 col-md-6 product'>
-                    {img}
-                </div>
 
-                <div className='col-xs-12 col-md-6'>
+        var length = self.data.comments.length;
+        var display;
+        if(length == 0){
+            display = <div><a href="/#/app/assets"><h2>Add files first</h2></a></div>;
+        }else{
+            display = (<div className='col-xs-12 col-md-6'>
                     <div className='col-xs-12'>
                         <DropDownMenu full={true} value={self.state.index} style={{width:"100%",marginLeft:'-50px',padding:'0px'}} onChange={this.handleChange}>
                                 {this.data.comments.map(function(c) {
@@ -77,7 +76,17 @@ var AddAssetDropDown = React.createClass({
                     <div className='col-xs-12' style={{marginTop:"20px"}}>
                         <RaisedButton label="Add file" secondary={true} onClick={self.addAsset} />
                     </div>
+                </div>);
+        }
+
+        return (
+            <div className='col-xs-12 row'>
+                
+                <div className='col-xs-12 col-md-6 product'>
+                    {img}
                 </div>
+
+                {display}
 
             </div>          
             

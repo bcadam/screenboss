@@ -132,7 +132,8 @@ var IndividualDisplay = React.createClass({
         {
           var button = <RaisedButton fullWidth={true} style={{maxWidth:'300px !important'}} label="Delete display" primary={true} onTouchTap={self.deleteOpen} />;
         }
-
+        var user = this.props.display.owner;
+        //console.log(user);
         return (
 
             <Card style={{marginBottom:'20px'}}>
@@ -146,7 +147,7 @@ var IndividualDisplay = React.createClass({
               <div className="col-xs-12" style={{marginTop:'30px !important'}}>
                 
                 <div className="col-xs-12">
-                  <h3><AddSchedule asset={self.props.display} /></h3>
+                  <h3><AddSchedule asset={self.props.display} user={user} /></h3>
                 </div>
 
                 <div className="col-xs-12 col-md-6 col-md-4" style={{marginBottom:'15px',marginTop:'40px'}}>

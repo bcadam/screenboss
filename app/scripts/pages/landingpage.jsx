@@ -299,7 +299,7 @@ olark.identify('3932-129-10-4975');/*]]>*/
                     <li style={planLine}>Unlimited Screens</li>
                     <li style={planLine}>Unlimited Team Uploads</li>
                     <li style={planLine}>Email Support</li>
-                    <li style={planLine} className="plan-action"><Link to="app/login" className="btn btn-primary btn-lg">Sign Up</Link></li>
+                    <li style={planLine} className="plan-action"><Link to="app/profile" className="btn btn-primary btn-lg">Sign Up</Link></li>
                 </ul>
             </div>
             <div className="col-sm-4" style={pricingTableItem}>
@@ -311,7 +311,7 @@ olark.identify('3932-129-10-4975');/*]]>*/
                     <li style={planLine}>Unlimited Screens</li>
                     <li style={planLine}>Unlimited Team Uploads</li>
                     <li style={planLine}>Email Support</li>
-                    <li style={planLine} className="plan-action"><Link to="app/login" className="btn btn-primary btn-lg">Sign Up</Link></li>
+                    <li style={planLine} className="plan-action"><Link to="app/profile" className="btn btn-primary btn-lg">Sign Up</Link></li>
                 </ul>
             </div>
             <div className="col-sm-4" style={pricingTableItem}>
@@ -323,7 +323,7 @@ olark.identify('3932-129-10-4975');/*]]>*/
                     <li style={planLine}>Unlimited Screens</li>
                     <li style={planLine}>Unlimited Team Uploads</li>
                     <li style={planLine}><b>Phone Support</b></li>
-                    <li style={planLine} className="plan-action"><Link to="app/login" className="btn btn-primary btn-lg">Sign Up</Link></li>
+                    <li style={planLine} className="plan-action"><Link to="app/profile" className="btn btn-primary btn-lg">Sign Up</Link></li>
                 </ul>
             </div>
         </div>

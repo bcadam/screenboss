@@ -38,7 +38,7 @@ var NewScreenForm = React.createClass({
         var newScreen = ParseReact.Mutation.Create('Screen',configs).dispatch(function(){
             self.setState({name:'',description:''});
             
-            setTimeout(function(){ window.location.reload(); }, 750);
+            window.location.reload();
         });
         
     },

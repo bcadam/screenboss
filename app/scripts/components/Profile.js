@@ -2,6 +2,8 @@ import React from 'react';
 import Parse from 'parse';
 var moment = require('moment');
 var ParseReact = require('parse-react');
+import { Link } from 'react-router'
+
 
 import RaisedButton from 'material-ui/lib/raised-button';
 import FlatButton from 'material-ui/lib/flat-button';
@@ -72,12 +74,12 @@ var Profile = React.createClass({
                             <div className="col-sm-8 col-xs-12">
                                 <h3>{user.get('email')}</h3>
                                 <h6>Member since: {moment(user.createdAt).format('MMM Do, YYYY')}</h6>
-                                <div><a href='https://drive.google.com/open?id=0B3fMsATjcJxAZkk5bmk3Z2VSdHM' target="_blank">Download installer</a></div>
-                                <MenuItem primaryText={"Playlists: " + self.data.screens.length} leftIcon={<Schedules />} onTouchTap={function(){window.location.assign("/#/app/schedules");}} />
-                                <MenuItem primaryText={"Files: " + self.data.screenassets.length} leftIcon={<File />} onTouchTap={function(){window.location.assign("/#/app/assets");}} />
-                                <MenuItem primaryText={"Calendars: " + self.data.calendars.length} leftIcon={<Calendars />} onTouchTap={function(){window.location.assign('/#/app/calendars')}} />
-                                <MenuItem primaryText="Displays" leftIcon={<DisplayIcon />} onTouchTap={function(){window.location.assign('/#/app/displays/')}} />
-                                <MenuItem primaryText={"Send File Request"} leftIcon={<SendFile />} onTouchTap={function(){window.location.assign('/#/app/sendfile/')}} />
+                                <div><a href='/public/install' target="_blank"><h4>Download installer</h4></a></div>
+                                <Link to="app/playlists"><MenuItem primaryText={"Playlists: " + self.data.screens.length} leftIcon={<Schedules />} /></Link>
+                                <Link to="app/assets"><MenuItem primaryText={"Files: " + self.data.screenassets.length} leftIcon={<File />} /></Link>
+                                <Link to="app/calendars"><MenuItem primaryText={"Calendars: " + self.data.calendars.length} leftIcon={<Calendars />} /></Link>
+                                <Link to="app/displays"><MenuItem primaryText="Displays" leftIcon={<DisplayIcon />} /></Link>
+                                <Link to="app/sendfile"><MenuItem primaryText={"Send File Request"} leftIcon={<SendFile />} /></Link>
                                 <CreditCard />
                             </div>
                         </div>

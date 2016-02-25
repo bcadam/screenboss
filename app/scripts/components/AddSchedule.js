@@ -9,8 +9,9 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 var AddSchedule = React.createClass({
     mixins: [ParseReact.Mixin],
     observe: function() {
+        var user = Parse.User.current();
         return {
-            schedules: new Parse.Query('Screen').descending('createdAt')
+            schedules: new Parse.Query('Screen').equalTo('owner', user).descending('createdAt')
         };
     },
     handleChange:function(e, index, value){
@@ -43,9 +44,6 @@ var AddSchedule = React.createClass({
         var self = this;
         var display = this.props.asset.id;
         var schedule = this.data.schedules[self.state.index].id;
-
-        console.log(display);
-        console.log(schedule);
        
         var configs ={
             schedule : schedule
@@ -59,6 +57,8 @@ var AddSchedule = React.createClass({
     render: function() {
         var self = this;
         var i = -1
+        var user = this.props.user;
+        console.log(user);
 
         return (
             <div>
