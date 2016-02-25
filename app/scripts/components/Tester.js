@@ -10,8 +10,8 @@ Parse.serverURL = 'http://screenboss.co/parse';
 // Parse.serverURL = 'https://<MY_HEROKU_APP_NAME>.herokuapp.com/Parse'
 var TestObject = Parse.Object.extend("TestObject");
 var testObject = new TestObject();
-testObject.save({foo: "bar"}).then(function(object) {
-alert("yay! it worked");
+    testObject.save({foo: "bar"}).then(function(object) {
+    alert("yay! it worked");
 });
 
 
