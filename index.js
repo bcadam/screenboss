@@ -3,20 +3,26 @@ var express = require('express')
   , app = express();
 
 
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+// var allowCrossDomain = function(req, res, next) {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type');
 
-    next();
-}
+//     next();
+// }
 
 
-    app.use(allowCrossDomain);
-  
+// app.use(allowCrossDomain);
+// app.use(cors());
+// app.options('*', cors());
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
-app.use(cors());
-app.options('*', cors());
+
+
 
 var favicon = require('serve-favicon');
 
