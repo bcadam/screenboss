@@ -58,6 +58,7 @@ var PickFile = React.createClass({
           function(Blobs){
             Parse.Cloud.run('saveBlob', { blob: Blobs , user: userId }).then(function(response) {
               console.log(response);
+              setTimeout(function(){ window.location.reload(); }, 500);
             });
 
             // Parse.Cloud.run('alertUser', {
