@@ -1,25 +1,16 @@
-var express = require('express')
-  , cors = require('cors')
-  , app = express();
+var express = require('express');  // find this line in the file
+var cors = require('cors') // add this line below it
 
+//....
 
-// var allowCrossDomain = function(req, res, next) {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//     res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-//     next();
-// }
-
-
-// app.use(allowCrossDomain);
-// app.use(cors());
-// app.options('*', cors());
-app.all('/*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-});
+var app = express();  // find this line in the file
+app.use(cors()); // add this line below it
+// // app.options('*', cors());
+// app.all('/*', function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   next();
+// });
 
 
 
