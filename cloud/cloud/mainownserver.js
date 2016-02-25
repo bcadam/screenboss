@@ -1,4 +1,4 @@
-var Image = require("parse-image");
+//var Image = require("parse-image");
 
 
 var mandrill = require('mandrill-api/mandrill');
@@ -24,7 +24,6 @@ Parse.Cloud.beforeSave("ScreenAsset", function(request, response) {
     }
 
     if (!user.dirty("file")) {
-        // The profile photo isn't being modified.
         response.success();
         return;
     }

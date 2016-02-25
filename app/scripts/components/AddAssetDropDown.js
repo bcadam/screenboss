@@ -10,8 +10,9 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 var AddAssetDropDown = React.createClass({
     mixins: [ParseReact.Mixin],
     observe: function() {
+        var user = this.props.user;
         return {
-            comments: new Parse.Query('ScreenAsset').descending('createdAt')
+            comments: new Parse.Query('ScreenAsset').equalTo('owner',user).descending('createdAt')
         };
     },
     handleChange:function(e, index, value){

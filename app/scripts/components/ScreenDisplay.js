@@ -69,7 +69,7 @@ var ScreenDisplay = React.createClass({
             keyboardFocused={true}
             onTouchTap={this.delete} />,
         ];
-
+        //console.log(Parse.User.current());
         var publishedButton;
         var stringOfPublished;
 
@@ -96,7 +96,7 @@ var ScreenDisplay = React.createClass({
 
                     <CardText expandable={true}>
                         
-                        <AddAssetDropDown asset={self.props.asset} />
+                        <AddAssetDropDown asset={self.props.asset} user={Parse.User.current()}/>
                         <div selectable={false}>
                             <div>
                               {self.data.comments.map(function(c) {

@@ -87,7 +87,7 @@ var LoginForm = React.createClass({
 
     },
     render: function() {
-        console.log(this.state.user);
+        //console.log(this.state.user);
         return (
                   <div>
                     <div className="container">
