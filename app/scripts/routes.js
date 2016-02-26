@@ -51,7 +51,6 @@ const routes = (
       <Route path='sendfile' component={ SendFile } />
       <Route path='claim' component={ Claim } />
       <Route path='displays' component={ Displays } />
-      <Route path='tester' component={ Displays } />
 
       <Route path='login' component={ LoginForm } />
       <Route path='logout' component={ LogOut } />

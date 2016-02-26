@@ -31,12 +31,14 @@ var PickFile = React.createClass({
         var self = this;
         var userId = self.props.userId;
 
-        if (! self.props.userId)
+        console.log(self.props.params.id);
+
+        if (!self.props.params.id)
         {
             userId = Parse.User.current().id;
         }
         else{
-          userId = self.props.userId;
+          userId = self.props.params.id;
         }
         //console.log(userId);
 

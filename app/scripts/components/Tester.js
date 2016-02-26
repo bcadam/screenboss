@@ -1,210 +1,115 @@
 var React = require('react');
-var Parse = require('parse');
-var ParseReact = require('parse-react');
+var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 
-// Parse.initialize("pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6");
-// Parse.serverURL = 'http://screenboss.co/parse';
-
-// // Parse.initialize('<MY_APP_ID>', '<MY_JS_KEY>');
-// // Parse.serverURL = 'https://<MY_HEROKU_APP_NAME>.herokuapp.com/Parse'
-// var TestObject = Parse.Object.extend("TestObject");
-// var testObject = new TestObject();
-//     testObject.save({foo: "bar"}).then(function(object) {
-//     alert("yay! it worked");
-// });
-
-
-
-
-var key = window.location.href;
-var count = key.indexOf('display/');
-key = key.substring(count + 8, key.length);
-
-var Screen = require('./Screen.js');
-
-var Display = React.createClass({
-    componentDidMount() {
-        var self = this;
-
-        //////////////////////////////////////////////////
-        //////////////////////////////////////////////////
-        //////////////////////////////////////////////////
-        //////////////////////////////////////////////////
-        //////////////////////////////////////////////////
-        //////////////////////////////////////////////////
-        var timeBetweenChecks = 1000;
-        //////////////////////////////////////////////////
-        //////////////////////////////////////////////////
-        //////////////////////////////////////////////////
-        //////////////////////////////////////////////////
-        //////////////////////////////////////////////////
-        //////////////////////////////////////////////////
-
-        var Display = Parse.Object.extend("Display");
-        var query = new Parse.Query(Display);
-        query.ascending('createdAt');
-        query.equalTo("key",key);
-        query.include('owner');
-        query.include('schedule');
-        query.limit(1);
-        query.find({
-          success: function(results) {
-
-            self.setState({results:results});
-
-            if(results.length == 0){
-
-                var number = Math.floor((Math.random() * 10000000));
-                ParseReact.Mutation.Create('Display', {
-                  key: key,
-                  randomNumber : number
-                }).dispatch().then(function(object){
-                    console.log(object);
-                    window.location.reload();
-                });
-            }
-            else if(results.length == 1){
-                //console.log(results[0]);
-
-                if(!results[0].get('owner'))
-                {
-                    var id = results[0].id;
-
-                    window.setInterval(function(){                    
-                    results[0].fetch({
-                          success: function(myObject) {
-                            // The object was refreshed successfully.
-                            console.log('Checking for update...');
-                            if(myObject.get('owner'))
-                            {
-                                window.location.reload();
-                            }
-                          },
-                          error: function(myObject, error) {
-                            // The object was not refreshed successfully.
-                            // error is a Parse.Error with an error code and message.
-                                window.location.reload();
-                          }
-                        });
-                    }, timeBetweenChecks);
-
-                }
-                else if(results[0].get('owner') && !results[0].get('schedule'))
-                {
-                    var location = results[0].get('location');
-
-                    window.setInterval(function(){                    
-                    results[0].fetch({
-                          success: function(myObject) {
-                            // The object was refreshed successfully.
-                            console.log('Checking for schedule assignment...');
-                            if(!myObject.get('owner'))
-                            {
-                                window.location.reload();
-                            }
-
-                            if(myObject.get('schedule'))
-                            {
-                                window.location.reload();
-                            }
-                          },
-                          error: function(myObject, error) {
-                                console.log(error);
-                                window.location.reload();
-                          }
-                        });
-                    }, timeBetweenChecks * 10);
-
-                }
-                else if(results[0].get('owner') && results[0].get('schedule'))
-                {
-                    var scheduleId = results[0].get('schedule').id;
-                    var owner = results[0].get('owner').id;
-                    //fconsole.log(scheduleId);
-
-                    window.setInterval(function(){                    
-                    results[0].fetch({
-                          success: function(myObject) {
-                            // The object was refreshed successfully.
-                            console.log('Checking for schedule change...');
-
-                            if(myObject.get('owner') == null)
-                            {
-                                window.location.reload();
-                            }
-
-                            if(!myObject.get('schedule')){
-                                window.location.reload();
-                            }
-                            if(myObject.get('schedule').id != scheduleId)
-                            {
-                                window.location.reload();
-                            }
-                            
-                          },
-                          error: function(myObject, error) {
-                            // The object was not refreshed successfully.
-                            // error is a Parse.Error with an error code and message.
-                                window.location.reload();
-                          }
-                        });
-                    }, timeBetweenChecks * 5);
-
-                }
-
-            }
-
-          },
-          error: function(error) {
-            alert("Error: " + error.code + " " + error.message);
-          }
-        });
-
-    },
-    getInitialState() {
-        return {
-            user: Parse.User.current(),
-            message : null,
-            results: null
-        };
+var Day = React.createClass({
+    handleClick(){
+        var holder = !this.props.publish.value;
+        this.props.publish.requestChange(holder);
     },
     render() {
-        // var user = Parse.User.current();     
         var self = this;
-        var screen;
-        if(self.state.results){
-        if(self.state.results.length == 1){
-                //console.log(results[0]);
+        var inline = {display:'inline'};
+        var padding = {padding:'10px'};
 
-                if(!self.state.results[0].get('owner'))
-                {
-                    var id = self.state.results[0].get('randomNumber');
-                    screen = <div style={{cursor:'none !important',margin:'0px',padding:'0px',background:'-webkit-radial-gradient(#494949, black)',background:'-o-radial-gradient(#494949, black)',background:'-moz-radial-gradient(#494949, black)',background:'radial-gradient(#494949, black)',color:'white',width:'100%',height:'100vh !important',position:'absolute',top:'0px',left:'0px'}}><h1 style={{position:'absolute',top:'30%',left:'28%'}}>Claim this screen with code: {id}</h1></div>;
-                }
-                else if(self.state.results[0].get('owner') && !self.state.results[0].get('schedule'))
-                {
-                    var location = self.state.results[0].get('location');
-                    screen = <div style={{cursor:'none !important',margin:'0px',padding:'0px',background:'-webkit-radial-gradient(#494949, black)',background:'-o-radial-gradient(#494949, black)',background:'-moz-radial-gradient(#494949, black)',background:'radial-gradient(#494949, black)',color:'white',width:'100%',height:'100vh !important',position:'absolute',top:'0px',left:'0px'}}><h1 style={{position:'absolute',top:'35%',left:'38%',textAlign:'center'}}><p>Set the schedule for</p><p>{location}</p></h1></div>;
-                }
-                else if(self.state.results[0].get('owner') && self.state.results[0].get('schedule'))
-                {
-                    var scheduleId = self.state.results[0].get('schedule').id;
-                    var owner = self.state.results[0].get('owner');
-                    screen = <Screen scheduleId={scheduleId} owner={owner} />;
-                }
+        var dayClass = ((self.props.publish.value) ? {color:'white',display:'inline',backgroundColor:'#2196F3',padding:'15px'} : {display:'inline',backgroundColor:'#E3F2FD',padding:'15px'});
 
-            }
-        }
+        var notClickable = {
+            MozUserSelect: '-moz-none',
+            KhtmlUserSelect: 'none',
+            WebkitUserSelect: 'none',
+            OUserSelect: 'none',
+            userSelect: 'none',
+            cursor:'pointer'
+        };
 
+        var dayClass = $.extend(dayClass, notClickable);
 
-        return (<div>{screen}</div>);
+        return (
+            <div style={dayClass} onClick={this.handleClick}>
+                <b>{this.props.day}</b>
+            </div>);
     }
 });
 
 
+var WeekSelect = React.createClass({
+    mixins: [LinkedStateMixin],
+    getDefaultProps: function() {
+        return {
+            monday: true,
+            tuesday: true,
+            wednesday: true,
+            thursday: true,
+            friday: true,
+            saturday: true,
+            sunday: true
+        };
+    },
+    getInitialState: function(){
+        console.log(this.props.week);
+        return {
+            monday: this.props.monday,
+            tuesday: this.props.tuesday,
+            wednesday: this.props.wednesday,
+            thursday: this.props.thursday,
+            friday: this.props.friday,
+            saturday: this.props.saturday,
+            sunday: this.props.sunday
+        }
+    },
+    render: function() {
+        var self = this;
+        var inline = {display:'inline'};
+        var padding = {padding:'10px'};
 
-module.exports = Display
+        var notClickable = {
+            MozUserSelect: '-moz-none',
+            KhtmlUserSelect: 'none',
+            WebkitUserSelect: 'none',
+            OUserSelect: 'none',
+            userSelect: 'none',
+        };
+
+        //console.log(self.props.week);
+        return (
+            <div>
+                <Day day="Mo" style={notClickable} publish={self.linkState('monday')} />
+                <Day day="Tu" style={notClickable} publish={self.linkState('tuesday')} />
+                <Day day="We" style={notClickable} publish={self.linkState('wednesday')} />
+                <Day day="Th" style={notClickable} publish={self.linkState('thursday')} />
+                <Day day="Fr" style={notClickable} publish={self.linkState('friday')} />
+                <Day day="Sa" style={notClickable} publish={self.linkState('saturday')} />
+                <Day day="Su" style={notClickable} publish={self.linkState('sunday')} />
+            </div>);
+        }
+});
+
+var Week = React.createClass({
+    mixins: [LinkedStateMixin],
+    getInitialState: function() {
+        return {
+            week : {
+                monday: true,
+                tuesday: true,
+                wednesday: true,
+                thursday: true,
+                friday: true,
+                saturday: true,
+                sunday: true
+            }  
+        };
+    },
+    render: function() {
+        var self = this;
+        return (
+            <div>
+                <WeekSelect week={self.linkState('week')} />
+            </div>);
+        }
+});
+
+module.exports = Week
 
 
 
