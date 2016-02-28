@@ -37,12 +37,16 @@ var AddAssetDropDown = React.createClass({
         custom_acl.setReadAccess(Parse.User.current(), true);
         custom_acl.setPublicReadAccess(true);
 
+        var week = {"friday":true,"monday":true,"saturday":false,"sunday":false,"thursday":true,"tuesday":true,"wednesday":true};
+
         var configs ={
             screen : screen,
             owner : owner,
             screenAsset : screenAsset,
+            startDate: new Date(),
             ACL : custom_acl,
-            published:true
+            published:true,
+            week: week
         };
         ParseReact.Mutation.Create('AssignmentPattern',configs).dispatch();
 
@@ -62,9 +66,10 @@ var AddAssetDropDown = React.createClass({
         if(length == 0){
             display = <div><a href="/#/app/assets"><h2>Add files first</h2></a></div>;
         }else{
-            display = (<div className='col-xs-12 col-md-6'>
+            display = (
+                <div className='col-xs-12 col-md-6'>
                     <div className='col-xs-12'>
-                        <DropDownMenu full={true} value={self.state.index} style={{width:"100%",marginLeft:'-50px',padding:'0px'}} onChange={this.handleChange}>
+                        <DropDownMenu full={true} fullWidth={{true}} value={self.state.index} style={{width:"100%",marginLeft:'-50px',padding:'0px'}} onChange={this.handleChange}>
                                 {this.data.comments.map(function(c) {
                                     i = i +1;
                                 return (

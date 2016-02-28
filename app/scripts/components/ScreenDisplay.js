@@ -82,6 +82,7 @@ var ScreenDisplay = React.createClass({
             publishedButton = (<RaisedButton secondary={true} name="checkboxName2" value="checkboxValue2" label={stringOfPublished} defaultChecked={self.props.asset.published} onClick={self.handleChangePublished} />)
         }
 
+        //console.log(self);
         return (
             <div>
                 <Card>

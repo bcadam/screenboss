@@ -61,6 +61,16 @@ var ScreenDisplayAnimator = React.createClass({
         var owner = this.props.user;
         var todaysDate = new Date(); 
 
+        var weekday = new Array(7);
+        weekday[0]=  "week.sunday";
+        weekday[1] = "week.monday";
+        weekday[2] = "week.tuesday";
+        weekday[3] = "week.wednesday";
+        weekday[4] = "week.thursday";
+        weekday[5] = "week.friday";
+        weekday[6] = "week.saturday";
+        var n = weekday[todaysDate.getDay()];
+
         return {
             screens: (new Parse.Query('AssignmentPattern')
                 .equalTo('published',true))
@@ -69,6 +79,7 @@ var ScreenDisplayAnimator = React.createClass({
                 .lessThan('startDate',todaysDate)
                 .greaterThan('endDate',todaysDate)
                 .equalTo('screen', new Parse.Object('Screen', {id: key}))
+                .equalTo(n,true)
                 .descending('createdAt'),
             calendars: (new Parse.Query('Calendar')
                 .equalTo('owner',owner)
@@ -85,12 +96,23 @@ var ScreenDisplayAnimator = React.createClass({
         var existingLengthOfAssignmentPatters;
         var todaysDate = new Date(); 
 
+        var weekday = new Array(7);
+        weekday[0]=  "week.sunday";
+        weekday[1] = "week.monday";
+        weekday[2] = "week.tuesday";
+        weekday[3] = "week.wednesday";
+        weekday[4] = "week.thursday";
+        weekday[5] = "week.friday";
+        weekday[6] = "week.saturday";
+        var n = weekday[todaysDate.getDay()];
+
         query.equalTo('published',true);
         query.include('screenAsset');
         query.include('screen');
         query.lessThan('startDate',todaysDate);
         query.greaterThan('endDate',todaysDate);
         query.equalTo('screen', new Parse.Object('Screen', {id: key}));
+        query.equalTo(n,true);
         query.descending('createdAt');
 
         $(document).ready(function() {

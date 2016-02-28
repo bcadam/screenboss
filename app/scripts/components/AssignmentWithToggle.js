@@ -8,18 +8,27 @@ import DatePicker from 'material-ui/lib/date-picker/date-picker';
 import TableRow from 'material-ui/lib/table/table-row';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
 import Toggle from 'material-ui/lib/toggle';
+var LinkedStateMixin = require('react-addons-linked-state-mixin');
+
+
+var WeekSelect = require('./WeekSelect.js');
+
 
 
 var AssignmentWithToggle = React.createClass({
+    mixins: [LinkedStateMixin],
+    
     delete: function() {
         ParseReact.Mutation.Destroy(this.props.asset.id).dispatch();
     },
     getInitialState: function(){
         var self = this;
+        //console.log(this.props.asset);
         return{
             deleteOpen : false,
             startDate: this.props.asset.startDate,
             endDate: this.props.asset.endDate,
+            week: this.props.asset.week,
             viewerOpen:false,
             code: (    <DatePicker
                             autoOk={true}
@@ -105,14 +114,28 @@ var AssignmentWithToggle = React.createClass({
             endDate = <div onClick={self.resetEndDate}>{endDate}</div>;
         }
 
-        return (
+        // console.log('self');
 
-            <div className='row' style={{marginTop:'15px'}}>
-                <div className='col-xs-12 col-md-4' style={{marginBottom:'10px'}}>{self.props.asset.screenAsset.name}</div>
-                <div className='col-xs-12 col-md-2'><img style={{marginBottom:'10px'}} onClick={self.handleCloseViewer} src={self.props.asset.screenAsset.fileThumbnail.url()} className='img img-responsive'/></div>
-                <div className='col-xs-12 col-md-3'>{startDate}<br />{endDate}</div>
-                <div className='col-xs-6 col-md-1'><Toggle toggled={self.props.asset.published} onToggle={self.handleToggle} /></div>
-                <div className='col-xs-6 col-md-1'><FlatButton label="Delete" primary={true} onClick={self.handleChange} /></div>
+        // console.log(this.state.week);
+        // console.log(this.props.asset);
+
+        return (
+            <div className='row' style={{marginTop:'25px',marginBottom:'15px'}}>
+                
+                <div className='col-xs-12'><h4>{self.props.asset.screenAsset.name}</h4></div>
+                <div className="col-xs-4">
+                    <img style={{marginBottom:'10px'}} onClick={self.handleCloseViewer} src={self.props.asset.screenAsset.fileThumbnail.url()} className='img img-responsive'/>
+                </div>
+                <div className="col-xs-5">
+                    <div className="col-xs-12" style={{marginBottom:'20px'}}>{startDate}<br />{endDate}</div>
+                    <div className="col-xs-12"><WeekSelect week={self.linkState('week')} asset={self.props.asset} /></div>
+                </div>
+                <div className="col-xs-3">
+                    <div className="col-xs-12" style={{marginBottom:'10px'}}><Toggle toggled={self.props.asset.published} onToggle={self.handleToggle} /></div>
+                    <div className="col-xs-12"><FlatButton label="Delete" primary={true} onClick={self.handleChange} /></div>
+                </div>
+                
+
                 <Dialog
                   modal={false}
                   open={self.state.viewerOpen}

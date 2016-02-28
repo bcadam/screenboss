@@ -9,8 +9,12 @@ var Day = React.createClass({
         var holder = this.props.publish.value;
         holder[this.props.spell] = !holder[this.props.spell];
         this.props.publish.requestChange(holder);
+        // console.log("this.props.handleChange");
+        this.props.handleChange();
     },
     render() {
+        // console.log("this");
+        // console.log(this);
         var self = this;
         var inline = {display:'inline'};
         var padding = {padding:'10px'};
@@ -42,23 +46,17 @@ var Day = React.createClass({
 var WeekSelect = React.createClass({
     mixins: [LinkedStateMixin],
     getInitialState: function(){
+        //console.log(this.props.week);
         return {
             week : this.props.week
         }
     },
-    componentWillUpdate: function(nextProps,nextState){
-        //console.log("this is happening");
-        //console.log(nextState);
-        //ParseReact.Mutation.Set(holder, nextState).dispatch().then(function(){return true;});
-        //console.log(this.props.id);
-         ParseReact.Mutation.Set({
-                className: 'AssignmentPattern',
-                objectId: 'LeMyH16cCA'
-              }, nextState ).dispatch({waitForServer: true});
-
-        return true;
+    handleChange: function(){
+        var holder = {'week':this.state.week.value};
+        ParseReact.Mutation.Set(this.props.asset , holder ).dispatch();
     },
     render: function() {
+
         var self = this;
         var inline = {display:'inline'};
         var padding = {padding:'10px'};
@@ -70,16 +68,15 @@ var WeekSelect = React.createClass({
             OUserSelect: 'none',
             userSelect: 'none',
         };
-
         return (
             <div style={notClickable} >
-                <Day day="Mo" spell="monday" style={notClickable} publish={self.state.week} />
-                <Day day="Tu" spell="tuesday" style={notClickable} publish={self.state.week} />
-                <Day day="We" spell="wednesday" style={notClickable} publish={self.state.week} />
-                <Day day="Th" spell="thursday" style={notClickable} publish={self.state.week} />
-                <Day day="Fr" spell="friday" style={notClickable} publish={self.state.week} />
-                <Day day="Sa" spell="saturday" style={notClickable} publish={self.state.week} />
-                <Day day="Su" spell="sunday" style={notClickable} publish={self.state.week} />
+                <Day day="Mo" spell="monday" style={notClickable} publish={self.state.week} handleChange={self.handleChange} />
+                <Day day="Tu" spell="tuesday" style={notClickable} publish={self.state.week} handleChange={self.handleChange} />
+                <Day day="We" spell="wednesday" style={notClickable} publish={self.state.week} handleChange={self.handleChange} />
+                <Day day="Th" spell="thursday" style={notClickable} publish={self.state.week} handleChange={self.handleChange} />
+                <Day day="Fr" spell="friday" style={notClickable} publish={self.state.week} handleChange={self.handleChange} />
+                <Day day="Sa" spell="saturday" style={notClickable} publish={self.state.week} handleChange={self.handleChange} />
+                <Day day="Su" spell="sunday" style={notClickable} publish={self.state.week} handleChange={self.handleChange} />
             </div>);
         }
 });
@@ -109,7 +106,8 @@ var Tester = React.createClass({
         }
 });
 
-module.exports = Tester
+
+module.exports = WeekSelect
 
 
 
