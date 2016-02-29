@@ -9,6 +9,16 @@ apiRouter.get('/', function(req, res) {
 	            });
 });
 
+apiRouter.get('/sendemail', function(req, res) {	    
+	    res.json({
+	        message: "What do you want it to say!",
+	        structure:{
+	        	targetemail : "Email of person being alerted",
+	        	message:'What you want it to say',
+	        	userid: 'Id of user sending'}
+	            });
+});
+
 apiRouter.get('/sendemail/:targetemail?/:message?/:userid?', function(req, res) {
 
 	var mandrill = require('mandrill-api/mandrill');
