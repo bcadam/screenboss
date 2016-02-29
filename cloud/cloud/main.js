@@ -83,14 +83,11 @@ Parse.Cloud.define("saveBlob", function(request, response) {
 
     query.get(request.params.user, {
         success: function(gameScore) {
-            //The object was retrieved successfully.
-            //response.success("found one");
-            //response.success(request.params.blob);
+
             var userId = gameScore.id;
 
-
             Parse.Cloud.httpRequest({
-                url: request.params.blob[0].url
+                url: request.params.blob[0].url + "/convert?format=jpg&page=1"
             }).then(function(response) {
                 // Create an Image from the data.
                 var image = new Image();
@@ -118,7 +115,6 @@ Parse.Cloud.define("saveBlob", function(request, response) {
                 custom_acl.setWriteAccess(userId, true);
                 custom_acl.setReadAccess(userId, true);
                 custom_acl.setPublicReadAccess(true);
-
 
 
                 var ScreenAsset = Parse.Object.extend("ScreenAsset");
@@ -485,7 +481,37 @@ Parse.Cloud.afterSave("Display", function(request, response) {
       } 
 });
 
+Parse.Cloud.beforeDelete("ScreenAsset", function(request, response) {
+  
 
+
+  query = new Parse.Query("AssignmentPattern");
+  query.equalTo("screenAsset", request.object);
+
+  query.find({
+    success: function(assignments) {
+
+        //response.error(assignments);
+
+      Parse.Object.destroyAll(assignments, {
+        success: function() {
+            response.success("All deleted");
+        },
+        error: function(error) {
+          response.error("Error deleting related assignments " + error.code + ": " + error.message);
+        }
+      });
+
+
+    },
+    error: function(error) {
+      response.error("Error finding related assignments " + error.code + ": " + error.message);
+    }
+  });
+
+
+
+});
 
 
 

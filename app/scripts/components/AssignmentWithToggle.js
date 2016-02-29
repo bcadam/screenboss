@@ -123,14 +123,14 @@ var AssignmentWithToggle = React.createClass({
             <div className='row' style={{marginTop:'25px',marginBottom:'15px'}}>
                 
                 <div className='col-xs-12'><h4>{self.props.asset.screenAsset.name}</h4></div>
-                <div className="col-xs-4">
+                <div className="col-xs-12 col-md-4">
                     <img style={{marginBottom:'10px'}} onClick={self.handleCloseViewer} src={self.props.asset.screenAsset.fileThumbnail.url()} className='img img-responsive'/>
                 </div>
-                <div className="col-xs-5">
+                <div className="col-xs-12 col-md-5">
                     <div className="col-xs-12" style={{marginBottom:'20px'}}>{startDate}<br />{endDate}</div>
-                    <div className="col-xs-12"><WeekSelect week={self.linkState('week')} asset={self.props.asset} /></div>
+                    <div className="row" style={{marginBottom:'15px'}}><WeekSelect week={self.linkState('week')} asset={self.props.asset} /></div>
                 </div>
-                <div className="col-xs-3">
+                <div className="col-xs-12 col-md-3">
                     <div className="col-xs-12" style={{marginBottom:'10px'}}><Toggle toggled={self.props.asset.published} onToggle={self.handleToggle} /></div>
                     <div className="col-xs-12"><FlatButton label="Delete" primary={true} onClick={self.handleChange} /></div>
                 </div>

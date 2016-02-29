@@ -33,8 +33,6 @@ var PickFile = React.createClass({
         var self = this;
         var userId = self.props.userId;
 
-        //console.log(!self.props.userId);
-
         if (! self.props.userId)
         {
             userId = Parse.User.current().id;
@@ -56,18 +54,13 @@ var PickFile = React.createClass({
           },
           {},
           function(Blobs){
+
+            console.log(Blobs);
+
             Parse.Cloud.run('saveBlob', { blob: Blobs , user: userId }).then(function(response) {
               console.log(response);
-              setTimeout(function(){ window.location.reload(); }, 500);
+              setTimeout(function(){ window.location.reload(); }, 200);
             });
-
-            // Parse.Cloud.run('alertUser', {
-            //     id: userId
-            // }).then(function(result) {
-            //   // ratings should be 4.5
-            //   console.log(result);
-            //   setTimeout(function(){ window.location.reload(); }, 750);
-            // });
 
           },
           function(error){

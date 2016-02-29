@@ -5,6 +5,8 @@ import React from 'react';
 var Parse = require('parse');
 var ParseReact = require('parse-react');
 
+// var Document = require('pdfjs');
+
 var IndividualAsset = React.createClass({
     delete: function() {
         ParseReact.Mutation.Destroy(this.props.asset.id).dispatch().then(function(){},function(error){
@@ -45,7 +47,7 @@ var IndividualAsset = React.createClass({
                       modal={false}
                       open={self.state.deleteOpen}
                       onRequestClose={this.handleClose}>
-                      Are you sure you would like to delete your asset? This cannot be undone.
+                      Are you sure you would like to delete your asset? <b>This will delete it from all playlists.</b> This cannot be undone.
                     </Dialog>
                 </div>
             );
