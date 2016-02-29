@@ -10,10 +10,7 @@ import TableRowColumn from 'material-ui/lib/table/table-row-column';
 import Toggle from 'material-ui/lib/toggle';
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
-
 var WeekSelect = require('./WeekSelect.js');
-
-
 
 var AssignmentWithToggle = React.createClass({
     mixins: [LinkedStateMixin],
@@ -23,7 +20,6 @@ var AssignmentWithToggle = React.createClass({
     },
     getInitialState: function(){
         var self = this;
-        //console.log(this.props.asset);
         return{
             deleteOpen : false,
             startDate: this.props.asset.startDate,
@@ -47,17 +43,19 @@ var AssignmentWithToggle = React.createClass({
     },
     handleStart:function(e,start){
         var self = this;
-        //console.log(self.props.asset.objectId);
-        //console.log(start);
-        self.setState({startDate: start});
-        ParseReact.Mutation.Set(self.props.asset.id, {startDate:start}).dispatch();
+        var d = new Date(start);
+        d.setHours(0);
+        d.setMinutes(0);
+        self.setState({startDate: d});
+        ParseReact.Mutation.Set(self.props.asset.id, {startDate:d}).dispatch();
     },
     handleEnd:function(e,end){
         var self = this;
-        //console.log(self.props.asset.objectId);
-        //console.log(end);
-        self.setState({startDate: end});
-        ParseReact.Mutation.Set(self.props.asset.id, {endDate:end}).dispatch();    },
+        var d = new Date(end);
+        d.setHours(23);
+        d.setMinutes(59);
+        self.setState({startDate: d});
+        ParseReact.Mutation.Set(self.props.asset.id, {endDate:d}).dispatch();    },
     handleCloseViewer: function(){
         var holder = this.state.viewerOpen;
         this.setState({viewerOpen : !holder});
@@ -73,9 +71,7 @@ var AssignmentWithToggle = React.createClass({
         //console.log("enddate");
     },
     render: function() {
-        // Render the text of each comment as a list item
         var self = this;
-        //console.log(self.props.asset);
         const actions = [
           <FlatButton
             label="Cancel"
@@ -94,37 +90,34 @@ var AssignmentWithToggle = React.createClass({
         if (!startDate){
             startDate = (    <DatePicker
                             autoOk={true}
+                            DateTimeFormat={global.Intl.DateTimeFormat}
                             hintText="Start"
                             mode="landscape"
                             onChange={self.handleStart} />);
         }
         else {
-            startDate = startDate.toString();
-            startDate = <div onClick={self.resetStartDate}>{startDate}</div>;
+            var starter = moment(startDate);
+            startDate = <div onClick={self.resetStartDate}>{starter.format("MMMM Do YYYY")}</div>;
         }
         if (!endDate){
             endDate = (    <DatePicker
                             autoOk={true}
+                            DateTimeFormat={global.Intl.DateTimeFormat}
                             hintText="End"
                             mode="landscape"
                             onChange={self.handleEnd}  />);
         }
         else {
-            endDate = endDate.toString();
-            endDate = <div onClick={self.resetEndDate}>{endDate}</div>;
+            var ender = moment(endDate);
+            endDate = <div onClick={self.resetEndDate}>{ender.format("MMMM Do YYYY")}</div>;
         }
-
-        // console.log('self');
-
-        // console.log(this.state.week);
-        // console.log(this.props.asset);
 
         return (
             <div className='row' style={{marginTop:'25px',marginBottom:'15px'}}>
                 
-                <div className='col-xs-12'><h4>{self.props.asset.screenAsset.name}</h4></div>
+                <div className='col-xs-12'><h3>{self.props.asset.screenAsset.name}</h3></div>
                 <div className="col-xs-12 col-md-4">
-                    <img style={{marginBottom:'10px'}} onClick={self.handleCloseViewer} src={self.props.asset.screenAsset.fileThumbnail.url()} className='img img-responsive'/>
+                    <img style={{marginBottom:'10px',maxHeight:'200px'}} onClick={self.handleCloseViewer} src={self.props.asset.screenAsset.fileThumbnail.url()} className='img img-responsive'/>
                 </div>
                 <div className="col-xs-12 col-md-5">
                     <div className="col-xs-12" style={{marginBottom:'20px'}}>{startDate}<br />{endDate}</div>

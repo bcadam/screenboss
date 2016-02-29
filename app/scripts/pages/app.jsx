@@ -26,30 +26,13 @@ var App = React.createClass({
             return (
 				<div>
 			        <Header open={this.linkState('open')} /><LeftSideBar open={this.linkState('open')} user={this.linkState('user')} />
-			        {/*<div className="wrapper row-offcanvas row-offcanvas-left">
-			        			        	<LeftSideBar />
-
-
-			        	<aside className="right-side">    */}            
-			                {/**<section className="content-header">
-			                    <h1>
-			                        Home Page
-			                        <small>{/**Control panel</small>
-			                    </h1>
-			                    <ol className="breadcrumb">
-			                        <li><a href="#"><i className="fa fa-dashboard"></i> Home</a></li>
-			                        <li className="active">Blank page</li>
-			                    </ol>
-			                </section>**/}
-
+			   
 			                <section className="content">
 
 			                    {this.props.children}
 
 			                </section>
-			           {/* </aside>
-
-			        </div>*/}
+			          
 		        </div>    
             )
         }

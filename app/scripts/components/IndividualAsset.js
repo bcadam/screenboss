@@ -39,7 +39,7 @@ var IndividualAsset = React.createClass({
 
         return (
                 <div className="image-container col-xs-6 col-md-3" style={{marginBottom:'10px'}}>
-                    <img src={self.props.asset.fileThumbnail.url()} className="col-xs-12 img img-responsive" />
+                    <img src={self.props.asset.fileThumbnail.url()} style={{maxHeight:'200px',height:'auto'}} className="col-xs-12 img img-responsive" />
                     <div onClick={self.handleChange} className="after" style={{width:'100%',height:'100%'}}><i className="fa fa-trash fa-4x" style={{marginLeft:'40%',marginTop:'8%'}}></i></div>
                     <Dialog
                       title='Delete Asset?'

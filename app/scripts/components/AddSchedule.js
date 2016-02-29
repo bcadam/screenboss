@@ -21,9 +21,6 @@ var AddSchedule = React.createClass({
     
         var display = this.props.asset.id;
         var schedule = this.data.schedules[index].id;
-
-        console.log(display);
-        console.log(schedule);
   
         var configs ={
             schedule : schedule
@@ -58,7 +55,6 @@ var AddSchedule = React.createClass({
         var self = this;
         var i = -1
         var user = this.props.user;
-        console.log(user);
 
         return (
             <div>
