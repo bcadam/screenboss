@@ -32,11 +32,11 @@ var AssetList = React.createClass({
         return (
             
             <div className="col-xs-12">
-                    {this.data.comments.map(function(c) {
-                        return (
-                        <IndividualAsset key={c.objectId + c.createdAt} asset={c} secondColumn={c.name}/>
-                        );
-                    })}
+                {this.data.comments.map(function(c) {
+                    return (
+                    <IndividualAsset key={c.objectId + c.createdAt} asset={c} secondColumn={c.name}/>
+                    );
+                })}
             </div>
         );
     }

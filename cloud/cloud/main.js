@@ -70,6 +70,79 @@ Parse.Cloud.beforeSave("ScreenAsset", function(request, response) {
     });
 });
 
+Parse.Cloud.beforeDelete("ScreenAsset", function(request, response) {
+  
+
+
+  query = new Parse.Query("AssignmentPattern");
+  query.equalTo("screenAsset", request.object);
+
+  query.find({
+    success: function(assignments) {
+
+        //response.error(assignments);
+
+      Parse.Object.destroyAll(assignments, {
+        success: function() {
+            response.success("All deleted");
+        },
+        error: function(error) {
+          response.error("Error deleting related assignments " + error.code + ": " + error.message);
+        }
+      });
+
+
+    },
+    error: function(error) {
+      response.error("Error finding related assignments " + error.code + ": " + error.message);
+    }
+  });
+});
+
+Parse.Cloud.afterSave("Display", function(request, response) {
+    
+    var display = request.object;
+
+    if (!display.get("key")) {
+    response.error('A Display must have a key.');
+      } else {
+        var Display = Parse.Object.extend("Display");
+        var query = new Parse.Query(Display);
+
+        query.descending("createdAt");
+        query.equalTo("key", display.get("key"));
+        
+        query.find({
+          success: function(objects) {
+            if (objects) {
+
+                if(objects.length>1)
+                {
+                    objects[0].destroy({
+                      success: function(myObject) {
+                        // The object was deleted from the Parse Cloud.
+                      },
+                      error: function(myObject, error) {
+                        // The delete failed.
+                        // error is a Parse.Error with an error code and message.
+                      }
+                    });
+                }
+
+
+
+              response.error("A Display with this key already exists.");
+            } else {
+              response.success();
+            }
+          },
+          error: function(error) {
+            response.error("Could not validate uniqueness for this Display object.");
+          }
+        });
+      } 
+});
+
 Parse.Cloud.define("saveBlob", function(request, response) {
 
     var User = Parse.Object.extend("_User");
@@ -78,65 +151,47 @@ Parse.Cloud.define("saveBlob", function(request, response) {
     var ScreenAsset = Parse.Object.extend("ScreenAsset");
     var screenAsset = new ScreenAsset();
 
-    var fileName = request.params.blob[0].filename;
-    //response.success(request.params.blob);
-
     query.get(request.params.user, {
         success: function(gameScore) {
 
             var userId = gameScore.id;
 
-            Parse.Cloud.httpRequest({
-                url: request.params.blob[0].url + "/convert?format=jpg&page=1"
-            }).then(function(response) {
-                // Create an Image from the data.
-                var image = new Image();
-                return image.setData(response.buffer);
+                var fileName = request.params.blob[0].filename;
+                Parse.Cloud.httpRequest({
+                    url: request.params.blob[0].url + "/convert?format=jpg&page=1&density=400"
+                }).then(function(response) {
+                    var image = new Image();
+                    return image.setData(response.buffer);
+                }).then(function(image) {
+                    return image.data();
+                }).then(function(buffer) {
+                    var file = new Parse.File("image.jpg", {
+                        base64: buffer.toString("base64")
+                    });
+                    return file.save();
+                }).then(function(file) {
 
-            }).then(function(image) {
-                // Scale the image to a certain size.
-                return image;
-            }).then(function(image) {
-                // Get the bytes of the new image.
-                return image.data();
+                    var custom_acl = new Parse.ACL();
+                    custom_acl.setWriteAccess(userId, true);
+                    custom_acl.setReadAccess(userId, true);
+                    custom_acl.setPublicReadAccess(true);
 
-            }).then(function(buffer) {
-                // Save the bytes to a new file.
-                var file = new Parse.File("image.jpg", {
-                    base64: buffer.toString("base64")
+                    var ScreenAsset = Parse.Object.extend("ScreenAsset");
+                    var screenAsset = new ScreenAsset();
+                    screenAsset.set('file', file);
+                    screenAsset.set('name', fileName);
+                    screenAsset.set('owner', gameScore);
+                    screenAsset.set('published', true);
+                    screenAsset.set('ACL', custom_acl);
+                    screenAsset.save(null, {
+                        success: function(screenAsset) {
+                            response.success('New object created with objectId: ' + screenAsset.id);
+                        },
+                        error: function(screenAsset, error) {
+                            response.error('Failed to create new object, with error code: ' + error.message);
+                        }
+                    });
                 });
-                return file.save();
-
-            }).then(function(file) {
-
-                //response.success(gameScore.objectId);
-
-                var custom_acl = new Parse.ACL();
-                custom_acl.setWriteAccess(userId, true);
-                custom_acl.setReadAccess(userId, true);
-                custom_acl.setPublicReadAccess(true);
-
-
-                var ScreenAsset = Parse.Object.extend("ScreenAsset");
-                var screenAsset = new ScreenAsset();
-                screenAsset.set('file', file);
-                screenAsset.set('name', fileName);
-                screenAsset.set('owner', gameScore);
-                screenAsset.set('published', true);
-                screenAsset.set('ACL', custom_acl);
-                screenAsset.save(null, {
-                    success: function(screenAsset) {
-                        response.success('New object created with objectId: ' + screenAsset.id);
-                    },
-                    error: function(screenAsset, error) {
-                        response.error('Failed to create new object, with error code: ' + error.message);
-                    }
-                });
-
-
-
-            });
-
 
 
         },
@@ -437,81 +492,6 @@ Parse.Cloud.define("renewSubscription", function(request, response) {
     });
 });
 
-Parse.Cloud.afterSave("Display", function(request, response) {
-    
-    var display = request.object;
-
-    if (!display.get("key")) {
-    response.error('A Display must have a key.');
-      } else {
-        var Display = Parse.Object.extend("Display");
-        var query = new Parse.Query(Display);
-
-        query.descending("createdAt");
-        query.equalTo("key", display.get("key"));
-        
-        query.find({
-          success: function(objects) {
-            if (objects) {
-
-                if(objects.length>1)
-                {
-                    objects[0].destroy({
-                      success: function(myObject) {
-                        // The object was deleted from the Parse Cloud.
-                      },
-                      error: function(myObject, error) {
-                        // The delete failed.
-                        // error is a Parse.Error with an error code and message.
-                      }
-                    });
-                }
-
-
-
-              response.error("A Display with this key already exists.");
-            } else {
-              response.success();
-            }
-          },
-          error: function(error) {
-            response.error("Could not validate uniqueness for this Display object.");
-          }
-        });
-      } 
-});
-
-Parse.Cloud.beforeDelete("ScreenAsset", function(request, response) {
-  
-
-
-  query = new Parse.Query("AssignmentPattern");
-  query.equalTo("screenAsset", request.object);
-
-  query.find({
-    success: function(assignments) {
-
-        //response.error(assignments);
-
-      Parse.Object.destroyAll(assignments, {
-        success: function() {
-            response.success("All deleted");
-        },
-        error: function(error) {
-          response.error("Error deleting related assignments " + error.code + ": " + error.message);
-        }
-      });
-
-
-    },
-    error: function(error) {
-      response.error("Error finding related assignments " + error.code + ": " + error.message);
-    }
-  });
-
-
-
-});
 
 
 

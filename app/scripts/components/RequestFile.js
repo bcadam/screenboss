@@ -50,7 +50,8 @@ var PickFile = React.createClass({
             multiple: false,
             services: ['COMPUTER','GOOGLE_DRIVE','GMAIL','IMAGE_SEARCH','CONVERT','IMGUR','FACEBOOK','URL'],
             cropDim: [1920, 1080],
-            conversions: ['crop', 'rotate', 'filter']
+            conversions: ['crop', 'rotate', 'filter'],
+            mimetypes: ['image/*','application/pdf']
           },
           {},
           function(Blobs){
