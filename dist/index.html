@@ -1212,14 +1212,20 @@
 
     </script>
     <script>
-        basket.require({ url: 'js/main.js', unique: 02292256});
-        //basket.require({ url: 'js/main.js'});
-        //basket.require({ url: 'https://cdn.jsdelivr.net/scrollreveal.js/3.0.9/scrollreveal.min.js'});
+        // basket.require({ url: 'js/main.js'});
+        // basket.require({ url: 'https://cdn.jsdelivr.net/scrollreveal.js/3.0.9/scrollreveal.min.js'});
+        // basket.require({ url: 'js/main.js', unique: 02292258});
+
+        basket
+            .require({ url: 'https://cdn.jsdelivr.net/scrollreveal.js/3.0.9/scrollreveal.min.js'})
+            .then(function () {
+                basket.require({ url: 'js/main.js', unique: 02292258});
+            });
 
 
     </script>
-    <script src="js/main.js" type="text/javascript"></script>
-    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+<!--     <script src="js/main.js" type="text/javascript"></script>
+ -->    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
     
    
 

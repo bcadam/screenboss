@@ -31,8 +31,8 @@ mixins: [LinkedStateMixin],
     sr.reveal('.secondPrice',{delay:100});
     sr.reveal('.thirdPrice',{delay:200});
 
-    this.unsubscribe = ItemStore.listen(this.onStatusChange);
-    ItemActions.loadItems();
+    // this.unsubscribe = ItemStore.listen(this.onStatusChange);
+    // ItemActions.loadItems();
 
     /*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
 f[z]=function(){
@@ -56,7 +56,7 @@ olark.identify('3932-129-10-4975');/*]]>*/
   },
 
   componentWillUnmount() {
-    this.unsubscribe();
+    //this.unsubscribe();
   },
 
   onStatusChange(state) {
