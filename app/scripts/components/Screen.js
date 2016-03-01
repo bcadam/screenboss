@@ -1,7 +1,7 @@
 var Parse = require('parse');
 var React = require('react');
 var ParseReact = require('parse-react');
-Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6', '8UXFi3hzHgbKWoMZIIX3ZgUg0tHKPzSK6w8Ul0M6');
+// Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6', '8UXFi3hzHgbKWoMZIIX3ZgUg0tHKPzSK6w8Ul0M6');
 
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');

@@ -1,7 +1,7 @@
 var React = require('react');
 var Parse = require('parse');
 
-var ScreenDisplay = require('../components/ScreenDisplay.js');
+// var ScreenDisplay = require('../components/ScreenDisplay.js');
 var ScreenList = require('../components/ScreenList.js');
 var NewScreenForm = require('../components/NewScreenForm.js');
 

@@ -5,7 +5,7 @@
 var React = require('react');
 var Parse = require('parse');
 var ParseReact = require('parse-react');
-Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6', '8UXFi3hzHgbKWoMZIIX3ZgUg0tHKPzSK6w8Ul0M6');
+// Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6', '8UXFi3hzHgbKWoMZIIX3ZgUg0tHKPzSK6w8Ul0M6');
 var PickFile = require('../components/PickFile.js')
 
 

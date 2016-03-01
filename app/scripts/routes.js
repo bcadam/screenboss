@@ -1,11 +1,16 @@
 import React from 'react';
+import Parse from 'parse';
+import ParseReact from 'parse-react';
+Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6', '8UXFi3hzHgbKWoMZIIX3ZgUg0tHKPzSK6w8Ul0M6');
+// Parse.initialize('pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6');
+// Parse.serverURL = 'http://www.screenboss.co/parse';
+
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import App from './pages/app.jsx';
 import BlankApp from './pages/blankapp.jsx';
-import NotFound from './pages/notFound.jsx';
-import Main from './pages/main.jsx';
 import LandingPage from './pages/landingpage.jsx';
+import NotFound from './pages/notFound.jsx';
 import ScheduleListPage from './pages/ScheduleListPage.js';
 import AssetListPage from './pages/AssetListPage.js';
 import CalendarsPage from './pages/CalendarsPage.js';
@@ -23,18 +28,13 @@ var SendFile = require('./components/SendFile.js');
 var Claim = require('./components/Claim.js');
 var Displays = require('./components/Displays.js');
 var Overview = require('./components/Overview.js');
-
-
 var Tester = require('./components/Tester.js');
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 const routes = (
   <Router>
-    
-    <Route path='screen' component={ BlankApp }>
-      <Route path=':id' component={ Screen } />
-    </Route>
-
     <Route path='display' component={ BlankApp }>
       <Route path=':id' component={ Display } />
     </Route>
@@ -46,32 +46,21 @@ const routes = (
       <Route path='assets' component={ AssetListPage } />
       <Route path='events' component={ GoogleEvents } />
       <Route path='profile' component={ Profile } />
-      <Route path='creditcard' component={ CreditCard } />
       <Route path='filerequest/:id' component={ RequestFile } />
       <Route path='sendfile' component={ SendFile } />
       <Route path='claim' component={ Claim } />
       <Route path='displays' component={ Displays } />
-
       <Route path='login' component={ LoginForm } />
       <Route path='logout' component={ LogOut } />
-
-
-
-
       <Route path='tester' component={ Tester } />
-
       <Route path='*' component={NotFound}/>
-
     </Route>
 
     <Route path='/admin' component={ App }>
       <IndexRoute component={ Profile } />
       <Route path='overview' component={ Overview } />
-
       <Route path='*' component={NotFound}/>
-
     </Route>
-
 
     <Route path='/' component={ BlankApp }>
       <IndexRoute component={ LandingPage }/>
@@ -85,6 +74,11 @@ const routes = (
 export default routes;
 
 
+// import Main from './pages/main.jsx';
+// <Route path='creditcard' component={ CreditCard } />
+// <Route path='screen' component={ BlankApp }>
+//   <Route path=':id' component={ Screen } />
+// </Route>
 // import GettingStarted from './pages/GettingStarted.jsx';
 // import GettingStartedAssets from './pages/GettingStartedAssets.jsx';
 // import GettingStartedScreens from './pages/GettingStartedScreens.jsx';

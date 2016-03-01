@@ -1,28 +1,30 @@
 import React from 'react';
 import Parse from 'parse';
+
 var moment = require('moment');
 var ParseReact = require('parse-react');
+
 import { Link } from 'react-router'
 
 
-import RaisedButton from 'material-ui/lib/raised-button';
+// import RaisedButton from 'material-ui/lib/raised-button';
 import FlatButton from 'material-ui/lib/flat-button';
 
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import Screen from 'material-ui/lib/svg-icons/hardware/cast';
 import File from 'material-ui/lib/svg-icons/file/attachment';
-import FileRequest from 'material-ui/lib/svg-icons/file/cloud-download';
-import ProfileImage from 'material-ui/lib/svg-icons/action/account-box';
+// import FileRequest from 'material-ui/lib/svg-icons/file/cloud-download';
+// import ProfileImage from 'material-ui/lib/svg-icons/action/account-box';
 import Dashboard from 'material-ui/lib/svg-icons/action/dashboard';
 import LogOut from 'material-ui/lib/svg-icons/action/input';
 import Calendars from 'material-ui/lib/svg-icons/action/today';
 import SendFile from 'material-ui/lib/svg-icons/communication/email';
-import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
+// import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import DisplayIcon from 'material-ui/lib/svg-icons/av/airplay';
 import Schedules from 'material-ui/lib/svg-icons/action/query-builder';
 
 import Dialog from 'material-ui/lib/dialog';
-import PlayClaim from 'material-ui/lib/svg-icons/action/play-for-work';
+// import PlayClaim from 'material-ui/lib/svg-icons/action/play-for-work';
 
 var CreditCard = require('./CreditCard.js');
 

@@ -3,16 +3,21 @@ var cors = require('cors') // add this line below it
 var favicon = require('serve-favicon');
 var Parse = require('parse');
 var ParseServer = require('parse-server').ParseServer;
-
-
 var apiRouter = require('./api.js');
 
+var parseServer = new ParseServer({
+  databaseURI: 'mongodb://main:main@ds013918.mlab.com:13918/screenboss',
+  cloud:  __dirname + '/cloud/cloud/mainownserver.js',
+  appId: 'pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6',
+  masterKey: 'Pp9mBdqFMmnjFLT4skUMif2Tz7bie3hCqKv5CfRj',
+  fileKey: '8ed68dcf-74f0-4188-a8e8-720e68bfa90b',
+  serverURL: '/parse'
+});
 
 var app = express();
 app.use(cors());
-
 app.use('/api', apiRouter);
-
+app.use('/parse', parseServer);
 
 app.use(favicon('app/images/favicon.ico'));
 app.set('port', (process.env.PORT || 5000));
@@ -24,23 +29,6 @@ app.use('/js', express.static('dist/js'));
 app.use('/fonts', express.static('dist/fonts'));
 app.use('/public/install', express.static('public/ScreenBossLocal.zip'));
 app.use('/public', express.static('public'));
-
-
-
-var parseServer = new ParseServer({
-  databaseURI: 'mongodb://main:main@ds013918.mlab.com:13918/screenboss',
-  cloud:  __dirname + '/cloud/cloud/mainownserver.js',
-  appId: 'pp9waK9ticOFbhrJzrdITkRVQfCycHLqNPj2ZrN6',
-  masterKey: 'Pp9mBdqFMmnjFLT4skUMif2Tz7bie3hCqKv5CfRj', // Keep this key secret!
-  fileKey: '8ed68dcf-74f0-4188-a8e8-720e68bfa90b',
-  serverURL: '/parse' // Don't forget to change to https if needed
-});
-
-// Serve the Parse API on the /parse URL prefix
-app.use('/parse', parseServer);
-
-
-
 
 app.get('/*', function(req, res) {
     res.sendFile('app/index.html', {
