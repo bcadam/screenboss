@@ -28,6 +28,7 @@ var SendFile = require('./components/SendFile.js');
 var Claim = require('./components/Claim.js');
 var Displays = require('./components/Displays.js');
 var Overview = require('./components/Overview.js');
+var Admin = require('./components/Admin.js');
 var Tester = require('./components/Tester.js');
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -57,7 +58,7 @@ const routes = (
     </Route>
 
     <Route path='/admin' component={ App }>
-      <IndexRoute component={ Profile } />
+      <IndexRoute component={ Admin } />
       <Route path='overview' component={ Overview } />
       <Route path='*' component={NotFound}/>
     </Route>
